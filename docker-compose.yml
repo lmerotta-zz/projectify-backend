@@ -1,0 +1,40 @@
+version: '3'
+
+services: 
+    nginx:
+        container_name: projectify-nginx
+        build: 
+            context: .
+            dockerfile: docker/Dockerfile-nginx
+        volumes: 
+            - ./symfony/:/var/www/symfony/
+        depends_on:
+            - php
+        ports: 
+            - 8001:80
+        networks: 
+            - projectify-backend
+
+    php:
+        container_name: projectify-php
+        build: 
+            context: .
+            dockerfile: docker/Dockerfile-php
+        volumes: 
+            - ./symfony/:/var/www/symfony/
+        depends_on: 
+            - mysql
+        networks: 
+            - projectify-backend
+
+    mysql:
+        image: mariadb:latest
+        ports:
+            - 8002:3306
+        volumes: 
+            - ./mysql:/var/lib/mysql:z
+        env_file: docker/mysql/.env.local
+        networks: 
+            - projectify-backend
+networks: 
+    projectify-backend:

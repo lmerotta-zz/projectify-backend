@@ -1,0 +1,9 @@
+controllers:
+    resource: ../../src/Modules/*/Controller/*APIController.php
+    prefix: /api/v1
+    defaults: {_format: "json"}
+    type: annotation
+
+kernel:
+    resource: ../../src/Kernel.php
+    type: annotation
