@@ -1,0 +1,11 @@
+# Read the documentation at https://github.com/thephpleague/flysystem-bundle/blob/master/docs/1-getting-started.md
+flysystem:
+    storages:
+        user_profile_picture.storage:
+            adapter: 'local'
+            options:
+                directory: '%kernel.project_dir%/var/storage/user_profile_picture'
+        user_profile_picture.cache:
+            adapter: 'local'
+            options:
+                directory: '%kernel.project_dir%/var/storage/cache/user_profile_picture'

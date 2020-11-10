@@ -2,11 +2,21 @@ FROM php:7.4-fpm
 
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential \
+        libssl-dev \
+        libwebp-dev \
+        libpng-dev \
+        libjpeg-dev \
+        libfreetype6-dev \
         git \
         zlib1g-dev \
         libxml2-dev \
         libzip-dev \
+    && docker-php-ext-configure \
+        gd --enable-gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install \
+        exif \
+        gd \
         zip \
         intl \
         mysqli \
@@ -18,4 +28,5 @@ RUN curl -sS https://get.symfony.com/cli/installer | bash
 RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 COPY symfony/ /var/www/symfony
 RUN chown -R 1000:1000 /var/www/symfony
+RUN chmod -R 777 /var/www/symfony/var
 WORKDIR /var/www/symfony

@@ -14,6 +14,9 @@
     <pharConfigPath>$PROJECT_DIR$/symfony/composer.json</pharConfigPath>
     <execution />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/symfony/vendor/nikic/php-parser" />
@@ -111,6 +114,15 @@
       <path value="$PROJECT_DIR$/symfony/vendor/phpdocumentor/type-resolver" />
       <path value="$PROJECT_DIR$/symfony/vendor/phpdocumentor/reflection-docblock" />
       <path value="$PROJECT_DIR$/symfony/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/symfony/vendor/league/mime-type-detection" />
+      <path value="$PROJECT_DIR$/symfony/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/symfony/vendor/league/flysystem-bundle" />
+      <path value="$PROJECT_DIR$/symfony/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/symfony/vendor/league/glide" />
+      <path value="$PROJECT_DIR$/symfony/vendor/league/glide-symfony" />
+      <path value="$PROJECT_DIR$/symfony/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/symfony/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/symfony/vendor/intervention/image" />
     </include_path>
   </component>
   <component name="ProjectId" id="1k3ISCBL1jBjIjsVDUIs4G65MAl" />
@@ -121,11 +133,13 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/docker/mysql" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/symfony/src/Modules/Common/Bus" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/symfony/src/Modules/Common/Bus" />
+      <recent name="$PROJECT_DIR$/symfony/src/Modules/FileManagement/DependencyInjection/CompilerPass" />
       <recent name="$PROJECT_DIR$/docker/mysql" />
     </key>
   </component>
@@ -141,6 +155,8 @@
       <workItem from="1604931765925" duration="252000" />
       <workItem from="1604932142418" duration="2321000" />
       <workItem from="1604937827679" duration="1674000" />
+      <workItem from="1605000180013" duration="8992000" />
+      <workItem from="1605011108712" duration="3957000" />
     </task>
     <servers />
   </component>
@@ -152,33 +168,43 @@
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="357" y="180" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.720@0.0.1280.720" timestamp="1604939430343" />
-    <state x="2678" y="248" key="#com.intellij.ide.util.MemberChooser" timestamp="1604933965780">
-      <screen x="1920" y="10" width="1920" height="1080" />
+    <state x="505" y="93" key="#com.intellij.ide.util.MemberChooser" timestamp="1605012587851">
+      <screen x="0" y="0" width="1280" height="720" />
     </state>
+    <state x="505" y="93" key="#com.intellij.ide.util.MemberChooser/0.0.1280.720@0.0.1280.720" timestamp="1605012587851" />
     <state x="758" y="238" key="#com.intellij.ide.util.MemberChooser/11.1090.1280.720/1920.10.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1604925396444" />
     <state x="2678" y="248" key="#com.intellij.ide.util.MemberChooser/11.1090.1280.720/1920.10.1920.1080/0.0.1920.1080@1920.10.1920.1080" timestamp="1604933965780" />
     <state x="445" y="184" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1604927045125">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="445" y="184" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/11.1090.1280.720/1920.10.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1604927045125" />
-    <state x="181" y="66" key="NewPhpClassDialog" timestamp="1604938775540">
+    <state x="378" y="133" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1605001971982">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="181" y="66" key="NewPhpClassDialog/0.0.1280.720@0.0.1280.720" timestamp="1604938775540" />
+    <state x="378" y="133" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.720@0.0.1280.720" timestamp="1605001971982" />
+    <state x="181" y="66" key="NewPhpClassDialog" timestamp="1605012707689">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="181" y="66" key="NewPhpClassDialog/0.0.1280.720@0.0.1280.720" timestamp="1605012707689" />
     <state x="271" y="99" key="NewPhpClassDialog/11.1090.1280.720/1920.10.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1604926932547" />
     <state x="2191" y="109" key="NewPhpClassDialog/11.1090.1280.720/1920.10.1920.1080/0.0.1920.1080@1920.10.1920.1080" timestamp="1604933975380" />
+    <state x="443" y="288" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605004253913">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="443" y="288" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.720@0.0.1280.720" timestamp="1605004253913" />
     <state x="337" y="111" width="606" height="520" key="find.popup" timestamp="1604926809257">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="337" y="111" width="606" height="520" key="find.popup/11.1090.1280.720/1920.10.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1604926809257" />
-    <state x="304" y="170" key="run.anything.popup" timestamp="1604928379345">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="304" y="170" key="run.anything.popup/11.1090.1280.720/1920.10.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1604928379345" />
-    <state x="415" y="171" width="672" height="452" key="search.everywhere.popup" timestamp="1604939507737">
+    <state x="203" y="113" key="run.anything.popup" timestamp="1605015043318">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="415" y="171" width="672" height="452" key="search.everywhere.popup/0.0.1280.720@0.0.1280.720" timestamp="1604939507737" />
+    <state x="203" y="113" key="run.anything.popup/0.0.1280.720@0.0.1280.720" timestamp="1605015043318" />
+    <state x="304" y="170" key="run.anything.popup/11.1090.1280.720/1920.10.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1604928379345" />
+    <state x="415" y="171" width="672" height="452" key="search.everywhere.popup" timestamp="1605015020802">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="415" y="171" width="672" height="452" key="search.everywhere.popup/0.0.1280.720@0.0.1280.720" timestamp="1605015020802" />
     <state x="623" y="256" width="672" height="678" key="search.everywhere.popup/11.1090.1280.720/1920.10.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1604928929850" />
     <state x="2543" y="266" width="672" height="678" key="search.everywhere.popup/11.1090.1280.720/1920.10.1920.1080/0.0.1920.1080@1920.10.1920.1080" timestamp="1604934245260" />
     <state x="2610" y="484" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1604933567214">

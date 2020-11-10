@@ -5,7 +5,7 @@ namespace App\Entity\Files;
 use App\Modules\FileManagement\Enum\FileContext;
 use App\Repository\Files\FileRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Rfc4122\UuidV4;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass=FileRepository::class)
@@ -30,7 +30,17 @@ class File
 
     private function __construct() {}
 
-    public function getId(): ?UuidV4
+    public static function create(UuidInterface $id, FileContext $context, string $path): self
+    {
+        $self = new static();
+        $self->id = $id;
+        $self->setContext($context)
+            ->setPath($path);
+
+        return $self;
+    }
+
+    public function getId(): ?UuidInterface
     {
         return $this->id;
     }

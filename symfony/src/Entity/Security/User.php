@@ -6,7 +6,7 @@ use App\Repository\Security\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Rfc4122\UuidV4;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -47,6 +47,11 @@ class User implements UserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity=Role::class)
+     * @ORM\JoinTable(
+     *     name="users_roles",
+     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="role_name", referencedColumnName="name")}
+     * )
      */
     private $roles;
 
@@ -55,7 +60,7 @@ class User implements UserInterface
         $this->roles = new ArrayCollection();
     }
 
-    public static function create(UuidV4  $id, string $firstName, string $lastName, string $password, string $email, ?string $profilePicture = null ): self
+    public static function create(UuidInterface $id, string $firstName, string $lastName, string $password, string $email, ?string $profilePicture = null ): self
     {
         $self = new static();
         $self->id = $id;
@@ -70,7 +75,7 @@ class User implements UserInterface
         return $self;
     }
 
-    public function getId(): ?UuidV4
+    public function getId(): ?UuidInterface
     {
         return $this->id;
     }
