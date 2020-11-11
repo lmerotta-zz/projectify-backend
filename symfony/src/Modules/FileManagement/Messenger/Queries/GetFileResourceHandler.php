@@ -5,14 +5,8 @@ namespace App\Modules\FileManagement\Messenger\Queries;
 use App\Contracts\FileManagement\Exception\FileNotFoundException;
 use App\Modules\FileManagement\Exception\NonExistingFileRetrieverException;
 use App\Modules\FileManagement\FileStorage\FileRetriever;
-use League\Glide\Filesystem\FileNotFoundException as GlideFileNotFoundException;
 use App\Repository\Files\FileRepository;
 use League\Flysystem\MountManager;
-use League\Glide\Responses\SymfonyResponseFactory;
-use League\Glide\ServerFactory;
-use League\Glide\Signatures\SignatureException;
-use League\Glide\Signatures\SignatureFactory;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class GetFileResourceHandler
 {

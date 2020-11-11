@@ -5,23 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1c4f0536-824b-4de7-afd1-1f626ec341ca" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/symfony/src/Contracts/FileManagement/Exception/FileNotFoundException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/symfony/src/Contracts/FileManagement/FileRetrieverInterface.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/DependencyInjection/CompilerPass/FileRetrieverCompilerPass.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/Exception/NonExistingFileRetrieverException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/FileStorage/FileRetriever.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/symfony/src/Modules/UserManagement/FileStorage/UserProfilePictureRetriever.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony/config/packages/elao_enum.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/config/packages/elao_enum.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony/src/Entity/Files/File.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Entity/Files/File.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony/src/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/Controller/FileStorageAPIController.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/Controller/FileStorageAPIController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/DependencyInjection/CompilerPass/MountManagerCompilerPass.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/DependencyInjection/CompilerPass/MountManagerCompilerPass.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/Enum/FileContext.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Contracts/FileManagement/Enum/FileContext.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/Exception/FileNotFoundException.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/Exception/DuplicateFileRetrieverException.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/Messenger/Commands/SaveFile.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/Messenger/Commands/SaveFile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/Messenger/Queries/GetFileResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/Messenger/Queries/GetFileResource.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/Messenger/Queries/GetFileResourceHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/Messenger/Queries/GetFileResourceHandler.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -177,7 +160,7 @@
       <workItem from="1604937827679" duration="1674000" />
       <workItem from="1605000180013" duration="8992000" />
       <workItem from="1605011108712" duration="4192000" />
-      <workItem from="1605077751795" duration="4221000" />
+      <workItem from="1605077751795" duration="5475000" />
     </task>
     <task id="LOCAL-00001" summary="Added file retrieval api endpoint">
       <created>1605015292178</created>
@@ -186,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605015292178</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Refactored image retrieval&#10;Moved shared contracts in a Contracts folder">
+      <created>1605083217224</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1605083217224</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,7 +184,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added file retrieval api endpoint" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added file retrieval api endpoint" />
+    <MESSAGE value="Refactored image retrieval&#10;Moved shared contracts in a Contracts folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactored image retrieval&#10;Moved shared contracts in a Contracts folder" />
   </component>
   <component name="WindowStateProjectService">
     <state x="357" y="180" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1604939430343">
@@ -219,20 +210,20 @@
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="320" y="266" key="#com.jetbrains.php.refactoring.move.PhpMoveClassDialog#1/0.0.1280.720@0.0.1280.720" timestamp="1605081542347" />
-    <state x="0" y="0" width="812" height="701" key="CommitChangelistDialog2" timestamp="1605015292030">
+    <state x="0" y="0" width="812" height="701" key="CommitChangelistDialog2" timestamp="1605083217084">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="0" y="0" width="812" height="701" key="CommitChangelistDialog2/0.0.1280.720@0.0.1280.720" timestamp="1605015292030" />
+    <state x="0" y="0" width="812" height="701" key="CommitChangelistDialog2/0.0.1280.720@0.0.1280.720" timestamp="1605083217084" />
     <state x="390" y="116" key="NewPhpClassDialog" timestamp="1605081358540">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="390" y="116" key="NewPhpClassDialog/0.0.1280.720@0.0.1280.720" timestamp="1605081358540" />
     <state x="271" y="99" key="NewPhpClassDialog/11.1090.1280.720/1920.10.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1604926932547" />
     <state x="2191" y="109" key="NewPhpClassDialog/11.1090.1280.720/1920.10.1920.1080/0.0.1920.1080@1920.10.1920.1080" timestamp="1604933975380" />
-    <state x="240" y="128" key="Vcs.Push.Dialog.v2" timestamp="1605015295586">
+    <state x="240" y="128" key="Vcs.Push.Dialog.v2" timestamp="1605083219878">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="240" y="128" key="Vcs.Push.Dialog.v2/0.0.1280.720@0.0.1280.720" timestamp="1605015295586" />
+    <state x="240" y="128" key="Vcs.Push.Dialog.v2/0.0.1280.720@0.0.1280.720" timestamp="1605083219878" />
     <state x="443" y="288" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605004253913">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
