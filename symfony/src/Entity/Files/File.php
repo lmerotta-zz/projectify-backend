@@ -2,7 +2,7 @@
 
 namespace App\Entity\Files;
 
-use App\Modules\FileManagement\Enum\FileContext;
+use App\Contracts\FileManagement\Enum\FileContext;
 use App\Repository\Files\FileRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;

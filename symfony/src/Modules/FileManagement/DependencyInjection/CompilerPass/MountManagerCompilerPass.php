@@ -3,7 +3,7 @@
 
 namespace App\Modules\FileManagement\DependencyInjection\CompilerPass;
 
-use App\Modules\FileManagement\Enum\FileContext;
+use App\Contracts\FileManagement\Enum\FileContext;
 use League\Flysystem\MountManager;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

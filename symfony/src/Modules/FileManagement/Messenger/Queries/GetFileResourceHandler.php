@@ -2,7 +2,9 @@
 
 namespace App\Modules\FileManagement\Messenger\Queries;
 
-use App\Modules\FileManagement\Exception\FileNotFoundException;
+use App\Contracts\FileManagement\Exception\FileNotFoundException;
+use App\Modules\FileManagement\Exception\NonExistingFileRetrieverException;
+use App\Modules\FileManagement\FileStorage\FileRetriever;
 use League\Glide\Filesystem\FileNotFoundException as GlideFileNotFoundException;
 use App\Repository\Files\FileRepository;
 use League\Flysystem\MountManager;
@@ -14,16 +16,18 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class GetFileResourceHandler
 {
-    private MountManager $manager;
     private FileRepository $repository;
+    private FileRetriever $fileRetriever;
+    private MountManager $manager;
 
-    public function __construct(MountManager $manager, FileRepository $repository)
+    public function __construct(FileRepository $repository, FileRetriever $fileRetriever, MountManager $manager)
     {
-        $this->manager = $manager;
+        $this->fileRetriever = $fileRetriever;
         $this->repository = $repository;
+        $this->manager = $manager;
     }
 
-    public function __invoke(GetFileResource $query): StreamedResponse
+    public function __invoke(GetFileResource $query)
     {
         $file = $this->repository->find($query->getUuid());
 
@@ -32,24 +36,14 @@ class GetFileResourceHandler
         }
 
         $context = $file->getContext();
-        $name = $file->getPath();
         $options = $query->getOptions();
-        $glideSecret = getenv('GLIDE_SECRET');
-        $glide = ServerFactory::create(['source' => $this->manager->getFilesystem($context->getValue().'.storage'), 'cache' => $this->manager->getFilesystem($context->getValue().'.cache')]);
-        $glide->setResponseFactory(new SymfonyResponseFactory());
-
-        if (count($options) > 0) {
-            try {
-                SignatureFactory::create($glideSecret)->validateRequest($context->getValue().'/'.$name, $options);
-            } catch (SignatureException $e) {
-                throw new FileNotFoundException($e->getMessage());
-            }
-        }
+        $source = $this->manager->getFilesystem($context->getValue().'.storage');
+        $cache = $this->manager->getFilesystem($context->getValue().'.cache');
 
         try {
-            return $glide->getImageResponse($name, $options);
-        } catch (GlideFileNotFoundException $e) {
-            throw new FileNotFoundException($e->getMessage());
+            return $this->fileRetriever->getRetriever($context)->retrieveFromEntity($file, $source, $cache, $options);
+        } catch (NonExistingFileRetrieverException $e) {
+            throw new FileNotFoundException('', 0, $e);
         }
     }
 }

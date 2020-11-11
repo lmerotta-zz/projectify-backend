@@ -4,8 +4,8 @@ namespace App\Modules\FileManagement\Controller;
 
 use App\Modules\Common\Bus\CommandBus;
 use App\Modules\Common\Bus\QueryBus;
-use App\Modules\FileManagement\Enum\FileContext;
-use App\Modules\FileManagement\Exception\FileNotFoundException;
+use App\Contracts\FileManagement\Enum\FileContext;
+use App\Contracts\FileManagement\Exception\FileNotFoundException;
 use App\Modules\FileManagement\HTTP\V1\Request\SaveFileRequest;
 use App\Modules\FileManagement\HTTP\V1\Response\SaveFileResponse;
 use App\Modules\FileManagement\Messenger\Commands\SaveFile;

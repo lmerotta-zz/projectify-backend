@@ -2,7 +2,7 @@
 
 namespace App\Modules\FileManagement\Messenger\Queries;
 
-use App\Modules\FileManagement\Enum\FileContext;
+use App\Contracts\FileManagement\Enum\FileContext;
 use Ramsey\Uuid\UuidInterface;
 
 class GetFileResource

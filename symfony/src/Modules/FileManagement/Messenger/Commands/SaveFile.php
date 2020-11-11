@@ -2,7 +2,7 @@
 
 namespace App\Modules\FileManagement\Messenger\Commands;
 
-use App\Modules\FileManagement\Enum\FileContext;
+use App\Contracts\FileManagement\Enum\FileContext;
 use Ramsey\Uuid\Rfc4122\UuidV4;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

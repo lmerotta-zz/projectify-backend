@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Modules\FileManagement\DependencyInjection\CompilerPass\FileRetrieverCompilerPass;
 use App\Modules\FileManagement\DependencyInjection\CompilerPass\MountManagerCompilerPass;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -41,5 +42,6 @@ class Kernel extends BaseKernel
     protected function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new MountManagerCompilerPass());
+        $container->addCompilerPass(new FileRetrieverCompilerPass());
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\FileManagement\Enum;
+namespace App\Contracts\FileManagement\Enum;
 
 use Elao\Enum\AutoDiscoveredValuesTrait;
 use Elao\Enum\Enum;
