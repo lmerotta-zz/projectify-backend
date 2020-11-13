@@ -10,6 +10,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
+/**
+ * @codeCoverageIgnore
+ */
 class MountManagerCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
@@ -23,7 +26,9 @@ class MountManagerCompilerPass implements CompilerPassInterface
 
         foreach($enumValues as $value) {
             if (!in_array($value.'.storage', $definitions) || !in_array($value.'.cache', $definitions)) {
+                // @codeCoverageIgnoreStart
                 throw new \CompileError("Missing storage or cache for ".$value);
+                // @codeCoverageIgnoreEnd
             }
         }
 

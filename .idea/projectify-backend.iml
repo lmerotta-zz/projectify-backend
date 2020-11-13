@@ -6,14 +6,18 @@
       <sourceFolder url="file://$MODULE_DIR$/symfony/tests" isTestSource="true" packagePrefix="App\Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/bin/.phpunit" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/dama/doctrine-test-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/doctrine/annotations" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/doctrine/cache" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/doctrine/collections" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/doctrine/common" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/doctrine/data-fixtures" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/doctrine/dbal" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/doctrine/doctrine-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/doctrine/doctrine-fixtures-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/doctrine/doctrine-migrations-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/doctrine/event-manager" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/doctrine/inflector" />
@@ -35,6 +39,7 @@
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/laminas/laminas-zendframework-bridge" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/league/flysystem" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/league/flysystem-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/league/flysystem-memory" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/league/glide" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/league/glide-symfony" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/league/mime-type-detection" />
@@ -56,6 +61,7 @@
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/sensio/framework-extra-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/amqp-messenger" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/asset" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/browser-kit" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/cache" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/cache-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/config" />
@@ -64,6 +70,7 @@
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/deprecation-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/doctrine-bridge" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/doctrine-messenger" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/dom-crawler" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/dotenv" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/error-handler" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/event-dispatcher" />
@@ -79,6 +86,7 @@
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/messenger" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/mime" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/options-resolver" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/phpunit-bridge" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/polyfill-intl-grapheme" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/polyfill-intl-idn" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/polyfill-intl-normalizer" />

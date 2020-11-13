@@ -16,7 +16,9 @@ class FileRetrieverCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         if (!$container->has(FileRetriever::class)) {
+            // @codeCoverageIgnoreStart
             return;
+            // @codeCoverageIgnoreEnd
         }
 
         $definition = $container->findDefinition(FileRetriever::class);

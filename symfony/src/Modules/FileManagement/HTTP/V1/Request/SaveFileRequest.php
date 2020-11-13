@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class SaveFileRequest
 {
     /**
-     * @Enum(class="App\Modules\FileManagement\Enum\FileContext", asValue=true)
+     * @Enum(class="App\Contracts\FileManagement\Enum\FileContext", asValue=true)
      */
     public string $context;
 
