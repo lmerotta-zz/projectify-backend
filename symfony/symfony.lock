@@ -1,4 +1,21 @@
 {
+    "api-platform/api-pack": {
+        "version": "v1.3.0"
+    },
+    "api-platform/core": {
+        "version": "2.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "a93061567140e386f107be75340ac2aee3f86cbf"
+        },
+        "files": [
+            "config/packages/api_platform.yaml",
+            "config/routes/api_platform.yaml",
+            "src/Entity/.gitignore"
+        ]
+    },
     "brick/math": {
         "version": "0.9.1"
     },
@@ -120,6 +137,9 @@
             "config/packages/elao_enum.yaml"
         ]
     },
+    "fig/link-util": {
+        "version": "1.1.1"
+    },
     "friendsofsymfony/rest-bundle": {
         "version": "2.2",
         "recipe": {
@@ -208,6 +228,18 @@
             "config/routes/nelmio_api_doc.yaml"
         ]
     },
+    "nelmio/cors-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.5",
+            "ref": "6388de23860284db9acce0a7a5d9d13153bcb571"
+        },
+        "files": [
+            "config/packages/nelmio_cors.yaml"
+        ]
+    },
     "nikic/php-parser": {
         "version": "v4.10.2"
     },
@@ -234,6 +266,9 @@
     },
     "psr/http-message": {
         "version": "1.0.1"
+    },
+    "psr/link": {
+        "version": "1.0.0"
     },
     "psr/log": {
         "version": "1.1.3"
@@ -327,6 +362,9 @@
     },
     "symfony/event-dispatcher-contracts": {
         "version": "v2.2.0"
+    },
+    "symfony/expression-language": {
+        "version": "v5.1.8"
     },
     "symfony/filesystem": {
         "version": "v5.1.8"
@@ -485,6 +523,12 @@
     "symfony/security-http": {
         "version": "v5.1.8"
     },
+    "symfony/serializer": {
+        "version": "v5.1.8"
+    },
+    "symfony/serializer-pack": {
+        "version": "v1.0.4"
+    },
     "symfony/service-contracts": {
         "version": "v2.2.0"
     },
@@ -533,6 +577,9 @@
     "symfony/var-exporter": {
         "version": "v5.1.8"
     },
+    "symfony/web-link": {
+        "version": "v5.1.8"
+    },
     "symfony/yaml": {
         "version": "v5.1.8"
     },
@@ -544,6 +591,9 @@
     },
     "webmozart/assert": {
         "version": "1.9.1"
+    },
+    "webonyx/graphql-php": {
+        "version": "v14.3.0"
     },
     "willdurand/jsonp-callback-validator": {
         "version": "v1.1.0"

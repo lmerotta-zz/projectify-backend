@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Modules\UserManagement\HTTP\V1\Request;
+namespace App\Modules\UserManagement\Messenger\Commands;
 
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class CreateUserRequest
+class CreateUser
 {
     /**
      * @Assert\NotBlank()

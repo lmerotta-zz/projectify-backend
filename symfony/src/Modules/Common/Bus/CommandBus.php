@@ -4,6 +4,7 @@
 namespace App\Modules\Common\Bus;
 
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 class CommandBus
 {
@@ -14,8 +15,8 @@ class CommandBus
         $this->bus = $bus;
     }
 
-    public function dispatch($command, array $stamps = []): void
+    public function dispatch($command, array $stamps = [])
     {
-        $this->bus->dispatch($command, $stamps);
+        return $this->bus->dispatch($command, $stamps)->last(HandledStamp::class)->getResult();
     }
 }
