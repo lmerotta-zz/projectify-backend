@@ -17,44 +17,26 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
 use Ramsey\Uuid\Exception\InvalidUuidStringException;
 use Ramsey\Uuid\Rfc4122\UuidV4;
+use App\Entity\Files\File;
 use Ramsey\Uuid\Uuid;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-/**
- * @Rest\Route("/assets")
- */
-class FileStorageAPIController extends AbstractFOSRestController
+class GetFileResourceAction
 {
-    /**
-     * @Rest\Get("/{uuid<(.+)>}")
-     *
-     * @OA\Get(
-     *     description="Retrieve a file from the database. Appended as query ",
-     *     @OA\Parameter(
-     *          in="query",
-     *          name="parameters",
-     *          @OA\Schema(
-     *              type="object",
-     *              example="{""w"": 400, ""h"": 200}",
-     *              additionalProperties=true
-     *          )
-     *     ),
-     *     @OA\Response(
-     *          response="200",
-     *          description="The requested file"
-     *     ),
-     *     @OA\Response(
-     *          response="404",
-     *          description="The file was not found"
-     *     )
-     * )
-     */
-    public function getFile(string $uuid, Request $request, QueryBus $bus)
+    private QueryBus $bus;
+    private RequestStack $requestStack;
+
+    public function __construct(QueryBus $bus, RequestStack $requestStack)
+    {
+        $this->bus = $bus;
+        $this->requestStack = $requestStack;
+    }
+
+    public function __invoke(File $data)
     {
         try {
-            return $bus->query(new GetFileResource(Uuid::fromString($uuid), $request->query->all()));
+            return $this->bus->query(new GetFileResource($file->getId(), $this->requestStack->getCurrentRequest()->query->all()));
         } catch (FileNotFoundException | InvalidUuidStringException $e) {
             throw $this->createNotFoundException($e->getMessage());
         }

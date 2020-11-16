@@ -7,10 +7,30 @@ use App\Contracts\FileManagement\Enum\FileContext;
 use App\Repository\Files\FileRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
+use App\Modules\FileManagement\Messenger\Queries;
+use App\Modules\FileManagement\Controller;
 
 /**
  * @ORM\Entity(repositoryClass=FileRepository::class)
  * @ApiResource(
+ *     collectionOperations={},
+ *     itemOperations={
+ *          "get"={
+ *              "status"=200,
+ *              "controller"=Controller\GetFileResourceAction::class,
+ *              "denormalizationContext"={"allow_extra_attributes"=true},
+ *              "swagger_context"={
+ *                  "parameters"={
+ *                      {
+ *                          "name"="parameters",
+ *                          "in"="query",
+ *                          "type"="object",
+ *                          "additionalProperties"=true
+ *                      }
+ *                  }
+ *              }
+ *          }
+ *     },
  *     graphql={
  *          "create"={
  *              "mutation"=App\Modules\FileManagement\GraphQL\Mutations\SaveFileResolver::class,
