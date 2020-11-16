@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/symfony/tests" isTestSource="true" packagePrefix="App\Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/api-platform/core" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/bin/.phpunit" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/composer" />
@@ -28,6 +29,7 @@
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/doctrine/persistence" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/doctrine/sql-formatter" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/elao/enum" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/fig/link-util" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/friendsofsymfony/rest-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/guzzlehttp/psr7" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/intervention/image" />
@@ -44,6 +46,7 @@
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/league/glide-symfony" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/league/mime-type-detection" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/nelmio/api-doc-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/nelmio/cors-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/nikic/php-parser" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/ocramius/proxy-manager" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/phpdocumentor/reflection-common" />
@@ -53,6 +56,7 @@
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/psr/container" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/psr/event-dispatcher" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/psr/link" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/psr/log" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/ralouphie/getallheaders" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/ramsey/collection" />
@@ -75,6 +79,7 @@
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/error-handler" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/event-dispatcher" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/event-dispatcher-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/expression-language" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/filesystem" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/finder" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/flex" />
@@ -102,6 +107,7 @@
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/security-csrf" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/security-guard" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/security-http" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/serializer" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/service-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/stopwatch" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/string" />
@@ -111,10 +117,12 @@
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/validator" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/var-dumper" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/var-exporter" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/web-link" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/yaml" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/twig/twig" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/webimpress/safe-writer" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/webonyx/graphql-php" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/willdurand/jsonp-callback-validator" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/willdurand/negotiation" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/zircote/swagger-php" />

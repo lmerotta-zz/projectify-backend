@@ -2,6 +2,7 @@
 
 namespace App\Entity\Files;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Contracts\FileManagement\Enum\FileContext;
 use App\Repository\Files\FileRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,6 +10,18 @@ use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass=FileRepository::class)
+ * @ApiResource(
+ *     graphql={
+ *          "create"={
+ *              "mutation"=App\Modules\FileManagement\GraphQL\Mutations\SaveFileResolver::class,
+ *              "deserialize"=false,
+ *              "args"={
+ *                  "file"={"type"="Upload!", "description"="File to upload"},
+ *                  "context"={"type"="String!", "description="="the upload context"}
+ *              }
+ *          }
+ *     }
+ * )
  */
 class File
 {

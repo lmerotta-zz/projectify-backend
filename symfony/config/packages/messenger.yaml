@@ -5,6 +5,8 @@ framework:
         command.bus:
           middleware:
             - doctrine_transaction
+            - validation
         query.bus:
           middleware:
             - doctrine_transaction
+            - validation

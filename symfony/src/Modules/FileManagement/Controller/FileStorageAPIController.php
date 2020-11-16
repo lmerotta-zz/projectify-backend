@@ -28,46 +28,6 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class FileStorageAPIController extends AbstractFOSRestController
 {
     /**
-     * @Rest\Post("/save")
-     * @OA\Post(
-     *     description="Save a file resource",
-     *     @OA\RequestBody(
-     *          @OA\MediaType(
-     *              mediaType="multipart/form-data",
-     *              @OA\Schema(ref=@Model(type=SaveFileRequest::class))
-     *          )
-     *     ),
-     *     @OA\Response(
-     *          response="422",
-     *          description="Validation errors",
-     *          @Model(type=App\Modules\Common\Model\ValidationErrors::class)
-     *     ),
-     *     @OA\Response(
-     *          response="200",
-     *          description="File uploaded successfully",
-     *          @Model(type=App\Modules\Common\Model\UUID::class)
-     *     )
-     * )
-     *
-     * @Rest\View()
-     */
-    public function postSaveFile(Request $request, ValidatorInterface $validator, CommandBus $bus): ?View
-    {
-        $fileRequest = new SaveFileRequest();
-        $fileRequest->context = (string)$request->request->get('context', '');
-        $fileRequest->file = $request->files->get('file');
-
-        $errors = $validator->validate($fileRequest, null, ['Default', $fileRequest->context]);
-        if ($errors->count() > 0) {
-            return View::create($errors, Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
-        $id = UuidV4::uuid4();
-        $bus->dispatch(new SaveFile($id, FileContext::get($fileRequest->context), $fileRequest->file));
-
-        return View::create($id);
-    }
-    /**
      * @Rest\Get("/{uuid<(.+)>}")
      *
      * @OA\Get(

@@ -5,6 +5,7 @@ namespace App\Modules\FileManagement\Messenger\Commands;
 use App\Entity\Files\File;
 use Doctrine\ORM\EntityManagerInterface;
 use League\Flysystem\MountManager;
+use Ramsey\Uuid\Uuid;
 
 class SaveFileHandler
 {
@@ -16,7 +17,7 @@ class SaveFileHandler
         $this->mountManager = $manager;
         $this->em = $em;
     }
-    public function __invoke(SaveFile $command)
+    public function __invoke(SaveFile $command): File
     {
         $file = $command->getFile();
         $filename = uniqid().'_'.$file->getClientOriginalName();
@@ -24,8 +25,10 @@ class SaveFileHandler
 
         $fs->writeStream($filename, fopen($file->getRealPath(), 'r'));
 
-        $entity = File::create($command->getId(), $command->getContext(), $filename);
+        $entity = File::create(Uuid::uuid4(), $command->getContext(), $filename);
         $this->em->persist($entity);
         $this->em->flush();
+
+        return $entity;
     }
 }

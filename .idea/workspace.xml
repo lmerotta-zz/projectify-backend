@@ -5,25 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1c4f0536-824b-4de7-afd1-1f626ec341ca" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/symfony/config/packages/test/doctrine.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/symfony/config/packages/test/flysystem.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/symfony/tests/Modules/FileManagement/Controller/FileStorageAPIControllerTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/symfony/tests/Modules/FileManagement/DependencyInjection/CompilerPass/FileRetrieverCompilerPassTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/symfony/tests/Modules/FileManagement/FileStorage/FileRetrieverTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/symfony/tests/Modules/FileManagement/Messenger/Commands/SaveFileHandlerTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/symfony/tests/Modules/FileManagement/Messenger/Queries/GetFileResourceHandlerTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/GraphQL/Mutations/SaveFileResolver.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/projectify-backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/projectify-backend.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/Dockerfile-php" beforeDir="false" afterPath="$PROJECT_DIR$/docker/Dockerfile-php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/symfony/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/symfony/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/DependencyInjection/CompilerPass/FileRetrieverCompilerPass.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/DependencyInjection/CompilerPass/FileRetrieverCompilerPass.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/DependencyInjection/CompilerPass/MountManagerCompilerPass.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/DependencyInjection/CompilerPass/MountManagerCompilerPass.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/HTTP/V1/Request/SaveFileRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/HTTP/V1/Request/SaveFileRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/config/packages/api_platform.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/config/packages/api_platform.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/config/packages/messenger.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/config/packages/messenger.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/src/Entity/Files/File.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Entity/Files/File.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/src/Modules/Common/Bus/CommandBus.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Modules/Common/Bus/CommandBus.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/Controller/FileStorageAPIController.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/Controller/FileStorageAPIController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/HTTP/V1/Request/SaveFileRequest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/Messenger/Commands/SaveFile.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/Messenger/Commands/SaveFile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/Messenger/Commands/SaveFileHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Modules/FileManagement/Messenger/Commands/SaveFileHandler.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +30,11 @@
     <execution />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
@@ -151,6 +151,14 @@
       <path value="$PROJECT_DIR$/symfony/vendor/doctrine/doctrine-fixtures-bundle" />
       <path value="$PROJECT_DIR$/symfony/vendor/league/flysystem-memory" />
       <path value="$PROJECT_DIR$/symfony/vendor/bin/.phpunit" />
+      <path value="$PROJECT_DIR$/symfony/vendor/webonyx/graphql-php" />
+      <path value="$PROJECT_DIR$/symfony/vendor/fig/link-util" />
+      <path value="$PROJECT_DIR$/symfony/vendor/api-platform/core" />
+      <path value="$PROJECT_DIR$/symfony/vendor/psr/link" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/serializer" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/web-link" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/expression-language" />
+      <path value="$PROJECT_DIR$/symfony/vendor/nelmio/cors-bundle" />
     </include_path>
   </component>
   <component name="ProjectId" id="1k3ISCBL1jBjIjsVDUIs4G65MAl" />
@@ -222,20 +230,22 @@
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="357" y="180" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.720@0.0.1280.720" timestamp="1605177604556" />
-    <state x="505" y="93" key="#com.intellij.ide.util.MemberChooser" timestamp="1605079990094">
-      <screen x="0" y="0" width="1280" height="720" />
+    <state x="2678" y="140" key="#com.intellij.ide.util.MemberChooser" timestamp="1605515538665">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="505" y="93" key="#com.intellij.ide.util.MemberChooser/0.0.1280.720@0.0.1280.720" timestamp="1605079990094" />
+    <state x="2678" y="140" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080/19.1080.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1605515538665" />
     <state x="758" y="238" key="#com.intellij.ide.util.MemberChooser/11.1090.1280.720/1920.10.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1604925396444" />
     <state x="2678" y="248" key="#com.intellij.ide.util.MemberChooser/11.1090.1280.720/1920.10.1920.1080/0.0.1920.1080@1920.10.1920.1080" timestamp="1604933965780" />
     <state x="445" y="184" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1604927045125">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="445" y="184" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/11.1090.1280.720/1920.10.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1604927045125" />
-    <state x="378" y="133" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1605080261706">
-      <screen x="0" y="0" width="1280" height="720" />
+    <state x="2487" y="200" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1605518055280">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="378" y="133" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.720@0.0.1280.720" timestamp="1605080261706" />
+    <state x="2487" y="200" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1080/19.1080.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1605518055280" />
     <state x="320" y="266" key="#com.jetbrains.php.refactoring.move.PhpMoveClassDialog#1" timestamp="1605081542347">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
@@ -244,10 +254,11 @@
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="0" y="0" width="812" height="701" key="CommitChangelistDialog2/0.0.1280.720@0.0.1280.720" timestamp="1605083217084" />
-    <state x="390" y="116" key="NewPhpClassDialog" timestamp="1605081358540">
-      <screen x="0" y="0" width="1280" height="720" />
+    <state x="2505" y="174" key="NewPhpClassDialog" timestamp="1605515493557">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="390" y="116" key="NewPhpClassDialog/0.0.1280.720@0.0.1280.720" timestamp="1605081358540" />
+    <state x="2505" y="174" key="NewPhpClassDialog/0.0.1920.1080/19.1080.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1605515493557" />
     <state x="271" y="99" key="NewPhpClassDialog/11.1090.1280.720/1920.10.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1604926932547" />
     <state x="2191" y="109" key="NewPhpClassDialog/11.1090.1280.720/1920.10.1920.1080/0.0.1920.1080@1920.10.1920.1080" timestamp="1604933975380" />
     <state x="240" y="128" key="Vcs.Push.Dialog.v2" timestamp="1605083219878">
@@ -264,27 +275,30 @@
     </state>
     <state x="272" y="128" width="1008" height="506" key="com.jetbrains.php.test.PhpNewTestDialog/0.0.1280.720@0.0.1280.720" timestamp="1605179163166" />
     <state x="2328" y="192" width="1156" height="506" key="com.jetbrains.php.test.PhpNewTestDialog/0.0.1920.1080/19.1080.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1605263164673" />
-    <state x="225" y="74" width="743" height="520" key="find.popup" timestamp="1605179430701">
-      <screen x="0" y="0" width="1280" height="720" />
+    <state x="2258" y="111" width="1115" height="780" key="find.popup" timestamp="1605514394013">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="225" y="74" width="743" height="520" key="find.popup/0.0.1280.720@0.0.1280.720" timestamp="1605179430701" />
+    <state x="2258" y="111" width="1115" height="780" key="find.popup/0.0.1920.1080/19.1080.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1605514394013" />
     <state x="337" y="111" width="606" height="520" key="find.popup/11.1090.1280.720/1920.10.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1604926809257" />
-    <state x="203" y="113" key="run.anything.popup" timestamp="1605015043318">
-      <screen x="0" y="0" width="1280" height="720" />
+    <state x="2225" y="170" key="run.anything.popup" timestamp="1605517013634">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="203" y="113" key="run.anything.popup/0.0.1280.720@0.0.1280.720" timestamp="1605015043318" />
+    <state x="2225" y="170" key="run.anything.popup/0.0.1920.1080/19.1080.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1605517013634" />
     <state x="304" y="170" key="run.anything.popup/11.1090.1280.720/1920.10.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1604928379345" />
-    <state x="2543" y="257" width="1008" height="678" key="search.everywhere.popup" timestamp="1605263557995">
+    <state x="2543" y="257" width="1008" height="678" key="search.everywhere.popup" timestamp="1605521391554">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="415" y="171" width="672" height="452" key="search.everywhere.popup/0.0.1280.720@0.0.1280.720" timestamp="1605179470866" />
-    <state x="2543" y="257" width="1008" height="678" key="search.everywhere.popup/0.0.1920.1080/19.1080.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1605263557995" />
+    <state x="2543" y="257" width="1008" height="678" key="search.everywhere.popup/0.0.1920.1080/19.1080.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1605521391554" />
     <state x="623" y="256" width="672" height="678" key="search.everywhere.popup/11.1090.1280.720/1920.10.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1604928929850" />
     <state x="2543" y="266" width="672" height="678" key="search.everywhere.popup/11.1090.1280.720/1920.10.1920.1080/0.0.1920.1080@1920.10.1920.1080" timestamp="1604934245260" />
-    <state x="460" y="316" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1605178982760">
-      <screen x="0" y="0" width="1280" height="720" />
+    <state x="2610" y="474" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1605517031894">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="460" y="316" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.0.1280.720@0.0.1280.720" timestamp="1605178982760" />
+    <state x="2610" y="474" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.0.1920.1080/19.1080.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1605517031894" />
     <state x="2610" y="484" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/11.1090.1280.720/1920.10.1920.1080/0.0.1920.1080@1920.10.1920.1080" timestamp="1604933567214" />
   </component>
 </project>

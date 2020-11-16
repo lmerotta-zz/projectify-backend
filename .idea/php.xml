@@ -114,6 +114,14 @@
       <path value="$PROJECT_DIR$/symfony/vendor/doctrine/doctrine-fixtures-bundle" />
       <path value="$PROJECT_DIR$/symfony/vendor/league/flysystem-memory" />
       <path value="$PROJECT_DIR$/symfony/vendor/bin/.phpunit" />
+      <path value="$PROJECT_DIR$/symfony/vendor/webonyx/graphql-php" />
+      <path value="$PROJECT_DIR$/symfony/vendor/fig/link-util" />
+      <path value="$PROJECT_DIR$/symfony/vendor/api-platform/core" />
+      <path value="$PROJECT_DIR$/symfony/vendor/psr/link" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/serializer" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/web-link" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/expression-language" />
+      <path value="$PROJECT_DIR$/symfony/vendor/nelmio/cors-bundle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
