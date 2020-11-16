@@ -13,25 +13,25 @@ class SaveFile
     /**
      * @Serializer\Type("string")
      * @Assert\NotBlank()
-     * @Enum(class="App\Contracts\FileManagement\Enum\FileContext")
+     * @Enum(class="App\Contracts\FileManagement\Enum\FileContext", asValue=true)
      */
-    private FileContext $context;
+    private string $context;
     /**
      * @Assert\NotBlank()
      * @Assert\File(groups={"user_profile_picture"}, maxSize="10M", mimeTypes={"image/jpeg", "image/jpg", "image/png"})
      */
     private UploadedFile $file;
 
-    public function __construct(FileContext $context, UploadedFile $file)
+    public function __construct(string $context, UploadedFile $file)
     {
         $this->context = $context;
         $this->file = $file;
     }
 
     /**
-     * @return FileContext
+     * @return string
      */
-    public function getContext(): FileContext
+    public function getContext(): string
     {
         return $this->context;
     }
