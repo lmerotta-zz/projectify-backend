@@ -12,6 +12,7 @@ use League\Glide\Responses\SymfonyResponseFactory;
 use League\Glide\ServerFactory;
 use League\Glide\Signatures\SignatureException;
 use League\Glide\Signatures\SignatureFactory;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Class UserProfilePictureRetriever
@@ -20,6 +21,13 @@ use League\Glide\Signatures\SignatureFactory;
  */
 class UserProfilePictureRetriever implements FileRetrieverInterface
 {
+    private UrlGeneratorInterface $router;
+
+    public function __construct(UrlGeneratorInterface $router)
+    {
+        $this->router = $router;
+    }
+
     public function getSupportedContext(): FileContext
     {
         return FileContext::get(FileContext::USER_PROFILE_PICTURE);
@@ -48,4 +56,14 @@ class UserProfilePictureRetriever implements FileRetrieverInterface
         }
     }
 
+    public function generateURL(File $entity): string
+    {
+        $context = $entity->getContext()->getValue();
+        $name = $entity->getPath();
+        $glideSecret = getenv('GLIDE_SECRET');
+        $parameters = ['w' => 180, 'h' => 180];
+        $signature = SignatureFactory::create($glideSecret)->generateSignature($context.'/'.$name, $parameters);
+
+        return $this->router->generate('app.file_management.action.get_file_resource', array_merge(['id' => $entity->getId()], $parameters, ['s' => $signature]));
+    }
 }

@@ -10,4 +10,5 @@ interface FileRetrieverInterface
 {
     public function getSupportedContext(): FileContext;
     public function retrieveFromEntity(File $entity, FilesystemInterface $source, FilesystemInterface $cache, array $options = []);
+    public function generateURL(File $entity): string;
 }

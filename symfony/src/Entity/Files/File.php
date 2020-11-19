@@ -8,28 +8,13 @@ use App\Repository\Files\FileRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 use App\Modules\FileManagement\Messenger\Queries;
-use App\Modules\FileManagement\Controller;
 
 /**
  * @ORM\Entity(repositoryClass=FileRepository::class)
  * @ApiResource(
  *     collectionOperations={},
  *     itemOperations={
- *          "get"={
- *              "status"=200,
- *              "controller"=Controller\GetFileResourceAction::class,
- *              "denormalizationContext"={"allow_extra_attributes"=true},
- *              "swagger_context"={
- *                  "parameters"={
- *                      {
- *                          "name"="parameters",
- *                          "in"="query",
- *                          "type"="object",
- *                          "additionalProperties"=true
- *                      }
- *                  }
- *              }
- *          }
+ *          "get"
  *     },
  *     graphql={
  *          "create"={
@@ -39,7 +24,9 @@ use App\Modules\FileManagement\Controller;
  *                  "file"={"type"="Upload!", "description"="File to upload"},
  *                  "context"={"type"="String!", "description="="the upload context"}
  *              }
- *          }
+ *          },
+ *          "item_query",
+ *          "collection_query"
  *     }
  * )
  */
@@ -60,6 +47,8 @@ class File
      * @ORM\Column(type="file_context", length=255)
      */
     private $context;
+
+    private string $url;
 
     private function __construct() {}
 
@@ -100,5 +89,17 @@ class File
         $this->context = $context;
 
         return $this;
+    }
+
+    public function setUrl(string $url): self
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    public function getUrl(): string
+    {
+        return $this->url;
     }
 }

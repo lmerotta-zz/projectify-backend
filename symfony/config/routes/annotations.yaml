@@ -1,6 +1,12 @@
-controllers:
+api_controllers:
     resource: ../../src/Modules/*/Controller/*APIController.php
     prefix: /api/v1
+    defaults: {_format: "json"}
+    type: annotation
+
+actions:
+    resource: ../../src/Modules/*/Action/*Action.php
+    prefix: /actions
     defaults: {_format: "json"}
     type: annotation
 
