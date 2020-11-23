@@ -50,7 +50,9 @@ class File
 
     private string $url;
 
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     public static function create(UuidInterface $id, FileContext $context, string $path): self
     {

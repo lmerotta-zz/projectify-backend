@@ -29,5 +29,4 @@ class FileRetrieverCompilerPass implements CompilerPassInterface
             $definition->addMethodCall('addRetriever', [new Reference($id)]);
         }
     }
-
 }

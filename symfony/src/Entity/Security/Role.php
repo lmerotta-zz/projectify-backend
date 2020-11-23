@@ -16,7 +16,9 @@ class Role
      */
     private $name;
 
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     public static function create(string $name): self
     {

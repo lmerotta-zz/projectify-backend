@@ -18,7 +18,7 @@ class SaveFileHandlerTest extends TestCase
 {
     public function testItSavesFile()
     {
-       $context = FileContext::get(FileContext::USER_PROFILE_PICTURE);
+        $context = FileContext::get(FileContext::USER_PROFILE_PICTURE);
         $mountManager = $this->prophesize(MountManager::class);
         $em = $this->prophesize(EntityManagerInterface::class);
         $file = $this->prophesize(UploadedFile::class)->willBeConstructedWith(['pek', 'pok', null, \UPLOAD_ERR_PARTIAL, true]);
@@ -32,6 +32,6 @@ class SaveFileHandlerTest extends TestCase
         $em->persist(Argument::type(File::class))->shouldBeCalledOnce();
         $em->flush()->shouldBeCalledOnce();
 
-        (new SaveFileHandler($mountManager->reveal(), $em->reveal()))(new SaveFile(Uuid::uuid4(), $context, $file->reveal()));
+        (new SaveFileHandler($mountManager->reveal(), $em->reveal()))(new SaveFile(FileContext::USER_PROFILE_PICTURE, $file->reveal()));
     }
 }

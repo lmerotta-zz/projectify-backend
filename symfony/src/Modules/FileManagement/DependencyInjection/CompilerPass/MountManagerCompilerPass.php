@@ -24,7 +24,7 @@ class MountManagerCompilerPass implements CompilerPassInterface
 
         $definitions = array_keys($container->findTaggedServiceIds('flysystem.storage'));
 
-        foreach($enumValues as $value) {
+        foreach ($enumValues as $value) {
             if (!in_array($value.'.storage', $definitions) || !in_array($value.'.cache', $definitions)) {
                 // @codeCoverageIgnoreStart
                 throw new \CompileError("Missing storage or cache for ".$value);
@@ -32,9 +32,8 @@ class MountManagerCompilerPass implements CompilerPassInterface
             }
         }
 
-        foreach($definitions as $name) {
+        foreach ($definitions as $name) {
             $manager->addMethodCall('mountFilesystem', [$name, new Reference($name)]);
         }
     }
-
 }

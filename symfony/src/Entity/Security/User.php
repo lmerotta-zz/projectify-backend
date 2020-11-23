@@ -188,7 +188,9 @@ class User implements UserInterface
         return $this->getEmail();
     }
 
-    public function eraseCredentials() {}
+    public function eraseCredentials()
+    {
+    }
 
     public function getRoles()
     {
