@@ -4,6 +4,9 @@ jobs:
   insights:
     name: PHP Insights
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./symfony
     
     steps:
       - name: Checkout code
