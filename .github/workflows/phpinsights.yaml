@@ -1,0 +1,15 @@
+name: PHP Insights
+on: pull_request
+jobs:
+  insights:
+    name: PHP Insights
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Composer
+        uses: php-actions/composer@v4
+      - name: Insights
+        uses: tienvx/phpinsights-action@v1.0.0
+      
