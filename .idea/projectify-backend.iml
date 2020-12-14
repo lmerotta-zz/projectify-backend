@@ -30,7 +30,6 @@
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/doctrine/sql-formatter" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/elao/enum" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/fig/link-util" />
-      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/friendsofsymfony/rest-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/guzzlehttp/psr7" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/intervention/image" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/jms/metadata" />
@@ -123,7 +122,6 @@
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/webimpress/safe-writer" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/webmozart/assert" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/webonyx/graphql-php" />
-      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/willdurand/jsonp-callback-validator" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/willdurand/negotiation" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/zircote/swagger-php" />
     </content>

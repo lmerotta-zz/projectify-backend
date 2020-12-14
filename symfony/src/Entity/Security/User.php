@@ -7,23 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
-use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Security\Core\User\UserInterface;
-use App\Modules\UserManagement\Messenger\Commands\CreateUser;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ApiResource(
- *  collectionOperations={
- *         "post"={"status"=200, "messenger"="input", "input"=CreateUser::class}
- *   },
- *   graphql={
- *     "create"={
- *        "input"=CreateUser::class,
- *        "messenger"="input"
- *     }
- *   }
- * )
  */
 class User implements UserInterface
 {
