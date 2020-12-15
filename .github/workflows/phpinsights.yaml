@@ -18,7 +18,7 @@ jobs:
       - name: Composer
         uses: php-actions/composer@v4
         env:
-          DATABASE_URL: mysql://root:mysqlactions@localhost:3306/test 
+          DATABASE_URL: mysql://root:mysqlactions@127.0.0.1:3306/test 
         with:
           working_dir: symfony
       - name: Insights
