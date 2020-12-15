@@ -11,8 +11,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: MySQL
+        uses: mirromutth/mysql-action@v1.1
+        with:
+          mysql root password: mysqlactions 
       - name: Composer
         uses: php-actions/composer@v4
+        env:
+          DATABASE_URL: mysql://root:mysqlactions@localhost:3306/test 
         with:
           working_dir: symfony
       - name: Insights
