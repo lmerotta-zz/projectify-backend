@@ -4,6 +4,7 @@ namespace App\Modules\FileManagement\GraphQL\Mutations;
 
 use ApiPlatform\Core\Bridge\Symfony\Validator\Exception\ValidationException;
 use ApiPlatform\Core\GraphQl\Resolver\MutationResolverInterface;
+use App\Entity\Files\File;
 use App\Modules\Common\Bus\CommandBus;
 use App\Modules\FileManagement\Messenger\Commands\SaveFile;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -19,10 +20,16 @@ class SaveFileResolver implements MutationResolverInterface
         $this->bus = $bus;
     }
 
-    public function __invoke($item, array $context)
+    public function __invoke($item, array $context): File
     {
         try {
-            return $this->bus->dispatch(new SaveFile($context['args']['input']['context'], new UploadedFile($context['args']['input']['file'], uniqid())), [new ValidationStamp(['Default', $context['args']['input']['context']])]);
+            return $this->bus->dispatch(
+                new SaveFile(
+                    $context['args']['input']['context'],
+                    new UploadedFile($context['args']['input']['file'], uniqid())
+                ),
+                [new ValidationStamp(['Default', $context['args']['input']['context']])]
+            );
         } catch (ValidationFailedException $e) {
             throw new ValidationException($e->getViolations());
         }

@@ -7,23 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
-use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Security\Core\User\UserInterface;
-use App\Modules\UserManagement\Messenger\Commands\CreateUser;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ApiResource(
- *  collectionOperations={
- *         "post"={"status"=200, "messenger"="input", "input"=CreateUser::class}
- *   },
- *   graphql={
- *     "create"={
- *        "input"=CreateUser::class,
- *        "messenger"="input"
- *     }
- *   }
- * )
  */
 class User implements UserInterface
 {
@@ -73,8 +60,13 @@ class User implements UserInterface
         $this->roles = new ArrayCollection();
     }
 
-    public static function create(UuidInterface $id, string $firstName, string $lastName, string $password, string $email): self
-    {
+    public static function create(
+        UuidInterface $id,
+        string $firstName,
+        string $lastName,
+        string $password,
+        string $email
+    ): self {
         $self = new static();
         $self->id = $id;
 
@@ -116,18 +108,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
     public function getPassword(): ?string
     {
         return $this->password;
@@ -152,14 +132,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Role[]
-     */
-    public function getInternalRoles(): Collection
-    {
-        return $this->roles;
-    }
-
     public function addRole(Role $role): self
     {
         if (!$this->roles->contains($role)) {
@@ -176,25 +148,48 @@ class User implements UserInterface
         return $this;
     }
 
-    // ------ UserInterface methods ----- //
-
-    public function getSalt()
+    public function getSalt(): ?string
     {
         return null;
     }
 
-    public function getUsername()
+    public function getUsername(): string
     {
         return $this->getEmail();
     }
 
-    public function eraseCredentials()
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    // ------ UserInterface methods ----- //
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function eraseCredentials(): void
     {
     }
 
-    public function getRoles()
+    /**
+     * @return string[]
+     */
+    public function getRoles(): array
     {
-        return $this->getInternalRoles()->map(fn (Role $r) => $r->getName());
+        return $this->getInternalRoles()->map(static fn(Role $r) => $r->getName())->toArray();
+    }
+
+    /**
+     * @return Collection|Role[]
+     */
+    public function getInternalRoles(): Collection
+    {
+        return $this->roles;
     }
 
     // ------ end UserInterface methods ----- //

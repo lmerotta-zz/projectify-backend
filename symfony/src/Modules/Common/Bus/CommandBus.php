@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Modules\Common\Bus;
 
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
@@ -16,6 +15,9 @@ class CommandBus
         $this->bus = $bus;
     }
 
+    /**
+     * @return mixed
+     */
     public function dispatch($command, array $stamps = [])
     {
         try {

@@ -1,19 +1,15 @@
 <?php
 
-
 namespace App\Modules\FileManagement\DependencyInjection\CompilerPass;
 
-use App\Contracts\FileManagement\Enum\FileContext;
 use App\Modules\FileManagement\FileStorage\FileRetriever;
-use League\Flysystem\MountManager;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
 class FileRetrieverCompilerPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->has(FileRetriever::class)) {
             // @codeCoverageIgnoreStart
