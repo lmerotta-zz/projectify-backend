@@ -29,6 +29,4 @@ RUN curl -sS https://get.symfony.com/cli/installer | bash
 RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 COPY symfony/ /var/www/symfony
 RUN chown -R 1000:1000 /var/www/symfony
-RUN composer install
-RUN chmod -R 777 /var/www/symfony/var
 WORKDIR /var/www/symfony
