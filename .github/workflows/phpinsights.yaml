@@ -23,6 +23,8 @@ jobs:
         uses: actions/checkout@v2
       - name: cp env
         run: cp symfony/.env.test symfony/.env.local
+      - name: wait for mysql
+        run: sleep 10
       - name: Composer
         uses: php-actions/composer@v4
         with:
