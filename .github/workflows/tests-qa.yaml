@@ -1,0 +1,48 @@
+name: Tests & QA
+on: pull_request
+jobs:
+  insights:
+    name: PHP Insights
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Prepare mysql
+        run: cp docker/mysql/.env docker/mysql/.env.local
+      - name: Run containers
+        run: docker-compose up -d
+      - name: setup composer
+        shell: 'script -q -e -c "bash {0}"'
+        run: docker-compose exec php composer install
+      - name: php insights
+        shell: 'script -q -e -c "bash {0}"'
+        run: docker-compose exec php ./vendor/bin/phpinsights -n --format=json > ./phpinsights.json
+      - name: Archive Insights report
+        uses: actions/upload-artifact@v2
+        with:
+          name: insights-report
+          path: ./symfony/phpinsights.json
+
+    insights:
+      name: PHPUnit
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+        - name: Prepare mysql
+          run: cp docker/mysql/.env docker/mysql/.env.local
+        - name: Run containers
+          run: docker-compose up -d
+        - name: setup composer
+          shell: 'script -q -e -c "bash {0}"'
+          run: docker-compose exec php composer install
+        - name: php insights
+          shell: 'script -q -e -c "bash {0}"'
+          run: docker-compose exec php ./vendor/bin/simple-phpunit
+        - name: Archive Code coverage reports
+          uses: actions/upload-artifact@v2
+          with:
+            name: code-coverage-report
+            path: ./symfony/tests/coverage
