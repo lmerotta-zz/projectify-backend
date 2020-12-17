@@ -24,7 +24,7 @@ jobs:
           name: insights-report
           path: ./symfony/phpinsights.json
 
-    insights:
+    phpunit:
       name: PHPUnit
       runs-on: ubuntu-latest
 
