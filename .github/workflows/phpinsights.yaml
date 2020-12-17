@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       mysql:
-        image: mysql:5.7
+        image: mariadb:latest
         env:
           MYSQL_USER: projectify-dev
           MYSQL_PASSWORD: projectify-dev
