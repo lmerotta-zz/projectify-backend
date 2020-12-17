@@ -2,16 +2,9 @@
 
 namespace App\Modules\FileManagement\Stage;
 
-use ApiPlatform\Core\EventListener\EventPriorities;
-use ApiPlatform\Core\GraphQl\Resolver\Stage\ReadStageInterface;
 use ApiPlatform\Core\GraphQl\Resolver\Stage\SerializeStageInterface;
-use ApiPlatform\Core\Util\RequestAttributesExtractor;
 use App\Entity\Files\File;
 use App\Modules\FileManagement\FileStorage\FileRetriever;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\ViewEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpFoundation\Response;
 
 class GenerateFileURLSerializeStage implements SerializeStageInterface
 {
@@ -24,14 +17,12 @@ class GenerateFileURLSerializeStage implements SerializeStageInterface
         $this->stage = $stage;
     }
 
+    /**
+     * @return File[]|null
+     */
     public function __invoke($itemOrCollection, string $resourceClass, string $operationName, array $context): ?array
     {
-        $files = $itemOrCollection;
-        $iterable = is_iterable($files);
-
-        if (!$iterable) {
-            $files = [$files];
-        }
+        $files = is_iterable($itemOrCollection) ? $itemOrCollection : [$itemOrCollection];
 
         if (\is_a($resourceClass, File::class, true)) {
             foreach ($files as $file) {
@@ -43,6 +34,6 @@ class GenerateFileURLSerializeStage implements SerializeStageInterface
             }
         }
 
-        return ($this->stage)(is_iterable($itemOrCollection) ? $files : $files[0], $resourceClass, $operationName, $context);
+        return ($this->stage)($itemOrCollection, $resourceClass, $operationName, $context);
     }
 }

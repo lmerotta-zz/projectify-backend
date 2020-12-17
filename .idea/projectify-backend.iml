@@ -11,6 +11,7 @@
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/dama/doctrine-test-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/dealerdirect/phpcodesniffer-composer-installer" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/doctrine/annotations" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/doctrine/cache" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/doctrine/collections" />
@@ -35,9 +36,11 @@
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/jms/metadata" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/jms/serializer" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/jms/serializer-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/justinrainbow/json-schema" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/laminas/laminas-code" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/laminas/laminas-eventmanager" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/laminas/laminas-zendframework-bridge" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/league/container" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/league/flysystem" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/league/flysystem-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/league/flysystem-memory" />
@@ -46,11 +49,17 @@
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/league/mime-type-detection" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/nelmio/api-doc-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/nelmio/cors-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/nette/utils" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/nikic/php-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/nunomaduro/phpinsights" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/object-calisthenics/phpcs-calisthenics-rules" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/ocramius/proxy-manager" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/php-cs-fixer/diff" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/phpdocumentor/reflection-common" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/phpdocumentor/reflection-docblock" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/phpdocumentor/type-resolver" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/phploc/phploc" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/phpstan/phpdoc-parser" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/psr/cache" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/psr/container" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/psr/event-dispatcher" />
@@ -61,7 +70,14 @@
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/ramsey/collection" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/ramsey/uuid" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/ramsey/uuid-doctrine" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/sebastian/finder-facade" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/sebastian/version" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/seld/jsonlint" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/seld/phar-utils" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/sensio/framework-extra-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/sensiolabs/security-checker" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/slevomat/coding-standard" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/squizlabs/php_codesniffer" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/amqp-messenger" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/asset" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/browser-kit" />
@@ -83,6 +99,7 @@
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/finder" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/flex" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/framework-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/http-client" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/http-client-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/http-foundation" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/http-kernel" />
@@ -97,6 +114,7 @@
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/polyfill-mbstring" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/polyfill-php73" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/polyfill-php80" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/process" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/property-access" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/property-info" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/redis-messenger" />
@@ -118,6 +136,7 @@
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/var-exporter" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/web-link" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/symfony/yaml" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/theseer/fdomdocument" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/twig/twig" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/webimpress/safe-writer" />
       <excludeFolder url="file://$MODULE_DIR$/symfony/vendor/webmozart/assert" />

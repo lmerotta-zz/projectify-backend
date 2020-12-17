@@ -2,7 +2,6 @@
 
 namespace App\Modules\FileManagement\Messenger\Queries;
 
-use App\Contracts\FileManagement\Enum\FileContext;
 use Ramsey\Uuid\UuidInterface;
 
 class GetFileResource
@@ -16,16 +15,13 @@ class GetFileResource
         $this->options = $options;
     }
 
-    /**
-     * @return UuidInterface
-     */
     public function getUuid(): UuidInterface
     {
         return $this->uuid;
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function getOptions(): array
     {

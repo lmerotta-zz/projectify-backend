@@ -2,8 +2,8 @@
 
 namespace App\Modules\FileManagement\FileStorage;
 
-use App\Contracts\FileManagement\FileRetrieverInterface;
 use App\Contracts\FileManagement\Enum\FileContext;
+use App\Contracts\FileManagement\FileRetrieverInterface;
 use App\Modules\FileManagement\Exception\DuplicateFileRetrieverException;
 use App\Modules\FileManagement\Exception\NonExistingFileRetrieverException;
 
@@ -11,7 +11,7 @@ class FileRetriever
 {
     private array $retrievers = [];
 
-    public function addRetriever(FileRetrieverInterface $fileRetriever)
+    public function addRetriever(FileRetrieverInterface $fileRetriever): void
     {
         $context = $fileRetriever->getSupportedContext()->getValue();
         if (!empty($this->retrievers[$context])) {
