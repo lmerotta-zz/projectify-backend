@@ -2,22 +2,21 @@
 
 namespace App\Modules\UserManagement\FileStorage;
 
-use App\Entity\Files\File;
 use App\Contracts\FileManagement\Enum\FileContext;
 use App\Contracts\FileManagement\Exception\FileNotFoundException;
 use App\Contracts\FileManagement\FileRetrieverInterface;
+use App\Entity\Files\File;
 use League\Flysystem\FilesystemInterface;
 use League\Glide\Filesystem\FileNotFoundException as GlideFileNotFoundException;
 use League\Glide\Responses\SymfonyResponseFactory;
 use League\Glide\ServerFactory;
 use League\Glide\Signatures\SignatureException;
 use League\Glide\Signatures\SignatureFactory;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * Class UserProfilePictureRetriever
- * @package App\Modules\UserManagement\FileStorage
- * Is used to retrieve a user profile picture as a Symfony response
+ * Class UserProfilePictureRetriever.
  */
 class UserProfilePictureRetriever implements FileRetrieverInterface
 {
@@ -33,8 +32,12 @@ class UserProfilePictureRetriever implements FileRetrieverInterface
         return FileContext::get(FileContext::USER_PROFILE_PICTURE);
     }
 
-    public function retrieveFromEntity(File $entity, FilesystemInterface $source, FilesystemInterface $cache, array $options = [])
-    {
+    public function retrieveFromEntity(
+        File $entity,
+        FilesystemInterface $source,
+        FilesystemInterface $cache,
+        array $options = []
+    ): Response {
         $context = $entity->getContext()->getValue();
         $name = $entity->getPath();
         $glideSecret = getenv('GLIDE_SECRET');
@@ -43,7 +46,7 @@ class UserProfilePictureRetriever implements FileRetrieverInterface
 
         if (count($options) > 0) {
             try {
-                SignatureFactory::create($glideSecret)->validateRequest($context.'/'.$name, $options);
+                SignatureFactory::create($glideSecret)->validateRequest($context . '/' . $name, $options);
             } catch (SignatureException $e) {
                 throw new FileNotFoundException($e->getMessage());
             }
@@ -62,8 +65,11 @@ class UserProfilePictureRetriever implements FileRetrieverInterface
         $name = $entity->getPath();
         $glideSecret = getenv('GLIDE_SECRET');
         $parameters = ['w' => 180, 'h' => 180];
-        $signature = SignatureFactory::create($glideSecret)->generateSignature($context.'/'.$name, $parameters);
+        $signature = SignatureFactory::create($glideSecret)->generateSignature($context . '/' . $name, $parameters);
 
-        return $this->router->generate('app.file_management.action.get_file_resource', array_merge(['id' => $entity->getId()], $parameters, ['s' => $signature]));
+        return $this->router->generate(
+            'app.file_management.action.get_file_resource',
+            array_merge(['id' => $entity->getId()], $parameters, ['s' => $signature])
+        );
     }
 }

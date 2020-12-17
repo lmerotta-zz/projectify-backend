@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Modules\FileManagement\DependencyInjection\CompilerPass;
 
 use App\Contracts\FileManagement\Enum\FileContext;
@@ -15,19 +14,23 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class MountManagerCompilerPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $enumValues = FileContext::values();
 
-        $manager = $container->setDefinition('app.file_management.flysystem.mount_manager', (new Definition(MountManager::class))->setPublic(false));
+        $manager = $container->setDefinition(
+            'app.file_management.flysystem.mount_manager',
+            (new Definition(MountManager::class))->setPublic(false)
+        );
+
         $container->setAlias(MountManager::class, 'app.file_management.flysystem.mount_manager');
 
         $definitions = array_keys($container->findTaggedServiceIds('flysystem.storage'));
 
         foreach ($enumValues as $value) {
-            if (!in_array($value.'.storage', $definitions) || !in_array($value.'.cache', $definitions)) {
+            if (!in_array($value . '.storage', $definitions) || !in_array($value . '.cache', $definitions)) {
                 // @codeCoverageIgnoreStart
-                throw new \CompileError("Missing storage or cache for ".$value);
+                throw new \CompileError('Missing storage or cache for ' . $value);
                 // @codeCoverageIgnoreEnd
             }
         }

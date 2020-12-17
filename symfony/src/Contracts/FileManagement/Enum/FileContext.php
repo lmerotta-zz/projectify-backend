@@ -9,5 +9,5 @@ class FileContext extends Enum
 {
     use AutoDiscoveredValuesTrait;
 
-    const USER_PROFILE_PICTURE = 'user_profile_picture';
+    public const USER_PROFILE_PICTURE = 'user_profile_picture';
 }

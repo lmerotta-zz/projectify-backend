@@ -7,7 +7,6 @@ use App\Contracts\FileManagement\Enum\FileContext;
 use App\Repository\Files\FileRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
-use App\Modules\FileManagement\Messenger\Queries;
 
 /**
  * @ORM\Entity(repositoryClass=FileRepository::class)

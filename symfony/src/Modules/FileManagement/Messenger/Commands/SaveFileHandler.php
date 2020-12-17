@@ -18,6 +18,7 @@ class SaveFileHandler
         $this->mountManager = $manager;
         $this->em = $em;
     }
+
     public function __invoke(SaveFile $command): File
     {
         $context = FileContext::get($command->getContext());
