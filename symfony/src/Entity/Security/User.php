@@ -2,6 +2,8 @@
 
 namespace App\Entity\Security;
 
+use ApiPlatform\Core\Annotation\ApiResource;
+use App\Modules\UserManagement\Messenger\Commands\SignUserUp;
 use App\Repository\Security\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,6 +13,18 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ApiResource(
+ *     itemOperations={"get"},
+ *     collectionOperations={},
+ *     graphql={
+ *          "create"={
+ *              "input"=SignUserUp::class,
+ *              "messenger"="input"
+ *          },
+ *          "item_query",
+ *          "collection_query"
+ *     }
+ * )
  */
 class User implements UserInterface
 {

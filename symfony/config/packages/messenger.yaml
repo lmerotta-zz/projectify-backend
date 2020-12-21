@@ -10,3 +10,5 @@ framework:
           middleware:
             - doctrine_transaction
             - validation
+        event.bus:
+          default_middleware: allow_no_handlers

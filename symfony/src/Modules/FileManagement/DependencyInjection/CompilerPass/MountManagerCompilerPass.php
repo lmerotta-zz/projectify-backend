@@ -28,9 +28,9 @@ class MountManagerCompilerPass implements CompilerPassInterface
         $definitions = array_keys($container->findTaggedServiceIds('flysystem.storage'));
 
         foreach ($enumValues as $value) {
-            if (!in_array($value . '.storage', $definitions) || !in_array($value . '.cache', $definitions)) {
+            if (!in_array($value.'.storage', $definitions) || !in_array($value.'.cache', $definitions)) {
                 // @codeCoverageIgnoreStart
-                throw new \CompileError('Missing storage or cache for ' . $value);
+                throw new \CompileError('Missing storage or cache for '.$value);
                 // @codeCoverageIgnoreEnd
             }
         }

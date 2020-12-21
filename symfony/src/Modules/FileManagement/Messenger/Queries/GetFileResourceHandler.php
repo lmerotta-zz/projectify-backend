@@ -34,8 +34,8 @@ class GetFileResourceHandler
 
         $context = $file->getContext();
         $options = $query->getOptions();
-        $source = $this->manager->getFilesystem($context->getValue() . '.storage');
-        $cache = $this->manager->getFilesystem($context->getValue() . '.cache');
+        $source = $this->manager->getFilesystem($context->getValue().'.storage');
+        $cache = $this->manager->getFilesystem($context->getValue().'.cache');
 
         try {
             return $this->fileRetriever->getRetriever($context)->retrieveFromEntity($file, $source, $cache, $options);

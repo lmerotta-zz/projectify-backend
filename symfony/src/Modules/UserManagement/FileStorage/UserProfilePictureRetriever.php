@@ -22,16 +22,15 @@ class UserProfilePictureRetriever implements FileRetrieverInterface
 {
     private UrlGeneratorInterface $router;
 
-    public function __construct(UrlGeneratorInterface $router)
-    {
-        $this->router = $router;
-    }
-
     public function getSupportedContext(): FileContext
     {
         return FileContext::get(FileContext::USER_PROFILE_PICTURE);
     }
 
+    /**
+     * @codeCoverageIgnore
+     * uses Glide, no need to test it for now
+     */
     public function retrieveFromEntity(
         File $entity,
         FilesystemInterface $source,
@@ -46,7 +45,7 @@ class UserProfilePictureRetriever implements FileRetrieverInterface
 
         if (count($options) > 0) {
             try {
-                SignatureFactory::create($glideSecret)->validateRequest($context . '/' . $name, $options);
+                SignatureFactory::create($glideSecret)->validateRequest($context.'/'.$name, $options);
             } catch (SignatureException $e) {
                 throw new FileNotFoundException($e->getMessage());
             }
@@ -65,11 +64,19 @@ class UserProfilePictureRetriever implements FileRetrieverInterface
         $name = $entity->getPath();
         $glideSecret = getenv('GLIDE_SECRET');
         $parameters = ['w' => 180, 'h' => 180];
-        $signature = SignatureFactory::create($glideSecret)->generateSignature($context . '/' . $name, $parameters);
+        $signature = SignatureFactory::create($glideSecret)->generateSignature($context.'/'.$name, $parameters);
 
         return $this->router->generate(
             'app.file_management.action.get_file_resource',
             array_merge(['id' => $entity->getId()], $parameters, ['s' => $signature])
         );
+    }
+
+    /**
+     * @required
+     */
+    public function setRouter(UrlGeneratorInterface $router): void
+    {
+        $this->router = $router;
     }
 }
