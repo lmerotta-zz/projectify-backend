@@ -23,10 +23,10 @@ class SignUserUpHandler
     {
         $user = User::create(
             Uuid::uuid4(),
-            $command->getFirstName(),
-            $command->getLastName(),
-            $this->passwordEncoder->getEncoder(User::class)->encodePassword($command->getPassword(), null),
-            $command->getEmail()
+            $command->firstName,
+            $command->lastName,
+            $this->passwordEncoder->getEncoder(User::class)->encodePassword($command->password, null),
+            $command->email
         );
 
         $this->em->persist($user);

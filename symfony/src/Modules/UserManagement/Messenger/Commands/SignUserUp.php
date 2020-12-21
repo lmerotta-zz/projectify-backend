@@ -16,25 +16,25 @@ class SignUserUp
      * @Assert\NotBlank
      * @Serializer\Type("string")
      */
-    private string $email;
+    public string $email;
 
     /**
      * @Assert\NotBlank
      * @Serializer\Type("string")
      */
-    private string $firstName;
+    public string $firstName;
 
     /**
      * @Assert\NotBlank
      * @Serializer\Type("string")
      */
-    private string $lastName;
+    public string $lastName;
 
     /**
      * @Assert\NotBlank
      * @Serializer\Type("string")
      */
-    private string $password;
+    public string $password;
 
     public function __construct(
         string $email,
@@ -46,25 +46,5 @@ class SignUserUp
         $this->password = $password;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
-    }
-
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    public function getFirstName(): string
-    {
-        return $this->firstName;
-    }
-
-    public function getLastName(): string
-    {
-        return $this->lastName;
-    }
-
-    public function getPassword(): string
-    {
-        return $this->password;
     }
 }
