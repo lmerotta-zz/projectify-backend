@@ -10,3 +10,4 @@ framework:
           middleware:
             - doctrine_transaction
             - validation
+        event.bus: ~
