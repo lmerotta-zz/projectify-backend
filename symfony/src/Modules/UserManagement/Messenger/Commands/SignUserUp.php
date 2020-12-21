@@ -2,9 +2,10 @@
 
 namespace App\Modules\UserManagement\Messenger\Commands;
 
+use App\Entity\Security\Role;
 use App\Entity\Security\User;
 use App\Modules\Common\Validator\Constraints\UniqueEntity;
-use JMS\Serializer\Annotation as Serializer;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -14,27 +15,31 @@ class SignUserUp
 {
     /**
      * @Assert\NotBlank
-     * @Serializer\Type("string")
      */
     public string $email;
 
     /**
      * @Assert\NotBlank
-     * @Serializer\Type("string")
      */
     public string $firstName;
 
     /**
      * @Assert\NotBlank
-     * @Serializer\Type("string")
      */
     public string $lastName;
 
     /**
      * @Assert\NotBlank
-     * @Serializer\Type("string")
      */
     public string $password;
+
+    /**
+     * @Assert\Count(min="1")
+     * @Assert\Unique()
+     *
+     * @var Collection<Role>
+     */
+    public iterable $roles;
 
     public function __construct(
         string $email,

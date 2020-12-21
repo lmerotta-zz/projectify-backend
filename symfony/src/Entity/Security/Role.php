@@ -2,11 +2,19 @@
 
 namespace App\Entity\Security;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\Security\RoleRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=RoleRepository::class)
+ * @ApiResource(
+ *     itemOperations={"get"},
+ *     collectionOperations={},
+ *     graphql={
+ *         "collection_query"
+ *     }
+ * )
  */
 class Role
 {

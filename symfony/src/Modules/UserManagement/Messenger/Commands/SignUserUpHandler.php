@@ -29,6 +29,10 @@ class SignUserUpHandler
             $command->email
         );
 
+        foreach ($command->roles as $role) {
+            $user->addRole($role);
+        }
+
         $this->em->persist($user);
         $this->em->flush();
 
