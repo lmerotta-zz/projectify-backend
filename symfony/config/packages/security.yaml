@@ -14,15 +14,24 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+
+        api_token:
+            pattern: ^/actions/security/authentication/token
+            security: false
+
         auth:
             pattern: ^/actions/security/authentication
             anonymous: true
             lazy: true
             json_login:
                 check_path: app.security.action.login
+        api:
+            pattern: ^/api
+            security: true
+            stateless: true
+            oauth2: true
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/actions/security/authentication/authorize, roles: IS_AUTHENTICATED_REMEMBERED }

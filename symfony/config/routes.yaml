@@ -2,3 +2,7 @@ app.swagger.ui:
   path: /api/doc
   methods: GET
   defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
+
+app.security.oauth2:
+  resource: '@TrikoderOAuth2Bundle/Resources/config/routes.xml'
+  prefix: /actions/security/authentication

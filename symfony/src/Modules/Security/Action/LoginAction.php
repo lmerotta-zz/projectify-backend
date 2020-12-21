@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Modules\UserManagement\Action;
+namespace App\Modules\Security\Action;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;

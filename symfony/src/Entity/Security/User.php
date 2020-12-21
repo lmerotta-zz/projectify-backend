@@ -195,7 +195,9 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        return $this->getInternalRoles()->map(static fn(Role $r) => $r->getName())->toArray();
+        // TODO: remove this
+        return ['ROLE_USER'];
+        //return $this->getInternalRoles()->map(static fn(Role $r) => $r->getName())->toArray();
     }
 
     /**

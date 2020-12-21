@@ -62,3 +62,8 @@ services:
 
     App\Modules\FileManagement\Stage\GenerateFileURLSerializeStage:
         decorates: api_platform.graphql.resolver.stage.serialize
+
+    ## SECURITY ##
+    App\Modules\Security\EventListener\AuthorizationCodeListener:
+        tags:
+            - { name: kernel.event_listener, event: 'trikoder.oauth2.authorization_request_resolve', method: onAuthorizationRequestResolve }
