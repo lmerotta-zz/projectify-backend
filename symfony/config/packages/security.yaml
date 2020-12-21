@@ -4,10 +4,22 @@ security:
         App\Entity\Security\User:
             algorithm: auto
             cost: 12
+    providers:
+        local_users:
+            entity:
+                class: App\Entity\Security\User
+                property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        auth:
+            pattern: ^/actions/security/authentication
+            anonymous: true
+            lazy: true
+            json_login:
+                check_path: app.security.action.login
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
