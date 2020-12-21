@@ -49,7 +49,7 @@ services:
 
     event_handlers:
         namespace: App\
-        resource: '../src/{Modules}/*/Messenger/Events/*Handler.php'
+        resource: '../src/{Modules}/*/Messenger/Events/*When*Handler.php'
         autoconfigure: false
         tags:
             - { name: messenger.message_handler, bus: event.bus }

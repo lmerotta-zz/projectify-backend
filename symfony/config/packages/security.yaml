@@ -25,15 +25,16 @@ security:
             lazy: true
             json_login:
                 check_path: app.security.action.login
+
         api_graphql:
             pattern: ^/api/graphql
             security: false
 
-        #api:
-        #    pattern: ^/api
-        #    security: true
-        #    stateless: true
-        #    oauth2: true
+        api:
+            pattern: ^/api
+            security: true
+            stateless: true
+            oauth2: true
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used

@@ -60,7 +60,7 @@ class User implements UserInterface
     private $profilePicture;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Role::class)
+     * @ORM\ManyToMany(targetEntity=Role::class, cascade={"persist", "remove"})
      * @ORM\JoinTable(
      *     name="users_roles",
      *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
