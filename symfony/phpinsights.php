@@ -81,8 +81,7 @@ return [
         \PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterNotSniff::class,
         \ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff::class,
         \SlevomatCodingStandard\Sniffs\Commenting\DocCommentSpacingSniff::class,
-
-
+        \PhpCsFixer\Fixer\FunctionNotation\FunctionDeclarationFixer::class,
     ],
 
     'config' => [

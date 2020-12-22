@@ -4,13 +4,39 @@ security:
         App\Entity\Security\User:
             algorithm: auto
             cost: 12
+    providers:
+        local_users:
+            entity:
+                class: App\Entity\Security\User
+                property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+
+        api_token:
+            pattern: ^/actions/security/authentication/token
+            security: false
+
+        auth:
+            pattern: ^/actions/security/authentication
+            anonymous: true
+            lazy: true
+            json_login:
+                check_path: app.security.action.login
+
+        api_docs:
+            pattern: ^/api/(graphql|doc)
+            security: false
+
+        api:
+            pattern: ^/api
+            security: true
+            stateless: true
+            oauth2: true
+
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/actions/security/authentication/authorize, roles: IS_AUTHENTICATED_REMEMBERED }

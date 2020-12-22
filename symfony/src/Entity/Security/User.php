@@ -60,7 +60,7 @@ class User implements UserInterface
     private $profilePicture;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Role::class)
+     * @ORM\ManyToMany(targetEntity=Role::class, cascade={"persist", "remove"})
      * @ORM\JoinTable(
      *     name="users_roles",
      *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
@@ -195,7 +195,7 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        return $this->getInternalRoles()->map(static fn(Role $r) => $r->getName())->toArray();
+        return $this->getInternalRoles()->map(static fn (Role $r) => $r->getName())->toArray();
     }
 
     /**
