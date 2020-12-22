@@ -26,8 +26,8 @@ security:
             json_login:
                 check_path: app.security.action.login
 
-        api_graphql:
-            pattern: ^/api/graphql
+        api_docs:
+            pattern: ^/api/(graphql|doc)
             security: false
 
         api:

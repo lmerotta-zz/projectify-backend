@@ -1,3 +1,5 @@
+# Security module
+
 Generate client: php bin/console trikoder:oauth:create-client --redirect-uri=http://localhost/authentify --grant-type=authorization_code --scope=
 public.profile --scope=email --public --grant-type=refresh_token
 
