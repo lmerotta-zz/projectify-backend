@@ -4,3 +4,4 @@ elao_enum:
     doctrine:
         types:
             file_context: App\Contracts\FileManagement\Enum\FileContext
+            permission: App\Contracts\Security\Enum\Permission

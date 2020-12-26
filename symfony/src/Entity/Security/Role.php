@@ -3,6 +3,7 @@
 namespace App\Entity\Security;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Contracts\Security\Enum\Permission;
 use App\Repository\Security\RoleRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -24,6 +25,11 @@ class Role
      */
     private $name;
 
+    /**
+     * @ORM\Column(type="permission", nullable=true)
+     */
+    private $permissions;
+
     private function __construct()
     {
     }
@@ -44,6 +50,18 @@ class Role
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getPermissions(): Permission
+    {
+        return $this->permissions;
+    }
+
+    public function setPermissions(Permission $permissions): self
+    {
+        $this->permissions = $permissions;
 
         return $this;
     }
