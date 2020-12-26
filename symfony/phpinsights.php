@@ -82,6 +82,7 @@ return [
         \ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff::class,
         \SlevomatCodingStandard\Sniffs\Commenting\DocCommentSpacingSniff::class,
         \PhpCsFixer\Fixer\FunctionNotation\FunctionDeclarationFixer::class,
+        \PhpCsFixer\Fixer\Phpdoc\AlignMultilineCommentFixer::class
     ],
 
     'config' => [

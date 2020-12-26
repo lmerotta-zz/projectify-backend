@@ -14,14 +14,26 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ApiResource(
- *     itemOperations={"get"},
+ *     itemOperations={
+ *          "get"={
+ *              "security"="is_granted(
+                    constant('App\\Contracts\\Security\\Enum\\Permission::USER_VIEW_SELF'),
+                    object
+                )"
+ *          }
+ *     },
  *     collectionOperations={},
  *     graphql={
  *          "create"={
  *              "input"=SignUserUp::class,
  *              "messenger"="input"
  *          },
- *          "item_query",
+ *          "item_query"={
+ *              "security"="is_granted(
+                    constant('App\\Contracts\\Security\\Enum\\Permission::USER_VIEW_SELF'),
+                    object
+                )"
+ *          },
  *          "collection_query"
  *     }
  * )
