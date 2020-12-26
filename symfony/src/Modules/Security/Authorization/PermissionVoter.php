@@ -22,9 +22,11 @@ class PermissionVoter implements VoterInterface
             return $vote;
         }
 
-        $permissions = Permission::get(
-            $user->getInternalRoles()->map(static fn(Role $r) => $r->getPermissions()->getValue())
-        );
+        $permissions = Permission::get(array_reduce(
+            $user->getInternalRoles()->toArray(),
+            static fn (int $carry, Role $item) => $carry | $item->getPermissions()->getValue(),
+            0
+        ));
 
         foreach ($attributes as $attribute) {
             if (!Permission::accepts($attribute)) {
