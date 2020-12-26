@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c31c5477a3e9c085e560a40e7adeb5cb",
+    "content-hash": "7fe487710ad2598e184828173893e743",
     "packages": [
         {
             "name": "api-platform/core",
@@ -163,7 +163,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-12-19T08:57:56+00:00"
+            "time": "2020-12-22T11:39:37+00:00"
         },
         {
             "name": "brick/math",
@@ -11767,6 +11767,8 @@
         "ext-ctype": "*",
         "ext-iconv": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {
+        "ext-json": "*"
+    },
     "plugin-api-version": "2.0.0"
 }
