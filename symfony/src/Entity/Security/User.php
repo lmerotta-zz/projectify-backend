@@ -3,6 +3,7 @@
 namespace App\Entity\Security;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Contracts\Security\Enum\Permission;
 use App\Modules\UserManagement\Messenger\Commands\SignUserUp;
 use App\Repository\Security\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -14,15 +15,32 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ApiResource(
- *     itemOperations={"get"},
+ *     itemOperations={
+ *          "get"={
+ *              "security"="is_granted(
+                    constant('App\\Contracts\\Security\\Enum\\Permission::USER_VIEW_SELF'),
+                    object
+                )"
+ *          }
+ *     },
  *     collectionOperations={},
  *     graphql={
  *          "create"={
  *              "input"=SignUserUp::class,
  *              "messenger"="input"
  *          },
- *          "item_query",
- *          "collection_query"
+ *          "item_query"={
+ *              "security"="is_granted(
+                    constant('App\\Contracts\\Security\\Enum\\Permission::USER_VIEW_SELF'),
+                    object
+                )"
+ *          },
+ *          "collection_query"={
+ *              "security"="is_granted(
+                    constant('App\\Contracts\\Security\\Enum\\Permission::USER_VIEW_LIST'),
+                    object
+                )"
+ *          }
  *     }
  * )
  */
@@ -175,6 +193,15 @@ class User implements UserInterface
     public function getEmail(): ?string
     {
         return $this->email;
+    }
+
+    public function getPermissions(): Permission
+    {
+        return Permission::get(array_reduce(
+            $this->getInternalRoles()->toArray(),
+            static fn (int $carry, Role $item) => $carry | $item->getPermissions()->getValue(),
+            0
+        ));
     }
 
     // ------ UserInterface methods ----- //

@@ -1,4 +1,7 @@
 security:
+    access_decision_manager:
+        strategy: unanimous
+        allow_if_all_abstain: false
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     encoders:
         App\Entity\Security\User:
@@ -27,11 +30,12 @@ security:
                 check_path: app.security.action.login
 
         api_docs:
-            pattern: ^/api/(graphql|doc)
+            pattern: ^/api/doc
             security: false
 
         api:
             pattern: ^/(api|actions)
+            anonymous: true
             security: true
             stateless: true
             oauth2: true

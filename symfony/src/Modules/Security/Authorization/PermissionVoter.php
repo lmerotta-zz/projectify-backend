@@ -3,7 +3,6 @@
 namespace App\Modules\Security\Authorization;
 
 use App\Contracts\Security\Enum\Permission;
-use App\Entity\Security\Role;
 use App\Entity\Security\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
@@ -17,23 +16,17 @@ class PermissionVoter implements VoterInterface
 
         $user = $token->getUser();
 
-        // abstain if not logged in
-        if (!$user instanceof User) {
-            return $vote;
-        }
-
-        $permissions = Permission::get(array_reduce(
-            $user->getInternalRoles()->toArray(),
-            static fn (int $carry, Role $item) => $carry | $item->getPermissions()->getValue(),
-            0
-        ));
-
         foreach ($attributes as $attribute) {
             if (!Permission::accepts($attribute)) {
                 continue;
             }
 
-            if (!$permissions->hasFlag($attribute)) {
+            // abstain if not logged in
+            if (!$user instanceof User) {
+                return self::ACCESS_DENIED;
+            }
+
+            if (!$user->getPermissions()->hasFlag($attribute)) {
                 $vote = self::ACCESS_DENIED;
             }
         }
