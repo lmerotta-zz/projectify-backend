@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
-class AddDefaultRoleWhenUserSignedUp
+class AddDefaultRoleWhenUserSignedUpHandler
 {
     private const DEFAULT_ROLE = 'ROLE_USER';
 

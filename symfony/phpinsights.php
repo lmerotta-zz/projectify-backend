@@ -82,7 +82,8 @@ return [
         \ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff::class,
         \SlevomatCodingStandard\Sniffs\Commenting\DocCommentSpacingSniff::class,
         \PhpCsFixer\Fixer\FunctionNotation\FunctionDeclarationFixer::class,
-        \PhpCsFixer\Fixer\Phpdoc\AlignMultilineCommentFixer::class
+        \PhpCsFixer\Fixer\Phpdoc\AlignMultilineCommentFixer::class,
+        \PHP_CodeSniffer\Standards\Generic\Sniffs\Commenting\TodoSniff::class
     ],
 
     'config' => [
@@ -92,6 +93,11 @@ return [
         ],
         \PhpCsFixer\Fixer\FunctionNotation\FunctionDeclarationFixer::class => [
             'closure_function_spacing' => 'none'
+        ],
+        \NunoMaduro\PhpInsights\Domain\Insights\CyclomaticComplexityIsHigh::class => [
+            'exclude' => [
+                'src/Modules/UserManagement/Security/Authorization/UserVoter.php'
+            ]
         ],
     ],
 

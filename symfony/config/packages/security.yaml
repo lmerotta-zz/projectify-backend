@@ -35,6 +35,7 @@ security:
 
         api:
             pattern: ^/(api|actions)
+            anonymous: true
             security: true
             stateless: true
             oauth2: true

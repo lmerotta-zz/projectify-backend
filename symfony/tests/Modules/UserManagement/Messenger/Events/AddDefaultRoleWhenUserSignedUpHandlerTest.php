@@ -4,7 +4,7 @@ namespace App\Tests\Modules\UserManagement\Messenger\Events;
 
 use App\Entity\Security\Role;
 use App\Entity\Security\User;
-use App\Modules\UserManagement\Messenger\Events\AddDefaultRoleWhenUserSignedUp;
+use App\Modules\UserManagement\Messenger\Events\AddDefaultRoleWhenUserSignedUpHandler;
 use App\Modules\UserManagement\Messenger\Events\UserSignedUp;
 use App\Repository\Security\RoleRepository;
 use App\Repository\Security\UserRepository;
@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\Uuid;
 
-class AddDefaultRoleWhenUserSignedUpTest extends TestCase
+class AddDefaultRoleWhenUserSignedUpHandlerTest extends TestCase
 {
     public function testItAddsTheRoleUserOnEvent()
     {
@@ -30,7 +30,7 @@ class AddDefaultRoleWhenUserSignedUpTest extends TestCase
         $user->addRole($role->reveal())->shouldBeCalled()->willReturn($user->reveal());
         $em->flush()->shouldBeCalled();
 
-        $handler = new AddDefaultRoleWhenUserSignedUp();
+        $handler = new AddDefaultRoleWhenUserSignedUpHandler();
         $handler->setEm($em->reveal());
         $handler->setRoleRepository($roleRepo->reveal());
         $handler->setUserRepository($userRepo->reveal());

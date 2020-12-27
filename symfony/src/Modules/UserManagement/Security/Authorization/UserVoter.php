@@ -14,6 +14,8 @@ class UserVoter extends Voter
         switch ($attribute) {
             case Permission::USER_VIEW_SELF:
                 return $subject instanceof User;
+            case Permission::USER_VIEW_LIST:
+                return is_iterable($subject);
             // @codeCoverageIgnoreStart
             default:
                 return false;
@@ -26,6 +28,15 @@ class UserVoter extends Voter
         switch ($attribute) {
             case Permission::USER_VIEW_SELF:
                 return $this->isSelf($token->getUser(), $subject);
+            case Permission::USER_VIEW_LIST:
+                foreach ($subject as $user) {
+                    // TODO: better list handling once we have teams
+                    if (!$this->isSelf($token->getUser(), $user)) {
+                        return false;
+                    }
+                }
+
+                return true;
             // @codeCoverageIgnoreStart
             default:
                 return false;
