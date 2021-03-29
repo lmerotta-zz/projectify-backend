@@ -173,6 +173,9 @@
             ".php_cs.dist"
         ]
     },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.3"
+    },
     "guzzlehttp/psr7": {
         "version": "1.7.0"
     },
@@ -305,9 +308,6 @@
     },
     "object-calisthenics/phpcs-calisthenics-rules": {
         "version": "v3.9.1"
-    },
-    "ocramius/proxy-manager": {
-        "version": "2.9.1"
     },
     "php-cs-fixer/diff": {
         "version": "v1.3.1"
@@ -750,9 +750,6 @@
     },
     "twig/twig": {
         "version": "v3.1.1"
-    },
-    "webimpress/safe-writer": {
-        "version": "2.1.0"
     },
     "webmozart/assert": {
         "version": "1.9.1"
