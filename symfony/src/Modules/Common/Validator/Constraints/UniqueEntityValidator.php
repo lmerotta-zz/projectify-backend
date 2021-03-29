@@ -39,7 +39,7 @@ class UniqueEntityValidator extends ConstraintValidator
         if (!is_null($entity)) {
             $this->context->buildViolation($constraint->message)
                 ->atPath($constraint->propertyPath)
-                ->setParameter('fields', implode(',', array_keys($constraint->fields)))
+                ->setParameter('{{ fields }}', implode(',', array_keys($constraint->fields)))
                 ->addViolation();
         }
     }

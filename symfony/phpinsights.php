@@ -83,7 +83,8 @@ return [
         \SlevomatCodingStandard\Sniffs\Commenting\DocCommentSpacingSniff::class,
         \PhpCsFixer\Fixer\FunctionNotation\FunctionDeclarationFixer::class,
         \PhpCsFixer\Fixer\Phpdoc\AlignMultilineCommentFixer::class,
-        \PHP_CodeSniffer\Standards\Generic\Sniffs\Commenting\TodoSniff::class
+        \PHP_CodeSniffer\Standards\Generic\Sniffs\Commenting\TodoSniff::class,
+        \SlevomatCodingStandard\Sniffs\ControlStructures\DisallowYodaComparisonSniff::class,
     ],
 
     'config' => [

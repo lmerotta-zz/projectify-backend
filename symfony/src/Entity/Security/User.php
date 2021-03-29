@@ -18,8 +18,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *     itemOperations={
  *          "get"={
  *              "security"="is_granted(
-                    constant('App\\Contracts\\Security\\Enum\\Permission::USER_VIEW_SELF'),
-                    object
                 )"
  *          }
  *     },
@@ -31,14 +29,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *          },
  *          "item_query"={
  *              "security"="is_granted(
-                    constant('App\\Contracts\\Security\\Enum\\Permission::USER_VIEW_SELF'),
-                    object
                 )"
  *          },
  *          "collection_query"={
  *              "security"="is_granted(
-                    constant('App\\Contracts\\Security\\Enum\\Permission::USER_VIEW_LIST'),
-                    object
                 )"
  *          }
  *     }

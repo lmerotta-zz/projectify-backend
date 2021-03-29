@@ -31,7 +31,7 @@ class UniqueEntityValidatorTest extends TestCase
         $repo->findOneBy(['email' => 'test@test.com'])->shouldBeCalled()->willReturn($user->reveal());
         $context->buildViolation($constraint->message)->shouldBeCalled()->willReturn($violationBuilder->reveal());
         $violationBuilder->atPath($constraint->propertyPath)->shouldBeCalled()->willReturn($violationBuilder->reveal());
-        $violationBuilder->setParameter('fields', implode(',', array_keys($constraint->fields)))->shouldBeCalled()->willReturn($violationBuilder->reveal());
+        $violationBuilder->setParameter('{{ fields }}', implode(',', array_keys($constraint->fields)))->shouldBeCalled()->willReturn($violationBuilder->reveal());
         $violationBuilder->addViolation()->shouldBeCalled();
 
         $bag = new SignUserUp('test@test.com', 'test', 'test', 'test');
