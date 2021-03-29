@@ -44,7 +44,7 @@ class ListUsersExtension implements QueryCollectionExtensionInterface, QueryItem
          */
         $user = $this->security->getUser();
 
-        if ($user && $user->getPermissions()->hasFlag($permission->getValue()) && $resourceClass === User::class) {
+        if ($user && $user->getPermissions()->hasFlag($permission->getValue()) && User::class === $resourceClass) {
             // TODO: better query once we have teams set up
             $queryBuilder->andWhere(
                 sprintf('%s.id = :current_user', $queryBuilder->getRootAliases()[0])
