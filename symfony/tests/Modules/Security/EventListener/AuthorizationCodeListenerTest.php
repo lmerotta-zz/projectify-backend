@@ -8,9 +8,13 @@ use League\OAuth2\Server\RequestTypes\AuthorizationRequest;
 use PHPUnit\Framework\TestCase;
 use Trikoder\Bundle\OAuth2Bundle\Event\AuthorizationRequestResolveEvent;
 use Trikoder\Bundle\OAuth2Bundle\Model\Client;
+use Prophecy\PhpUnit\ProphecyTrait;
+
 
 class AuthorizationCodeListenerTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testItGrantsAccessIfValidUserInEvent()
     {
         $user = $this->prophesize(User::class);

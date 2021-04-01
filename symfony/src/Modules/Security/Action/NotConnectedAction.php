@@ -12,6 +12,6 @@ class NotConnectedAction
      */
     public function action(): RedirectResponse
     {
-        return new RedirectResponse($_ENV['FRONTEND_URL']."/security/login");
+        return new RedirectResponse($_ENV['FRONTEND_URL'].'/security/login');
     }
 }

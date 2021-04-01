@@ -14,9 +14,13 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class SignUserUpHandlerTest extends TestCase
 {
+
+    use ProphecyTrait;
+
     public function testItSavesTheUserInDatabase()
     {
         $em = $this->prophesize(EntityManagerInterface::class);

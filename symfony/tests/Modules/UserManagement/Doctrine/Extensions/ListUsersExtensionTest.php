@@ -10,9 +10,14 @@ use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Security\Core\Security;
+use Prophecy\PhpUnit\ProphecyTrait;
+
 
 class ListUsersExtensionTest extends TestCase
 {
+
+    use ProphecyTrait;
+
     public function testItAddsWhereConditionOnCollectionIfUserHasVIEW_LISTOnCollection()
     {
         $id = Uuid::uuid4();

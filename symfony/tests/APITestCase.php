@@ -9,7 +9,7 @@ class APITestCase extends WebTestCase
 {
     protected KernelBrowser $client;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->client = static::createClient();
     }

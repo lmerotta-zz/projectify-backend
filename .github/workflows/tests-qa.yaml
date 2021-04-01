@@ -55,7 +55,7 @@ jobs:
         run: mkdir -p symfony/var/oauth && docker-compose exec php openssl genrsa -out var/oauth/private.key 2048 && docker-compose exec php openssl rsa -in var/oauth/private.key -pubout -out var/oauth/public.key
       - name: phpunit
         shell: 'script -q -e -c "bash {0}"'
-        run: docker-compose exec php ./vendor/bin/simple-phpunit
+        run: docker-compose exec php -dxdebug.mode=coverage ./vendor/bin/simple-phpunit
       - name: Archive Code coverage reports
         uses: actions/upload-artifact@v2
         with:

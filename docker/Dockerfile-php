@@ -1,4 +1,4 @@
-FROM php:7.4-fpm
+FROM php:8.0.3-fpm
 
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         mysqli \
         pdo pdo_mysql
 
-RUN pecl install xdebug-2.9.8 && docker-php-ext-enable xdebug
+RUN pecl install xdebug-3.0.3 && docker-php-ext-enable xdebug
 RUN mkdir -p symfony/var/oauth
 RUN openssl genrsa -out symfony/var/oauth/private.key 2048
 RUN openssl rsa -in symfony/var/oauth/private.key -pubout -out symfony/var/oauth/public.key

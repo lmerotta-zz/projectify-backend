@@ -9,9 +9,13 @@ use App\Modules\UserManagement\Security\Authorization\UserVoter;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class UserVoterTest extends TestCase
 {
+
+    use ProphecyTrait;
+
     public function testItGrantsAccessIfUserIsSelfOnVIEW_SELF()
     {
         $id = Uuid::uuid4();

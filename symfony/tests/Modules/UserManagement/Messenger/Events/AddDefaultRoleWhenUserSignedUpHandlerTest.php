@@ -12,9 +12,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\Uuid;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class AddDefaultRoleWhenUserSignedUpHandlerTest extends TestCase
 {
+
+    use ProphecyTrait;
+
     public function testItAddsTheRoleUserOnEvent()
     {
         $id = Uuid::uuid4();

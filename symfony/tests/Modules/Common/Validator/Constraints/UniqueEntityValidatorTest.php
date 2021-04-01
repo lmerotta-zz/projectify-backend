@@ -11,9 +11,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class UniqueEntityValidatorTest extends TestCase
 {
+
+    use ProphecyTrait;
+
     public function testItTriggersAnErrorIfEntityIsFoundInDatabase()
     {
         $constraint = new UniqueEntity();
