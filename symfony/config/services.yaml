@@ -71,3 +71,13 @@ services:
     App\Modules\Security\EventListener\AuthorizationCodeListener:
         tags:
             - { name: kernel.event_listener, event: 'trikoder.oauth2.authorization_request_resolve', method: onAuthorizationRequestResolve }
+
+    app.security.provider.oauth:
+        class: App\Modules\Security\Authorization\OAuthUserProvider
+        autoconfigure: false
+        autowire: true
+        arguments:
+            $class: App\Entity\Security\User
+            $properties:
+                github: githubId
+            $managerName: default

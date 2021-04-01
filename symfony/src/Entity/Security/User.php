@@ -62,7 +62,7 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $password;
 
@@ -80,6 +80,11 @@ class User implements UserInterface
      * )
      */
     private $roles;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true, unique=true)
+     */
+    private $githubId;
 
     private function __construct()
     {
@@ -100,6 +105,23 @@ class User implements UserInterface
             ->setFirstName($firstName)
             ->setLastName($lastName)
             ->setPassword($password)
+            ->setEmail($email);
+
+        return $self;
+    }
+
+    public static function createFromOAuth(
+        UuidInterface $id,
+        string $firstName,
+        string $lastName,
+        string $email
+    ): self {
+        $self = new static();
+        $self->id = $id;
+
+        $self
+            ->setFirstName($firstName)
+            ->setLastName($lastName)
             ->setEmail($email);
 
         return $self;
@@ -228,4 +250,16 @@ class User implements UserInterface
     }
 
     // ------ end UserInterface methods ----- //
+
+    public function getGithubId(): ?string
+    {
+        return $this->githubId;
+    }
+
+    public function setGithubId(?string $githubId): self
+    {
+        $this->githubId = $githubId;
+
+        return $this;
+    }
 }
