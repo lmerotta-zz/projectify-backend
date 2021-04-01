@@ -11,12 +11,12 @@ class LoginActionTest extends WebTestCase
 {
     private KernelBrowser $client;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->client = static::createClient();
     }
 
-    public function testGetMissingFileError()
+    public function testLogsInSuccessfully()
     {
         $messenger = static::$container->get(CommandBus::class);
         $messenger->dispatch(new SignUserUp('test@test.com', 'test', 'test', '1234'));

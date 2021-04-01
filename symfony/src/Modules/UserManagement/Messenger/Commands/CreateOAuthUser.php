@@ -2,16 +2,9 @@
 
 namespace App\Modules\UserManagement\Messenger\Commands;
 
-use App\Entity\Security\User;
-use App\Modules\Common\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[UniqueEntity(
-    className: User::class,
-    fields: ['email' => 'email'],
-    propertyPath: 'email')
-]
-class SignUserUp
+class CreateOAuthUser
 {
     #[Assert\NotBlank]
     #[Assert\Email]
@@ -24,16 +17,22 @@ class SignUserUp
     public string $lastName;
 
     #[Assert\NotBlank]
-    public string $password;
+    #[Assert\Choice(choices: ['githubId'])]
+    public string $identifierField;
+
+    #[Assert\NotBlank]
+    public string $identifierValue;
 
     public function __construct(
         string $email,
         string $firstName,
         string $lastName,
-        string $password
+        string $identifierField,
+        string $identifierValue
     ) {
         $this->email = $email;
-        $this->password = $password;
+        $this->identifierField = $identifierField;
+        $this->identifierValue = $identifierValue;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
     }

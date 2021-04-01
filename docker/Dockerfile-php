@@ -1,4 +1,4 @@
-FROM php:7.4-fpm
+FROM php:8.0.3-fpm
 
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         mysqli \
         pdo pdo_mysql
 
-RUN pecl install xdebug-2.9.8 && docker-php-ext-enable xdebug
+RUN pecl install xdebug-3.0.3 && docker-php-ext-enable xdebug
 RUN mkdir -p symfony/var/oauth
 RUN openssl genrsa -out symfony/var/oauth/private.key 2048
 RUN openssl rsa -in symfony/var/oauth/private.key -pubout -out symfony/var/oauth/public.key
@@ -30,6 +30,7 @@ RUN openssl rsa -in symfony/var/oauth/private.key -pubout -out symfony/var/oauth
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 RUN curl -sS https://get.symfony.com/cli/installer | bash
 RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
+COPY docker/php/xdebug.ini $PHP_INI_DIR/conf.d/xdebug.ini
 COPY symfony/ /var/www/symfony
 RUN chown -R 1000:1000 /var/www/symfony
 WORKDIR /var/www/symfony

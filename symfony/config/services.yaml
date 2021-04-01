@@ -11,11 +11,6 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-    _instanceof:
-        App\Contracts\FileManagement\FileRetrieverInterface:
-            tags:
-                - 'app.file_management.file_retriever_concrete'
-
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
@@ -62,12 +57,17 @@ services:
         arguments: ['%kernel.default_locale%']
         tags: [kernel.event_subscriber]
 
-    ## FILE MANAGEMENT ##
-
-    App\Modules\FileManagement\Stage\GenerateFileURLSerializeStage:
-        decorates: api_platform.graphql.resolver.stage.serialize
-
     ## SECURITY ##
     App\Modules\Security\EventListener\AuthorizationCodeListener:
         tags:
             - { name: kernel.event_listener, event: 'trikoder.oauth2.authorization_request_resolve', method: onAuthorizationRequestResolve }
+
+    app.security.provider.oauth:
+        class: App\Modules\Security\Authorization\OAuthUserProvider
+        autoconfigure: false
+        autowire: true
+        arguments:
+            $class: App\Entity\Security\User
+            $properties:
+                github: githubId
+            $managerName: default

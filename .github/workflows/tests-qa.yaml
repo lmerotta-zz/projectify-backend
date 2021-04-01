@@ -61,3 +61,10 @@ jobs:
         with:
           name: code-coverage-report
           path: ./symfony/tests/coverage
+      - name: Check code coverage
+        uses: slavcodev/coverage-monitor-action@1.2.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          clover_file: "./symfony/tests/coverage/clover.xml"
+          threshold_alert: 80
+          threshold_warning: 90

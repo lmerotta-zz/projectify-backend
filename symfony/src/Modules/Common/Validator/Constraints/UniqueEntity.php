@@ -8,9 +8,10 @@ use Symfony\Component\Validator\Constraint;
  * @Annotation
  * @codeCoverageIgnore
  */
+#[\Attribute(\Attribute::TARGET_CLASS)]
 class UniqueEntity extends Constraint
 {
-    public string $message = 'common.errors.entity_not_unique';
+    public string $message;
     public string $class;
 
     /**
@@ -18,6 +19,23 @@ class UniqueEntity extends Constraint
      */
     public array $fields;
     public string $propertyPath;
+
+    public function __construct(
+        $options = null,
+        array $groups = null,
+        $payload = null,
+        string $className = null,
+        array $fields = null,
+        string $propertyPath = null,
+        ?string $message = null
+    ) {
+        parent::__construct($options, $groups ?? [], $payload);
+
+        $this->message = $message ?? 'common.errors.entity_not_unique';
+        $this->class = $className ?? $this->class;
+        $this->fields = $fields ?? $this->fields;
+        $this->propertyPath = $propertyPath ?? $this->propertyPath;
+    }
 
     /**
      * @return string[]

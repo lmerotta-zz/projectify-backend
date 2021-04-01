@@ -29,3 +29,7 @@ tests/storage
 ###< friendsofphp/php-cs-fixer ###
 
 !.gitkeep
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###

@@ -51,9 +51,12 @@ return [
     'exclude' => [
         //  'path/to/directory-or-file'
         'src/Kernel.php',
+        'src/Entity',
         'migrations',
         'phpinsights.php',
         'tests',
+        'vendor',
+        'bin',
     ],
 
     'add' => [
@@ -85,6 +88,10 @@ return [
         \PhpCsFixer\Fixer\Phpdoc\AlignMultilineCommentFixer::class,
         \PHP_CodeSniffer\Standards\Generic\Sniffs\Commenting\TodoSniff::class,
         \SlevomatCodingStandard\Sniffs\ControlStructures\DisallowYodaComparisonSniff::class,
+        \NunoMaduro\PhpInsights\Domain\Insights\ForbiddenGlobals::class,
+        \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\DiscourageGotoSniff::class,
+        \SlevomatCodingStandard\Sniffs\TypeHints\NullableTypeForNullDefaultValueSniff::class,
+        \SlevomatCodingStandard\Sniffs\Namespaces\UnusedUsesSniff::class,
     ],
 
     'config' => [

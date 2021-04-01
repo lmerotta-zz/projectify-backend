@@ -11,6 +11,7 @@ use Psr\Log\LogLevel;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class SignUserUpHandler
 {
@@ -39,33 +40,25 @@ class SignUserUpHandler
         return $user;
     }
 
-    /**
-     * @required
-     */
+    #[Required]
     public function setEntityManager(EntityManagerInterface $em): void
     {
         $this->em = $em;
     }
 
-    /**
-     * @required
-     */
+    #[Required]
     public function setEventBus(EventBus $eventBus): void
     {
         $this->eventBus = $eventBus;
     }
 
-    /**
-     * @required
-     */
+    #[Required]
     public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
     }
 
-    /**
-     * @required
-     */
+    #[Required]
     public function setPasswordEncoder(EncoderFactoryInterface $encoder): void
     {
         $this->passwordEncoder = $encoder;

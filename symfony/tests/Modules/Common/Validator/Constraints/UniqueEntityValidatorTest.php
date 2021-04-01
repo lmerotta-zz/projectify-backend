@@ -11,15 +11,16 @@ use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class UniqueEntityValidatorTest extends TestCase
 {
+
+    use ProphecyTrait;
+
     public function testItTriggersAnErrorIfEntityIsFoundInDatabase()
     {
-        $constraint = new UniqueEntity();
-        $constraint->fields = ['email' => 'email'];
-        $constraint->class = User::class;
-        $constraint->propertyPath = 'email';
+        $constraint = new UniqueEntity(className: User::class, fields: ['email' => 'email'], propertyPath: 'email');
 
         $context = $this->prophesize(ExecutionContextInterface::class);
         $violationBuilder = $this->prophesize(ConstraintViolationBuilderInterface::class);
@@ -44,10 +45,8 @@ class UniqueEntityValidatorTest extends TestCase
 
     public function testItShouldPassValidationIfNoDuplicate()
     {
-        $constraint = new UniqueEntity();
-        $constraint->fields = ['email' => 'email'];
-        $constraint->class = User::class;
-        $constraint->propertyPath = 'email';
+        $constraint = new UniqueEntity(className: User::class, fields: ['email' => 'email'], propertyPath: 'email');
+
 
         $context = $this->prophesize(ExecutionContextInterface::class);
         $em = $this->prophesize(EntityManagerInterface::class);

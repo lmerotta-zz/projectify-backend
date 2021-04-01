@@ -5,19 +5,19 @@ namespace App\Modules\Common\Bus;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\MessageBusInterface;
 
+/**
+ * @codeCoverageIgnore
+ */
 class EventBus
 {
-    protected MessageBusInterface $bus;
-
-    public function __construct(MessageBusInterface $eventBus)
+    public function __construct(protected MessageBusInterface $eventBus)
     {
-        $this->bus = $eventBus;
     }
 
     public function dispatch($event, array $stamps = []): void
     {
         try {
-            $this->bus->dispatch($event, $stamps);
+            $this->eventBus->dispatch($event, $stamps);
         } catch (HandlerFailedException $e) {
             while ($e instanceof HandlerFailedException) {
                 $e = $e->getPrevious();

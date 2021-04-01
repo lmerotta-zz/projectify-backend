@@ -6,11 +6,8 @@ use Ramsey\Uuid\UuidInterface;
 
 class UserSignedUp
 {
-    private UuidInterface $id;
-
-    public function __construct(UuidInterface $id)
+    public function __construct(private UuidInterface $id)
     {
-        $this->id = $id;
     }
 
     /**

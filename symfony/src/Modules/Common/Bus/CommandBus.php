@@ -6,19 +6,16 @@ use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
+/**
+ * @codeCoverageIgnore
+ */
 class CommandBus
 {
-    protected MessageBusInterface $bus;
-
-    public function __construct(MessageBusInterface $bus)
+    public function __construct(protected MessageBusInterface $bus)
     {
-        $this->bus = $bus;
     }
 
-    /**
-     * @return mixed
-     */
-    public function dispatch($command, array $stamps = [])
+    public function dispatch($command, array $stamps = []): mixed
     {
         try {
             return $this->bus->dispatch($command, $stamps)->last(HandledStamp::class)->getResult();

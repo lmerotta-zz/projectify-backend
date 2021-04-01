@@ -7,9 +7,12 @@ use App\Entity\Security\User;
 use App\Modules\Security\Authorization\PermissionVoter;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class PermissionVoterTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testItReturnsAbstainIfNotAUser()
     {
         $token = $this->prophesize(TokenInterface::class);
