@@ -7,7 +7,7 @@ use App\Modules\Common\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[UniqueEntity(
-    class: User::class,
+    className: User::class,
     fields: ['email' => 'email'],
     propertyPath: 'email')
 ]

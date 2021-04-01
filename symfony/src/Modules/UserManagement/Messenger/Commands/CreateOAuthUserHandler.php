@@ -39,7 +39,11 @@ class CreateOAuthUserHandler
 
         $this->em->flush();
 
-        $this->logger->log(LogLevel::INFO, 'User signed up using oauth', ['id' => $user->getId(), 'email' => $user->getEmail(), 'identifierValue' => $command->identifierValue]);
+        $this->logger->log(
+            LogLevel::INFO,
+            'User signed up using oauth',
+            ['id' => $user->getId(), 'email' => $user->getEmail(), 'identifierValue' => $command->identifierValue]
+        );
 
         return $user;
     }

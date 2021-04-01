@@ -25,7 +25,9 @@ class OAuthUserProvider extends EntityUserProvider
         $resourceOwnerName = $response->getResourceOwner()->getName();
 
         if (!isset($this->properties[$resourceOwnerName])) {
-            throw new \RuntimeException(sprintf("No property defined for entity for resource owner '%s'.", $resourceOwnerName));
+            throw new \RuntimeException(
+                sprintf("No property defined for entity for resource owner '%s'.", $resourceOwnerName)
+            );
         }
 
         $property = $this->properties[$resourceOwnerName];
@@ -37,7 +39,13 @@ class OAuthUserProvider extends EntityUserProvider
             $exception->setUsername($username);
 
             // create a new user
-            $command = new CreateOAuthUser($response->getEmail(), $response->getFirstName() ?? $response->getNickname(), $response->getLastName() ?? $response->getNickName(), $property, $username);
+            $command = new CreateOAuthUser(
+                $response->getEmail(),
+                $response->getFirstName() ?? $response->getNickname(),
+                $response->getLastName() ?? $response->getNickName(),
+                $property,
+                $username
+            );
 
             $user = $this->commandBus->dispatch($command);
         }

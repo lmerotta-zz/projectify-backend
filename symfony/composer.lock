@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "437573f19119be8401447a1d8d0b44ca",
+    "content-hash": "f0c49e6e1f29ddc737baa0b29ac46e2a",
     "packages": [
         {
             "name": "api-platform/core",
@@ -6974,16 +6974,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.5.8",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "9d583721a7157ee997f235f327de038e7ea6dac4"
+                "reference": "d427d75a155195970133974162e7fa9dbf3069da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/9d583721a7157ee997f235f327de038e7ea6dac4",
-                "reference": "9d583721a7157ee997f235f327de038e7ea6dac4",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/d427d75a155195970133974162e7fa9dbf3069da",
+                "reference": "d427d75a155195970133974162e7fa9dbf3069da",
                 "shasum": ""
             },
             "require": {
@@ -6995,6 +6995,7 @@
             "require-dev": {
                 "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
             },
+            "default-branch": true,
             "bin": [
                 "bin/phpcs",
                 "bin/phpcbf"
@@ -7026,7 +7027,7 @@
                 "source": "https://github.com/squizlabs/PHP_CodeSniffer",
                 "wiki": "https://github.com/squizlabs/PHP_CodeSniffer/wiki"
             },
-            "time": "2020-10-23T02:01:07+00:00"
+            "time": "2021-03-31T22:36:57+00:00"
         },
         {
             "name": "symfony/amqp-messenger",
@@ -14874,12 +14875,13 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "nunomaduro/phpinsights": 20
+        "nunomaduro/phpinsights": 20,
+        "squizlabs/php_codesniffer": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.4",
+        "php": ">=8.0",
         "ext-ctype": "*",
         "ext-iconv": "*"
     },

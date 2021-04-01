@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ApiResource(
     collectionOperations: [],
     graphql: [
-        'collection_query'
+        'collection_query',
     ],
     itemOperations: ['get']
 )]

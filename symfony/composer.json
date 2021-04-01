@@ -55,6 +55,8 @@
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "league/flysystem-memory": "^1.0",
         "phpspec/prophecy-phpunit": "^2.0",
+        "slevomat/coding-standard": "^6.0",
+        "squizlabs/php_codesniffer": "dev-master",
         "symfony/browser-kit": "5.2.*",
         "symfony/maker-bundle": "^1.23",
         "symfony/phpunit-bridge": "^5.1",

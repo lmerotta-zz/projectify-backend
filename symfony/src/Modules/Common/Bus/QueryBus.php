@@ -8,7 +8,9 @@ use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 class QueryBus
 {
-    public function __construct(protected MessageBusInterface $queryBus) {}
+    public function __construct(protected MessageBusInterface $queryBus)
+    {
+    }
 
     /**
      * @return mixed

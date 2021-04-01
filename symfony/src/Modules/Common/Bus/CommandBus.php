@@ -8,8 +8,9 @@ use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 class CommandBus
 {
-
-    public function __construct(protected MessageBusInterface $bus) {}
+    public function __construct(protected MessageBusInterface $bus)
+    {
+    }
 
     public function dispatch($command, array $stamps = []): mixed
     {

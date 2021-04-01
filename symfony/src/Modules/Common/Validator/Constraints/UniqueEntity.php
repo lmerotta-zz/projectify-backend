@@ -20,14 +20,21 @@ class UniqueEntity extends Constraint
     public array $fields;
     public string $propertyPath;
 
-    public function __construct($options = null, array $groups = null, $payload = null, string $class, array $fields, string $propertyPath, ?string $message = null)
-    {
-        parent::__construct($options, $groups, $payload);
+    public function __construct(
+        $options = null,
+        array $groups = null,
+        $payload = null,
+        string $className = null,
+        array $fields = null,
+        string $propertyPath = null,
+        ?string $message = null
+    ) {
+        parent::__construct($options, $groups ?? [], $payload);
 
         $this->message = $message ?? 'common.errors.entity_not_unique';
-        $this->class = $class;
-        $this->fields = $fields;
-        $this->propertyPath = $propertyPath;
+        $this->class = $className ?? $this->class;
+        $this->fields = $fields ?? $this->fields;
+        $this->propertyPath = $propertyPath ?? $this->propertyPath;
     }
 
     /**

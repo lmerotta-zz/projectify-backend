@@ -20,7 +20,7 @@ class UniqueEntityValidatorTest extends TestCase
 
     public function testItTriggersAnErrorIfEntityIsFoundInDatabase()
     {
-        $constraint = new UniqueEntity(class: User::class, fields: ['email' => 'email'], propertyPath: 'email');
+        $constraint = new UniqueEntity(className: User::class, fields: ['email' => 'email'], propertyPath: 'email');
 
         $context = $this->prophesize(ExecutionContextInterface::class);
         $violationBuilder = $this->prophesize(ConstraintViolationBuilderInterface::class);
@@ -45,7 +45,7 @@ class UniqueEntityValidatorTest extends TestCase
 
     public function testItShouldPassValidationIfNoDuplicate()
     {
-        $constraint = new UniqueEntity(class: User::class, fields: ['email' => 'email'], propertyPath: 'email');
+        $constraint = new UniqueEntity(className: User::class, fields: ['email' => 'email'], propertyPath: 'email');
 
 
         $context = $this->prophesize(ExecutionContextInterface::class);

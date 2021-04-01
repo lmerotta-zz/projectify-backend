@@ -21,26 +21,26 @@ use Symfony\Component\Serializer\Annotation\Groups;
     graphql: [
         'create' => [
             'input' => SignUserUp::class,
-            'messenger' => 'input'
+            'messenger' => 'input',
         ],
         'item_query' => [
             'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_VIEW_SELF"))',
             'normalization_context' => [
                 'groups' => [
-                    'user:self'
-                ]
-            ]
-        ]
+                    'user:self',
+                ],
+            ],
+        ],
     ],
     itemOperations: [
         'get' => [
             'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_VIEW_SELF"))',
             'normalization_context' => [
                 'groups' => [
-                    'user:self'
-                ]
-            ]
-        ]
+                    'user:self',
+                ],
+            ],
+        ],
     ],
 )]
 class User implements UserInterface

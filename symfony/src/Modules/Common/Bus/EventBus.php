@@ -7,7 +7,9 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 class EventBus
 {
-    public function __construct(protected MessageBusInterface $eventBus) {}
+    public function __construct(protected MessageBusInterface $eventBus)
+    {
+    }
 
     public function dispatch($event, array $stamps = []): void
     {
