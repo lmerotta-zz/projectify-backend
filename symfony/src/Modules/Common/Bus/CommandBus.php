@@ -6,6 +6,9 @@ use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
+/**
+ * @codeCoverageIgnore
+ */
 class CommandBus
 {
     public function __construct(protected MessageBusInterface $bus)

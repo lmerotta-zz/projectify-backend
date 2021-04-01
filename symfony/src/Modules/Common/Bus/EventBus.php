@@ -5,6 +5,9 @@ namespace App\Modules\Common\Bus;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\MessageBusInterface;
 
+/**
+ * @codeCoverageIgnore
+ */
 class EventBus
 {
     public function __construct(protected MessageBusInterface $eventBus)

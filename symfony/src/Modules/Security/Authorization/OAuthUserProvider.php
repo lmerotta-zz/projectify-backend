@@ -10,6 +10,9 @@ use HWI\Bundle\OAuthBundle\Security\Core\User\EntityUserProvider;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Contracts\Service\Attribute\Required;
 
+/**
+ * @codeCoverageIgnore
+ */
 class OAuthUserProvider extends EntityUserProvider
 {
     private CommandBus $commandBus;
