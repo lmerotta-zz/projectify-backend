@@ -15,7 +15,7 @@ class LocaleSubscriber implements EventSubscriberInterface
     public function onKernelRequest(RequestEvent $event): void
     {
         $request = $event->getRequest();
-        $locale = $request->headers->get('x-locale');
+        $locale = $request->headers->get('x-locale', $this->defaultLocale);
 
         // try to see if the locale has been set as a _locale routing parameter
         if ($locale) {
