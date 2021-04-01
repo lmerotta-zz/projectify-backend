@@ -11,53 +11,62 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ApiResource(
- *     itemOperations={
- *          "get"={
- *              "security"="is_granted(
-                )"
- *          }
- *     },
- *     collectionOperations={},
- *     graphql={
- *          "create"={
- *              "input"=SignUserUp::class,
- *              "messenger"="input"
- *          },
- *          "item_query"={
- *              "security"="is_granted(
-                )"
- *          },
- *          "collection_query"={
- *              "security"="is_granted(
-                )"
- *          }
- *     }
- * )
  */
+#[ApiResource(
+    collectionOperations: [],
+    graphql: [
+        'create' => [
+            'input' => SignUserUp::class,
+            'messenger' => 'input'
+        ],
+        'item_query' => [
+            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_VIEW_SELF"))',
+            'normalization_context' => [
+                'groups' => [
+                    'user:self'
+                ]
+            ]
+        ]
+    ],
+    itemOperations: [
+        'get' => [
+            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_VIEW_SELF"))',
+            'normalization_context' => [
+                'groups' => [
+                    'user:self'
+                ]
+            ]
+        ]
+    ],
+)]
 class User implements UserInterface
 {
     /**
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
+     * @Groups("user:self")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("user:self")
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("user:self")
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("user:self")
      */
     private $email;
 
@@ -68,6 +77,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("user:self")
      */
     private $profilePicture;
 

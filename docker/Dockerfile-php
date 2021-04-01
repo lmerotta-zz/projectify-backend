@@ -30,6 +30,7 @@ RUN openssl rsa -in symfony/var/oauth/private.key -pubout -out symfony/var/oauth
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 RUN curl -sS https://get.symfony.com/cli/installer | bash
 RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
+COPY docker/php/xdebug.ini $PHP_INI_DIR/conf.d/xdebug.ini
 COPY symfony/ /var/www/symfony
 RUN chown -R 1000:1000 /var/www/symfony
 WORKDIR /var/www/symfony

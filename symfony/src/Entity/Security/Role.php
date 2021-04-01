@@ -9,14 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=RoleRepository::class)
- * @ApiResource(
- *     itemOperations={"get"},
- *     collectionOperations={},
- *     graphql={
- *         "collection_query"
- *     }
- * )
  */
+#[ApiResource(
+    collectionOperations: [],
+    graphql: [
+        'collection_query'
+    ],
+    itemOperations: ['get']
+)]
 class Role
 {
     /**

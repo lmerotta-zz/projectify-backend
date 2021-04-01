@@ -8,12 +8,7 @@ use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 class QueryBus
 {
-    protected MessageBusInterface $bus;
-
-    public function __construct(MessageBusInterface $queryBus)
-    {
-        $this->bus = $queryBus;
-    }
+    public function __construct(protected MessageBusInterface $queryBus) {}
 
     /**
      * @return mixed
@@ -21,7 +16,7 @@ class QueryBus
     public function query($query, array $stamps = [])
     {
         try {
-            return $this->bus->dispatch($query, $stamps)->last(HandledStamp::class)->getResult();
+            return $this->queryBus->dispatch($query, $stamps)->last(HandledStamp::class)->getResult();
         } catch (HandlerFailedException $e) {
             while ($e instanceof HandlerFailedException) {
                 $e = $e->getPrevious();

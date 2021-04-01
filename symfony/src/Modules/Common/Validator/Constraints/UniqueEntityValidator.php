@@ -6,14 +6,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class UniqueEntityValidator extends ConstraintValidator
 {
     private EntityManagerInterface $em;
 
-    /**
-     * @required
-     */
+    #[Required]
     public function setEntityManager(EntityManagerInterface $em): void
     {
         $this->em = $em;

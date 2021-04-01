@@ -6,30 +6,21 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class CreateOAuthUser
 {
-    /**
-     * @Assert\NotBlank
-     */
+    #[Assert\NotBlank]
+    #[Assert\Email]
     public string $email;
 
-    /**
-     * @Assert\NotBlank
-     */
+    #[Assert\NotBlank]
     public string $firstName;
 
-    /**
-     * @Assert\NotBlank
-     */
+    #[Assert\NotBlank]
     public string $lastName;
 
-    /**
-     * @Assert\NotBlank
-     * @Assert\Choice({"githubId"})
-     */
+    #[Assert\NotBlank]
+    #[Assert\Choice(choices: ['githubId'])]
     public string $identifierField;
 
-    /**
-     * @Assert\NotBlank
-     */
+    #[Assert\NotBlank]
     public string $identifierValue;
 
     public function __construct(

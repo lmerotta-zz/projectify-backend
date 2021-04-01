@@ -6,29 +6,24 @@ use App\Entity\Security\User;
 use App\Modules\Common\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @UniqueEntity(fields={"email": "email"}, class=User::class, propertyPath="email")
- */
+#[UniqueEntity(
+    class: User::class,
+    fields: ['email' => 'email'],
+    propertyPath: 'email')
+]
 class SignUserUp
 {
-    /**
-     * @Assert\NotBlank
-     */
+    #[Assert\NotBlank]
+    #[Assert\Email]
     public string $email;
 
-    /**
-     * @Assert\NotBlank
-     */
+    #[Assert\NotBlank]
     public string $firstName;
 
-    /**
-     * @Assert\NotBlank
-     */
+    #[Assert\NotBlank]
     public string $lastName;
 
-    /**
-     * @Assert\NotBlank
-     */
+    #[Assert\NotBlank]
     public string $password;
 
     public function __construct(

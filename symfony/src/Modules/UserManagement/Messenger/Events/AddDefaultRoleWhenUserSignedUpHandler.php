@@ -7,6 +7,7 @@ use App\Repository\Security\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class AddDefaultRoleWhenUserSignedUpHandler
 {
@@ -32,33 +33,25 @@ class AddDefaultRoleWhenUserSignedUpHandler
         $this->em->flush();
     }
 
-    /**
-     * @required
-     */
+    #[Required]
     public function setRoleRepository(RoleRepository $roleRepository): void
     {
         $this->roleRepository = $roleRepository;
     }
 
-    /**
-     * @required
-     */
+    #[Required]
     public function setUserRepository(UserRepository $userRepository): void
     {
         $this->userRepository = $userRepository;
     }
 
-    /**
-     * @required
-     */
+    #[Required]
     public function setEm(EntityManagerInterface $em): void
     {
         $this->em = $em;
     }
 
-    /**
-     * @required
-     */
+    #[Required]
     public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;

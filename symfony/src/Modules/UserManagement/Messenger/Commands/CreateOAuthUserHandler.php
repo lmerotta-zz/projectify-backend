@@ -12,6 +12,7 @@ use Psr\Log\LogLevel;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class CreateOAuthUserHandler
 {
@@ -43,33 +44,25 @@ class CreateOAuthUserHandler
         return $user;
     }
 
-    /**
-     * @required
-     */
+    #[Required]
     public function setEntityManager(EntityManagerInterface $em): void
     {
         $this->em = $em;
     }
 
-    /**
-     * @required
-     */
+    #[Required]
     public function setEventBus(EventBus $eventBus): void
     {
         $this->eventBus = $eventBus;
     }
 
-    /**
-     * @required
-     */
+    #[Required]
     public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
     }
 
-    /**
-     * @required
-     */
+    #[Required]
     public function setUserRepository(UserRepository $userRepository): void
     {
         $this->userRepository = $userRepository;

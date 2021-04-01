@@ -5,6 +5,10 @@
     <include>
       <directory suffix=".php">src</directory>
     </include>
+    <exclude>
+      <directory>src/DataFixtures</directory>
+      <directory>src/Entity</directory>
+    </exclude>
     <report>
       <clover outputFile="./tests/coverage/clover.xml"/>
       <html outputDirectory="./tests/coverage"/>
