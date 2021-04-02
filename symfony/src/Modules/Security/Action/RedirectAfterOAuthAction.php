@@ -14,6 +14,6 @@ class RedirectAfterOAuthAction
     )]
     public function action(): RedirectResponse
     {
-        return new RedirectResponse($_ENV['FRONTEND_URL'].'/security/direct-login');
+        return new RedirectResponse($_ENV['FRONTEND_URL'].'/');
     }
 }
