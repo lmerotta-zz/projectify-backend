@@ -28,9 +28,8 @@ class OAuthUserProvider extends EntityUserProvider
         $resourceOwnerName = $response->getResourceOwner()->getName();
 
         if (!isset($this->properties[$resourceOwnerName])) {
-            throw new \RuntimeException(
-                sprintf("No property defined for entity for resource owner '%s'.", $resourceOwnerName)
-            );
+            $message = sprintf("No property defined for entity for resource owner '%s'.", $resourceOwnerName);
+            throw new \RuntimeException($message);
         }
 
         $property = $this->properties[$resourceOwnerName];
