@@ -21,6 +21,6 @@ class NotConnectedActionTest extends WebTestCase
             '/actions/security/authentication/oauth/not-connected'
         );
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
-        $this->assertEquals('/security/login', $this->client->getResponse()->headers->get('location'));
+        $this->assertEquals('http://dummy/security/login', $this->client->getResponse()->headers->get('location'));
     }
 }

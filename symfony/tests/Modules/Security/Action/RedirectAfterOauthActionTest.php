@@ -20,7 +20,8 @@ class RedirectAfterOauthActionTest extends WebTestCase
             'GET',
             '/actions/security/authentication/oauth/connected'
         );
+
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
-        $this->assertEquals('/security/direct-login', $this->client->getResponse()->headers->get('location'));
+        $this->assertEquals('http://dummy', $this->client->getResponse()->headers->get('location'));
     }
 }

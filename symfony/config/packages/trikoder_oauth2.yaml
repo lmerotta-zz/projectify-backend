@@ -5,6 +5,7 @@ trikoder_oauth2:
         private_key_passphrase: null                            # Passphrase of the private key, if any
 
         encryption_key: '%env(string:OAUTH2_ENCRYPTION_KEY)%'   # (Optional) Change this
+        access_token_ttl: PT5M
 
     resource_server:
         public_key: '%kernel.project_dir%/var/oauth/public.key'                       # Change this

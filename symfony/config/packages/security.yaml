@@ -53,6 +53,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/actions/security/authentication/authorize, roles: IS_AUTHENTICATED_REMEMBERED }
+        - { path: ^/actions/security/authentication/authorize, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/actionssecurity/authentication/.well-known/openid-configuration, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/actions/security/authentication/oauth/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/actions/security/authentication/oauth/not-connected, roles: IS_AUTHENTICATED_ANONYMOUSLY }
