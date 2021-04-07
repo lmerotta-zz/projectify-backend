@@ -2,9 +2,10 @@
 
 namespace App\Contracts\UserManagement\Exception;
 
+use App\Modules\Common\Exception\BaseException;
 use Ramsey\Uuid\UuidInterface;
 
-class UserAlreadyOnboardedException extends \Exception
+class UserAlreadyOnboardedException extends BaseException
 {
     public function __construct(UuidInterface $id)
     {

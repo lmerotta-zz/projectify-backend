@@ -92,6 +92,7 @@ return [
         \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\DiscourageGotoSniff::class,
         \SlevomatCodingStandard\Sniffs\TypeHints\NullableTypeForNullDefaultValueSniff::class,
         \SlevomatCodingStandard\Sniffs\Namespaces\UnusedUsesSniff::class,
+        \SlevomatCodingStandard\Sniffs\PHP\UselessSemicolonSniff::class,
     ],
 
     'config' => [
