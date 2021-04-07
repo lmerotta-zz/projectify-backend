@@ -1,0 +1,19 @@
+framework:
+    workflows:
+        user_journey:
+            type: 'state_machine'
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'stringStatus'
+            supports:
+                - App\Entity\Security\User
+            initial_marking: 'SIGNED_UP'
+            places:
+                - SIGNED_UP
+                - ONBOARDED
+            transitions:
+                onboard:
+                    from: SIGNED_UP
+                    to: ONBOARDED
