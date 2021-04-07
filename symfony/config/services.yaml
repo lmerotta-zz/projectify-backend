@@ -57,7 +57,7 @@ services:
         arguments: ['%kernel.default_locale%']
         tags: [kernel.event_subscriber]
 
-    App\Modules\Common\GraphQL\Type\EnumTypeConverter:
+    App\Modules\Common\GraphQL\Type\UserStatusTypeConverter:
         decorates: api_platform.graphql.type_converter
 
     ## SECURITY ##

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Modules\Common\GraphQL\Type\Definition;
-
 
 use ApiPlatform\Core\GraphQl\Type\Definition\TypeInterface;
 use App\Contracts\UserManagement\Enum\UserStatus;
@@ -19,7 +17,7 @@ class UserStatusType extends EnumType implements TypeInterface
     {
         $all = array_reduce(
             UserStatus::instances(),
-            function (array $carry, UserStatus $item) {
+            static function (array $carry, UserStatus $item) {
                 $carry[$item->getValue()] = ['value' => $item];
 
                 return $carry;
@@ -30,7 +28,7 @@ class UserStatusType extends EnumType implements TypeInterface
         parent::__construct([
             'name' => self::NAME,
             'description' => 'Describes a user status',
-            'values' => $all
+            'values' => $all,
         ]);
     }
 
@@ -39,9 +37,9 @@ class UserStatusType extends EnumType implements TypeInterface
         return self::NAME;
     }
 
-    public function serialize($value)
+    public function serialize($value): mixed
     {
-        if(is_string($value)) {
+        if (is_string($value)) {
             return $value;
         }
 

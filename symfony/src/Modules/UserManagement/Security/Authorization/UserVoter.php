@@ -11,26 +11,18 @@ class UserVoter extends Voter
 {
     protected function supports(string $attribute, $subject): bool
     {
-        switch ($attribute) {
-            case Permission::USER_VIEW_SELF:
-                return $subject instanceof User;
-            // @codeCoverageIgnoreStart
-            default:
-                return false;
-            // @codeCoverageIgnoreEnd
-        }
+        return match (intval($attribute)) {
+            Permission::USER_VIEW_SELF, Permission::USER_EDIT_SELF => $subject instanceof User,
+            default => false,
+        };
     }
 
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
-        switch ($attribute) {
-            case Permission::USER_VIEW_SELF:
-                return $this->isSelf($token->getUser(), $subject);
-            // @codeCoverageIgnoreStart
-            default:
-                return false;
-            // @codeCoverageIgnoreEnd
-        }
+        return match (intval($attribute)) {
+            Permission::USER_VIEW_SELF, Permission::USER_EDIT_SELF => $this->isSelf($token->getUser(), $subject),
+            default => false,
+        };
     }
 
     private function isSelf(User $current, User $subject): bool

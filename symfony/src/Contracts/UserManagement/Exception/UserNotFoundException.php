@@ -3,7 +3,6 @@
 namespace App\Contracts\UserManagement\Exception;
 
 use Ramsey\Uuid\UuidInterface;
-use Throwable;
 
 class UserNotFoundException extends \Exception
 {

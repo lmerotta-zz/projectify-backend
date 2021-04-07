@@ -2,7 +2,6 @@
 
 namespace App\Entity\Security;
 
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Contracts\Security\Enum\Permission;
 use App\Contracts\UserManagement\Enum\UserStatus;
@@ -48,18 +47,18 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
             'args' => [
                 'picture' => [
                     'type' => 'Upload!',
-                    'description' => 'Profile picture file'
+                    'description' => 'Profile picture file',
                 ],
                 'firstName' => [
                     'type' => 'String!',
-                    'description' => 'First name of the user'
+                    'description' => 'First name of the user',
                 ],
                 'lastName' => [
                     'type' => 'String!',
-                    'description' => 'Last name of the user'
-                ]
-            ]
-        ]
+                    'description' => 'Last name of the user',
+                ],
+            ],
+        ],
     ],
     itemOperations: [
         'get' => [
@@ -137,7 +136,7 @@ class User implements UserInterface
 
     /**
      * @var File|null
-     * Used by vich uploadable to upload files
+     *                Used by vich uploadable to upload files
      *
      * @Vich\UploadableField(mapping="user_profile_picture", fileNameProperty="profilePicture")
      */
@@ -334,22 +333,15 @@ class User implements UserInterface
 
     // ---------- Workflow user journey ----------
 
-    /**
-     * @return string
-     */
     public function getStringStatus(): string
     {
         return $this->status->getValue();
     }
 
-    /**
-     * @param string $stringStatus
-     * @return User
-     */
     public function setStringStatus(string $stringStatus): User
     {
         $this->status = UserStatus::get($stringStatus);
+
         return $this;
     }
-
 }

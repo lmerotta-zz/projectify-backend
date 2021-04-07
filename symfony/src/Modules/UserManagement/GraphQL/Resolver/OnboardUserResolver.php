@@ -1,10 +1,9 @@
 <?php
 
-
 namespace App\Modules\UserManagement\GraphQL\Resolver;
 
-
 use ApiPlatform\Core\GraphQl\Resolver\MutationResolverInterface;
+use App\Entity\Security\User;
 use App\Modules\Common\Bus\CommandBus;
 use App\Modules\UserManagement\Messenger\Commands\OnboardUser;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -15,15 +14,17 @@ class OnboardUserResolver implements MutationResolverInterface
     private CommandBus $commandBus;
     private TokenStorageInterface $tokenStorage;
 
-    /**
-     * @inheritdoc
-     */
-    public function __invoke($item, array $context): mixed
+    public function __invoke($item, array $context): ?User
     {
         $args = $context['args']['input'];
+        $user = $this->tokenStorage->getToken()->getUser();
+        if (!$user instanceof User) {
+            return null;
+        }
+
         return $this->commandBus->dispatch(
             new OnboardUser(
-                $this->tokenStorage->getToken()->getUser()->getId(),
+                $user->getId(),
                 $args['picture'],
                 $args['firstName'],
                 $args['lastName']
@@ -42,5 +43,4 @@ class OnboardUserResolver implements MutationResolverInterface
     {
         $this->commandBus = $commandBus;
     }
-
 }
