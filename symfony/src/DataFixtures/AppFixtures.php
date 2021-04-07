@@ -25,7 +25,8 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         // Create a default user, and assign it the ROLE_USER role
-        $role = Role::create('ROLE_USER');
+        $role = $manager->getRepository(Role::class)->find('ROLE_USER');
+
         $user = User::create(
             Uuid::uuid4(),
             'default',

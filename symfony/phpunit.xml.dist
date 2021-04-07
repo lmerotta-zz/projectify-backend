@@ -8,6 +8,7 @@
     <exclude>
       <directory>src/DataFixtures</directory>
       <directory>src/Entity</directory>
+      <directory>src/Contracts/**/Exception</directory>
     </exclude>
     <report>
       <clover outputFile="./tests/coverage/clover.xml"/>
@@ -23,6 +24,7 @@
   </php>
   <extensions>
     <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension"/>
+    <extension class="App\Tests\ResetDatabaseHook" />
   </extensions>
   <testsuites>
     <testsuite name="Project Test Suite">

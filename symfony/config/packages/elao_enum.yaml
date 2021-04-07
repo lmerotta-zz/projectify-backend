@@ -4,3 +4,5 @@ elao_enum:
     doctrine:
         types:
             permission: App\Contracts\Security\Enum\Permission
+            user_status: App\Contracts\UserManagement\Enum\UserStatus
+

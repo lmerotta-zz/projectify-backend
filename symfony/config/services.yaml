@@ -57,10 +57,17 @@ services:
         arguments: ['%kernel.default_locale%']
         tags: [kernel.event_subscriber]
 
+    App\Modules\Common\GraphQL\Type\UserStatusTypeConverter:
+        decorates: api_platform.graphql.type_converter
+
     ## SECURITY ##
     App\Modules\Security\EventListener\AuthorizationCodeListener:
         tags:
             - { name: kernel.event_listener, event: 'trikoder.oauth2.authorization_request_resolve', method: onAuthorizationRequestResolve }
+
+    ## USER MANAGEMENT ##
+    App\Modules\UserManagement\ApiPlatform\ResolveUserProfilePictureFieldSubscriber:
+        decorates: api_platform.graphql.resolver.stage.serialize
 
     app.security.provider.oauth:
         class: App\Modules\Security\Authorization\OAuthUserProvider

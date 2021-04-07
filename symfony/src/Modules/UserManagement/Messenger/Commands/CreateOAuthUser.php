@@ -11,17 +11,17 @@ class CreateOAuthUser
     public string $email;
 
     #[Assert\NotBlank]
-    public string $firstName;
-
-    #[Assert\NotBlank]
-    public string $lastName;
-
-    #[Assert\NotBlank]
     #[Assert\Choice(choices: ['githubId'])]
     public string $identifierField;
 
     #[Assert\NotBlank]
     public string $identifierValue;
+
+    // The next one are optional and do not need an assert
+    // as Oauth users may not have a first and last name
+
+    public string $firstName;
+    public string $lastName;
 
     public function __construct(
         string $email,
@@ -31,9 +31,9 @@ class CreateOAuthUser
         string $identifierValue
     ) {
         $this->email = $email;
-        $this->identifierField = $identifierField;
-        $this->identifierValue = $identifierValue;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
+        $this->identifierField = $identifierField;
+        $this->identifierValue = $identifierValue;
     }
 }

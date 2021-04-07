@@ -33,6 +33,7 @@ services:
             - 8002:3306
         volumes: 
             - ./mysql:/var/lib/mysql:z
+            - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:z
         env_file: docker/mysql/.env.local
         networks: 
             - projectify-backend

@@ -92,6 +92,7 @@ return [
         \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\DiscourageGotoSniff::class,
         \SlevomatCodingStandard\Sniffs\TypeHints\NullableTypeForNullDefaultValueSniff::class,
         \SlevomatCodingStandard\Sniffs\Namespaces\UnusedUsesSniff::class,
+        \SlevomatCodingStandard\Sniffs\PHP\UselessSemicolonSniff::class,
     ],
 
     'config' => [
@@ -104,9 +105,13 @@ return [
         ],
         \NunoMaduro\PhpInsights\Domain\Insights\CyclomaticComplexityIsHigh::class => [
             'exclude' => [
-                'src/Modules/UserManagement/Security/Authorization/UserVoter.php'
+                'src/Modules/UserManagement/Security/Authorization/UserVoter.php',
+                'src/Modules/UserManagement/ApiPlatform/ResolveUserProfilePictureFieldSubscriber.php'
             ]
         ],
+        \PhpCsFixer\Fixer\ClassNotation\OrderedClassElementsFixer::class => [
+            'order' => ['use_trait']
+        ]
     ],
 
     /*

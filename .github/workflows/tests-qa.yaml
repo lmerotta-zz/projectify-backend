@@ -44,12 +44,6 @@ jobs:
       - name: setup composer
         shell: 'script -q -e -c "bash {0}"'
         run: docker-compose exec php composer install
-      - name: Migrations
-        shell: 'script -q -e -c "bash {0}"'
-        run: docker-compose exec php bin/console doctrine:schema:update --force --env=test
-      - name: Fixtures
-        shell: 'script -q -e -c "bash {0}"'
-        run: docker-compose exec php bin/console doctrine:fixtures:load --env=test -n
       - name: Oauth
         shell: 'script -q -e -c "bash {0}"'
         run: mkdir -p symfony/var/oauth && docker-compose exec php openssl genrsa -out var/oauth/private.key 2048 && docker-compose exec php openssl rsa -in var/oauth/private.key -pubout -out var/oauth/public.key

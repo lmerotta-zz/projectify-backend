@@ -7,7 +7,6 @@ use App\Modules\Common\Bus\CommandBus;
 use App\Modules\UserManagement\Messenger\Commands\CreateOAuthUser;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\EntityUserProvider;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Contracts\Service\Attribute\Required;
 
 /**
@@ -37,14 +36,16 @@ class OAuthUserProvider extends EntityUserProvider
         $username = $response->getUsername();
         $user = $this->findUser([$property => $username]);
         if (!$user) {
-            $exception = new UsernameNotFoundException(sprintf("User '%s' not found.", $username));
-            $exception->setUsername($username);
-
+            $firstname = $response->getFirstName();
+            $lastName = $response->getLastName();
+            if (!$firstname || !$lastName) {
+                [$firstname, $lastName] = explode(' ', $response->getRealName(), 2);
+            }
             // create a new user
             $command = new CreateOAuthUser(
                 $response->getEmail(),
-                $response->getFirstName() ?? $response->getNickname(),
-                $response->getLastName() ?? $response->getNickName(),
+                $firstname ?? '',
+                $lastName ?? '',
                 $property,
                 $username
             );

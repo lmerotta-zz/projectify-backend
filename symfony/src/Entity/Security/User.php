@@ -4,17 +4,23 @@ namespace App\Entity\Security;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Contracts\Security\Enum\Permission;
+use App\Contracts\UserManagement\Enum\UserStatus;
+use App\Modules\UserManagement\GraphQL\Resolver\GetCurrentUserResolver;
+use App\Modules\UserManagement\GraphQL\Resolver\OnboardUserResolver;
 use App\Modules\UserManagement\Messenger\Commands\SignUserUp;
 use App\Repository\Security\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @Vich\Uploadable
  */
 #[ApiResource(
     collectionOperations: [],
@@ -23,11 +29,33 @@ use Symfony\Component\Serializer\Annotation\Groups;
             'input' => SignUserUp::class,
             'messenger' => 'input',
         ],
-        'item_query' => [
-            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_VIEW_SELF"))',
+        'collection_query',
+        'current' => [
+            'item_query' => GetCurrentUserResolver::class,
+            'args' => [],
+            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_VIEW_SELF"), object)',
             'normalization_context' => [
                 'groups' => [
                     'user:self',
+                ],
+            ],
+        ],
+        'onboard' => [
+            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_EDIT_SELF"), object)',
+            'mutation' => OnboardUserResolver::class,
+            'deserialize' => false,
+            'args' => [
+                'picture' => [
+                    'type' => 'Upload!',
+                    'description' => 'Profile picture file',
+                ],
+                'firstName' => [
+                    'type' => 'String!',
+                    'description' => 'First name of the user',
+                ],
+                'lastName' => [
+                    'type' => 'String!',
+                    'description' => 'Last name of the user',
                 ],
             ],
         ],
@@ -77,7 +105,6 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups("user:self")
      */
     private $profilePicture;
 
@@ -96,8 +123,28 @@ class User implements UserInterface
      */
     private $githubId;
 
+    /**
+     * @ORM\Column(type="user_status")
+     * @var UserStatus
+     */
+    private $status;
+
+    /**
+     * @Groups("user:self")
+     */
+    public ?string $profilePictureUrl = null;
+
+    /**
+     * @var File|null
+     *                Used by vich uploadable to upload files
+     *
+     * @Vich\UploadableField(mapping="user_profile_picture", fileNameProperty="profilePicture")
+     */
+    public $profilePictureFile;
+
     private function __construct()
     {
+        $this->status = UserStatus::get(UserStatus::SIGNED_UP);
         $this->roles = new ArrayCollection();
     }
 
@@ -129,10 +176,9 @@ class User implements UserInterface
         $self = new static();
         $self->id = $id;
 
-        $self
+        $self->setEmail($email)
             ->setFirstName($firstName)
-            ->setLastName($lastName)
-            ->setEmail($email);
+            ->setLastName($lastName);
 
         return $self;
     }
@@ -269,6 +315,32 @@ class User implements UserInterface
     public function setGithubId(?string $githubId): self
     {
         $this->githubId = $githubId;
+
+        return $this;
+    }
+
+    public function getStatus(): UserStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(UserStatus $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    // ---------- Workflow user journey ----------
+
+    public function getStringStatus(): string
+    {
+        return $this->status->getValue();
+    }
+
+    public function setStringStatus(string $stringStatus): User
+    {
+        $this->status = UserStatus::get($stringStatus);
 
         return $this;
     }
