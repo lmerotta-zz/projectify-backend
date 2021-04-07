@@ -28,8 +28,13 @@ tests/storage
 /.php_cs.cache
 ###< friendsofphp/php-cs-fixer ###
 
+public/uploads/
 !.gitkeep
 ###> phpunit/phpunit ###
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
+
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###

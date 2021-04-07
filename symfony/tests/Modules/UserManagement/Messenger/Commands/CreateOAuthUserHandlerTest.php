@@ -41,7 +41,7 @@ class CreateOAuthUserHandlerTest extends TestCase
         $handler->setUserRepository($repo->reveal());
         $handler->setEntityManager($em->reveal());
 
-        $command = new CreateOAuthUser($email, 'test', 'test', 'githubId', $githubId);
+        $command = new CreateOAuthUser($email, '', '', 'githubId', $githubId);
 
         $handler($command);
     }
@@ -68,7 +68,7 @@ class CreateOAuthUserHandlerTest extends TestCase
         $handler->setEntityManager($em->reveal());
         $handler->setEventBus($eventBus->reveal());
 
-        $command = new CreateOAuthUser($email, 'test', 'test', 'githubId', $githubId);
+        $command = new CreateOAuthUser($email,  'test', 'test', 'githubId', $githubId);
 
         $user = $handler($command);
         $this->assertEquals($githubId, $user->getGithubId());
