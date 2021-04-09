@@ -29,19 +29,20 @@ class UniqueEntity extends Constraint
         string $propertyPath = null,
         ?string $message = null
     ) {
-        parent::__construct($options, $groups ?? [], $payload);
+        parent::__construct($options, $groups, $payload);
 
         $this->message = $message ?? 'common.errors.entity_not_unique';
         $this->class = $className ?? $this->class;
         $this->fields = $fields ?? $this->fields;
         $this->propertyPath = $propertyPath ?? $this->propertyPath;
+
     }
 
     /**
-     * @return string[]
+     * @inheritdoc
      */
-    public function getTargets(): array
+    public function getTargets(): string|array
     {
-        return [self::CLASS_CONSTRAINT];
+        return self::CLASS_CONSTRAINT;
     }
 }
