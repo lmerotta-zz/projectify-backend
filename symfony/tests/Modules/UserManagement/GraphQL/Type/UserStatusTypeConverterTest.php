@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tests\Modules\Common\GraphQL\Type;
+namespace App\Tests\Modules\UserManagement\GraphQL\Type;
 
 use ApiPlatform\Core\GraphQl\Type\TypeConverterInterface;
 use App\Contracts\UserManagement\Enum\UserStatus;
-use App\Modules\Common\GraphQL\Type\Definition\UserStatusType;
-use App\Modules\Common\GraphQL\Type\UserStatusTypeConverter;
+use App\Modules\UserManagement\GraphQL\Type\Definition\UserStatusType;
+use App\Modules\UserManagement\GraphQL\Type\UserStatusTypeConverter;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Symfony\Component\PropertyInfo\Type;

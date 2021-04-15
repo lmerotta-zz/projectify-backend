@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Common\GraphQL\Type\Definition;
+namespace App\Modules\UserManagement\GraphQL\Type\Definition;
 
 use ApiPlatform\Core\GraphQl\Type\Definition\TypeInterface;
 use App\Contracts\UserManagement\Enum\UserStatus;

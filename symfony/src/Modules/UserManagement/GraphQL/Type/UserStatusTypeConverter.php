@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Modules\Common\GraphQL\Type;
+namespace App\Modules\UserManagement\GraphQL\Type;
 
 use ApiPlatform\Core\GraphQl\Type\TypeConverterInterface;
 use App\Contracts\UserManagement\Enum\UserStatus;
-use App\Modules\Common\GraphQL\Type\Definition\UserStatusType;
+use App\Modules\UserManagement\GraphQL\Type\Definition\UserStatusType;
 use GraphQL\Type\Definition\Type as GraphQLType;
 use Symfony\Component\PropertyInfo\Type;
 
