@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -19,6 +20,7 @@ class OnboardUserResolverTest extends TestCase
 
     public function testItReturnsNullIfTokenStorageIsNotAUser()
     {
+        $this->expectException(AccessDeniedHttpException::class);
         $token = new AnonymousToken('123', '456');
         $tokenStorage = $this->prophesize(TokenStorageInterface::class);
 
@@ -27,12 +29,10 @@ class OnboardUserResolverTest extends TestCase
         $resolver = new OnboardUserResolver();
         $resolver->setTokenStorage($tokenStorage->reveal());
 
-        $result = $resolver(
+        $resolver(
             null,
             ['args' => ['input' => []]]
         );
-
-        $this->assertNull($result);
     }
 
     public function testItDispatchesTheOnboardUserCommand()
