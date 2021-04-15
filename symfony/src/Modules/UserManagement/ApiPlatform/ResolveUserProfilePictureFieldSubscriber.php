@@ -7,7 +7,6 @@ use ApiPlatform\Core\GraphQl\Resolver\Stage\SerializeStageInterface;
 use ApiPlatform\Core\Util\RequestAttributesExtractor;
 use App\Entity\Security\User;
 use Composer\EventDispatcher\EventSubscriberInterface;
-use JetBrains\PhpStorm\ArrayShape;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ViewEvent;

@@ -2,17 +2,15 @@
 
 namespace App\Modules\UserManagement\Messenger\Events;
 
+use App\Modules\Common\SendInBlueMailer;
 use App\Repository\Security\UserRepository;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Address;
-use Symfony\Component\Mime\Email;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class SendWelcomeEmailWhenUserSignedUpHandler
 {
-    private MailerInterface $mailer;
+    private SendInBlueMailer $mailer;
     private UserRepository $userRepository;
     private LoggerInterface $logger;
 
@@ -25,22 +23,12 @@ class SendWelcomeEmailWhenUserSignedUpHandler
         );
 
         $user = $this->userRepository->find($event->getId());
-
-        $email = new Email();
-
-        $email->addTo(new Address($user->getEmail(), $user->getFirstName().' '.$user->getLastName()))
-        ->addFrom(new Address('l.merotta@gmail.com', 'Projectify'))
-        ->text('testing text');
-        $email->getHeaders()
-            ->addTextHeader('templateId', 1)
-            ->addParameterizedHeader('params', 'params', [
-                'PRENOM' => $user->getFirstName(),
-                'EMAIL' => $user->getEmail()
-            ]);
-
-        $this->mailer->send($email);
-
+        $this->mailer->send(1, [
+            'PRENOM' => $user->getFirstName(),
+            'EMAIL' => $user->getEmail(),
+        ], [$user->getEmail() => $user->getFirstName().' '.$user->getLastName()]);
     }
+
     #[Required]
     public function setUserRepository(UserRepository $userRepository): void
     {
@@ -54,7 +42,7 @@ class SendWelcomeEmailWhenUserSignedUpHandler
     }
 
     #[Required]
-    public function setMailer(MailerInterface $mailer): void
+    public function setMailer(SendInBlueMailer $mailer): void
     {
         $this->mailer = $mailer;
     }

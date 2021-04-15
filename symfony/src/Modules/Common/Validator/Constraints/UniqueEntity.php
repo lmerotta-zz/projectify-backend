@@ -35,13 +35,9 @@ class UniqueEntity extends Constraint
         $this->class = $className ?? $this->class;
         $this->fields = $fields ?? $this->fields;
         $this->propertyPath = $propertyPath ?? $this->propertyPath;
-
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getTargets(): string|array
+    public function getTargets(): string | array
     {
         return self::CLASS_CONSTRAINT;
     }
