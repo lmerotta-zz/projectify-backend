@@ -3,24 +3,17 @@
 namespace App\Modules\Security\Authorization;
 
 use App\Entity\Security\User;
-use App\Modules\Common\Bus\CommandBus;
+use App\Modules\Common\Traits\CommandBus;
 use App\Modules\UserManagement\Messenger\Commands\CreateOAuthUser;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\EntityUserProvider;
-use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * @codeCoverageIgnore
  */
 class OAuthUserProvider extends EntityUserProvider
 {
-    private CommandBus $commandBus;
-
-    #[Required]
-    public function setCommandBus(CommandBus $commandBus): void
-    {
-        $this->commandBus = $commandBus;
-    }
+    use CommandBus;
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response): User
     {

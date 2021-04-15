@@ -3,10 +3,10 @@
 namespace App\Modules\UserManagement\Messenger\Commands;
 
 use App\Entity\Security\User;
-use App\Modules\Common\Bus\EventBus;
+use App\Modules\Common\Traits\EntityManager;
+use App\Modules\Common\Traits\EventBus;
+use App\Modules\Common\Traits\Logger;
 use App\Modules\UserManagement\Messenger\Events\UserSignedUp;
-use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
@@ -15,10 +15,11 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SignUserUpHandler
 {
-    private EntityManagerInterface $em;
-    private EventBus $eventBus;
+    use EntityManager;
+    use EventBus;
+    use Logger;
+
     private EncoderFactoryInterface $passwordEncoder;
-    private LoggerInterface $logger;
 
     public function __invoke(SignUserUp $command): User
     {
@@ -38,24 +39,6 @@ class SignUserUpHandler
         $this->logger->log(LogLevel::INFO, 'User signed up', ['id' => $user->getId(), 'email' => $user->getEmail()]);
 
         return $user;
-    }
-
-    #[Required]
-    public function setEntityManager(EntityManagerInterface $em): void
-    {
-        $this->em = $em;
-    }
-
-    #[Required]
-    public function setEventBus(EventBus $eventBus): void
-    {
-        $this->eventBus = $eventBus;
-    }
-
-    #[Required]
-    public function setLogger(LoggerInterface $logger): void
-    {
-        $this->logger = $logger;
     }
 
     #[Required]

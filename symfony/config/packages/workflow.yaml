@@ -12,8 +12,9 @@ framework:
             initial_marking: 'SIGNED_UP'
             places:
                 - SIGNED_UP
+                - SIGNED_UP_OAUTH
                 - ONBOARDED
             transitions:
                 onboard:
-                    from: SIGNED_UP
+                    from: [SIGNED_UP, SIGNED_UP_OAUTH]
                     to: ONBOARDED

@@ -41,7 +41,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
             ],
         ],
         'onboard' => [
-            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_EDIT_SELF"), object)',
+            'security_post_denormalize' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_EDIT_SELF"), object)',
             'mutation' => OnboardUserResolver::class,
             'deserialize' => false,
             'args' => [
@@ -126,6 +126,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="user_status")
      * @var UserStatus
+     * @Groups("user:self")
      */
     private $status;
 
@@ -178,7 +179,8 @@ class User implements UserInterface
 
         $self->setEmail($email)
             ->setFirstName($firstName)
-            ->setLastName($lastName);
+            ->setLastName($lastName)
+            ->setStatus(UserStatus::get(UserStatus::SIGNED_UP_OAUTH));
 
         return $self;
     }

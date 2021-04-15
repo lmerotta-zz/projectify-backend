@@ -10,5 +10,6 @@ class UserStatus extends Enum
     use AutoDiscoveredValuesTrait;
 
     public const SIGNED_UP = 'SIGNED_UP';
+    public const SIGNED_UP_OAUTH = 'SIGNED_UP_OAUTH';
     public const ONBOARDED = 'ONBOARDED';
 }

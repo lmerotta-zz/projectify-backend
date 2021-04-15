@@ -35,7 +35,7 @@ class AddDefaultRoleWhenUserSignedUpHandlerTest extends TestCase
         $em->flush()->shouldBeCalled();
 
         $handler = new AddDefaultRoleWhenUserSignedUpHandler();
-        $handler->setEm($em->reveal());
+        $handler->setEntityManager($em->reveal());
         $handler->setRoleRepository($roleRepo->reveal());
         $handler->setUserRepository($userRepo->reveal());
         $handler->setLogger($logger->reveal());

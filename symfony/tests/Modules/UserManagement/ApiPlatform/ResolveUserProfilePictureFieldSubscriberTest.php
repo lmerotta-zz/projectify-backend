@@ -26,7 +26,7 @@ class ResolveUserProfilePictureFieldSubscriberTest extends TestCase
             ->willReturn([$item->reveal()]);
 
         $resolver = new ResolveUserProfilePictureFieldSubscriber();
-        $resolver->setStage($stage->reveal());
+        $resolver->setSerializeStage($stage->reveal());
         $resolver($item, Role::class, '', []);
     }
 
@@ -50,9 +50,9 @@ class ResolveUserProfilePictureFieldSubscriberTest extends TestCase
             ->willReturn([$item]);
 
         $resolver = new ResolveUserProfilePictureFieldSubscriber();
-        $resolver->setStage($stage->reveal());
-        $resolver->setStorage($storage->reveal());
-        $resolver->setCache($cache->reveal());
+        $resolver->setSerializeStage($stage->reveal());
+        $resolver->setUploaderHelper($storage->reveal());
+        $resolver->setImageCache($cache->reveal());
 
         $result = $resolver($item, User::class, '', []);
         $this->assertEquals('cached.png', $result[0]->profilePictureUrl);
@@ -74,9 +74,9 @@ class ResolveUserProfilePictureFieldSubscriberTest extends TestCase
             ->willReturn([$item]);
 
         $resolver = new ResolveUserProfilePictureFieldSubscriber();
-        $resolver->setStage($stage->reveal());
-        $resolver->setStorage($storage->reveal());
-        $resolver->setCache($cache->reveal());
+        $resolver->setSerializeStage($stage->reveal());
+        $resolver->setUploaderHelper($storage->reveal());
+        $resolver->setImageCache($cache->reveal());
 
         $result = $resolver([$item], User::class, '', []);
         $this->assertEquals(null, $result[0]->profilePictureUrl);
