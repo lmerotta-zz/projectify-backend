@@ -28,7 +28,7 @@ class OnboardUserHandlerTest extends TestCase
         $repo->find(Argument::type(UuidInterface::class))->shouldBeCalled()->willReturn(null);
 
         $handler = new OnboardUserHandler();
-        $handler->setRepository($repo->reveal());
+        $handler->setUserRepository($repo->reveal());
 
         $handler(new OnboardUser(
             Uuid::uuid4(),
@@ -50,7 +50,7 @@ class OnboardUserHandlerTest extends TestCase
         $workflow->can($user->reveal(), 'onboard')->shouldBeCalled()->willReturn(false);
 
         $handler = new OnboardUserHandler();
-        $handler->setRepository($repo->reveal());
+        $handler->setUserRepository($repo->reveal());
         $handler->setWorkflow($workflow->reveal());
 
         $handler(new OnboardUser(
@@ -76,7 +76,7 @@ class OnboardUserHandlerTest extends TestCase
         $user->setLastName('test')->shouldBeCalled()->willReturn($user->reveal());
 
         $handler = new OnboardUserHandler();
-        $handler->setRepository($repo->reveal());
+        $handler->setUserRepository($repo->reveal());
         $handler->setWorkflow($workflow->reveal());
 
         $result = $handler(new OnboardUser(

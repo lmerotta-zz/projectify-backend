@@ -5,18 +5,19 @@ namespace App\Modules\UserManagement\Messenger\Commands;
 use App\Contracts\UserManagement\Exception\UserAlreadyOnboardedException;
 use App\Contracts\UserManagement\Exception\UserNotFoundException;
 use App\Entity\Security\User;
-use App\Repository\Security\UserRepository;
+use App\Modules\Common\Traits\UserRepository;
 use Symfony\Component\Workflow\WorkflowInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class OnboardUserHandler
 {
-    private UserRepository $repository;
+    use UserRepository;
+
     private WorkflowInterface $stateMachine;
 
     public function __invoke(OnboardUser $command): User
     {
-        $user = $this->repository->find($command->id);
+        $user = $this->userRepository->find($command->id);
 
         if (!$user) {
             throw new UserNotFoundException($command->id);
@@ -33,12 +34,6 @@ class OnboardUserHandler
         $this->stateMachine->apply($user, 'onboard');
 
         return $user;
-    }
-
-    #[Required]
-    public function setRepository(UserRepository $repository): void
-    {
-        $this->repository = $repository;
     }
 
     #[Required]

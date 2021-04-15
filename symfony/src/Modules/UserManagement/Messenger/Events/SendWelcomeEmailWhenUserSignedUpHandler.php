@@ -2,17 +2,16 @@
 
 namespace App\Modules\UserManagement\Messenger\Events;
 
-use App\Modules\Common\SendInBlueMailer;
-use App\Repository\Security\UserRepository;
-use Psr\Log\LoggerInterface;
+use App\Modules\Common\Traits\Logger;
+use App\Modules\Common\Traits\Mailer;
+use App\Modules\Common\Traits\UserRepository;
 use Psr\Log\LogLevel;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class SendWelcomeEmailWhenUserSignedUpHandler
 {
-    private SendInBlueMailer $mailer;
-    private UserRepository $userRepository;
-    private LoggerInterface $logger;
+    use UserRepository;
+    use Logger;
+    use Mailer;
 
     public function __invoke(UserSignedUp $event): void
     {
@@ -27,23 +26,5 @@ class SendWelcomeEmailWhenUserSignedUpHandler
             'PRENOM' => $user->getFirstName(),
             'EMAIL' => $user->getEmail(),
         ], [$user->getEmail() => $user->getFirstName().' '.$user->getLastName()]);
-    }
-
-    #[Required]
-    public function setUserRepository(UserRepository $userRepository): void
-    {
-        $this->userRepository = $userRepository;
-    }
-
-    #[Required]
-    public function setLogger(LoggerInterface $logger): void
-    {
-        $this->logger = $logger;
-    }
-
-    #[Required]
-    public function setMailer(SendInBlueMailer $mailer): void
-    {
-        $this->mailer = $mailer;
     }
 }

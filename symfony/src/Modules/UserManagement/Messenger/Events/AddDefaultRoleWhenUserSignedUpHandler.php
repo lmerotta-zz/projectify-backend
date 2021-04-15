@@ -2,21 +2,21 @@
 
 namespace App\Modules\UserManagement\Messenger\Events;
 
+use App\Modules\Common\Traits\EntityManager;
+use App\Modules\Common\Traits\Logger;
+use App\Modules\Common\Traits\UserRepository;
 use App\Repository\Security\RoleRepository;
-use App\Repository\Security\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class AddDefaultRoleWhenUserSignedUpHandler
 {
     private const DEFAULT_ROLE = 'ROLE_USER';
+    use Logger;
+    use UserRepository;
+    use EntityManager;
 
     private RoleRepository $roleRepository;
-    private UserRepository $userRepository;
-    private EntityManagerInterface $em;
-    private LoggerInterface $logger;
 
     public function __invoke(UserSignedUp $event): void
     {
@@ -37,23 +37,5 @@ class AddDefaultRoleWhenUserSignedUpHandler
     public function setRoleRepository(RoleRepository $roleRepository): void
     {
         $this->roleRepository = $roleRepository;
-    }
-
-    #[Required]
-    public function setUserRepository(UserRepository $userRepository): void
-    {
-        $this->userRepository = $userRepository;
-    }
-
-    #[Required]
-    public function setEm(EntityManagerInterface $em): void
-    {
-        $this->em = $em;
-    }
-
-    #[Required]
-    public function setLogger(LoggerInterface $logger): void
-    {
-        $this->logger = $logger;
     }
 }

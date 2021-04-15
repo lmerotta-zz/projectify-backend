@@ -3,23 +3,23 @@
 namespace App\Modules\UserManagement\Messenger\Commands;
 
 use App\Entity\Security\User;
-use App\Modules\Common\Bus\EventBus;
+use App\Modules\Common\Traits\EntityManager;
+use App\Modules\Common\Traits\EventBus;
+use App\Modules\Common\Traits\Logger;
+use App\Modules\Common\Traits\UserRepository;
 use App\Modules\UserManagement\Messenger\Events\UserSignedUp;
-use App\Repository\Security\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class CreateOAuthUserHandler
 {
-    private EntityManagerInterface $em;
-    private EventBus $eventBus;
-    private UserRepository $userRepository;
-    private LoggerInterface $logger;
+    use EntityManager;
+    use EventBus;
+    use UserRepository;
+    use Logger;
+
 
     public function __invoke(CreateOAuthUser $command): User
     {
@@ -46,29 +46,5 @@ class CreateOAuthUserHandler
         );
 
         return $user;
-    }
-
-    #[Required]
-    public function setEntityManager(EntityManagerInterface $em): void
-    {
-        $this->em = $em;
-    }
-
-    #[Required]
-    public function setEventBus(EventBus $eventBus): void
-    {
-        $this->eventBus = $eventBus;
-    }
-
-    #[Required]
-    public function setLogger(LoggerInterface $logger): void
-    {
-        $this->logger = $logger;
-    }
-
-    #[Required]
-    public function setUserRepository(UserRepository $userRepository): void
-    {
-        $this->userRepository = $userRepository;
     }
 }

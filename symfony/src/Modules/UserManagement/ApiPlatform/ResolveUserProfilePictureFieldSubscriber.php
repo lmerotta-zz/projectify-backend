@@ -6,19 +6,19 @@ use ApiPlatform\Core\EventListener\EventPriorities;
 use ApiPlatform\Core\GraphQl\Resolver\Stage\SerializeStageInterface;
 use ApiPlatform\Core\Util\RequestAttributesExtractor;
 use App\Entity\Security\User;
+use App\Modules\Common\Traits\ImageCache;
+use App\Modules\Common\Traits\SerializeStage;
+use App\Modules\Common\Traits\UploaderHelper;
 use Composer\EventDispatcher\EventSubscriberInterface;
-use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Contracts\Service\Attribute\Required;
-use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 class ResolveUserProfilePictureFieldSubscriber implements EventSubscriberInterface, SerializeStageInterface
 {
-    private UploaderHelper $storage;
-    private CacheManager $cache;
-    private SerializeStageInterface $stage;
+    use UploaderHelper;
+    use ImageCache;
+    use SerializeStage;
 
     /**
      * @return array<mixed>|null
@@ -29,7 +29,7 @@ class ResolveUserProfilePictureFieldSubscriber implements EventSubscriberInterfa
             $this->assignContentUrl($itemOrCollection);
         }
 
-        return ($this->stage)($itemOrCollection, $resourceClass, $operationName, $context);
+        return ($this->serializeStage)($itemOrCollection, $resourceClass, $operationName, $context);
     }
 
     /**
@@ -70,9 +70,9 @@ class ResolveUserProfilePictureFieldSubscriber implements EventSubscriberInterfa
             }
             // @codeCoverageIgnoreEnd
 
-            $picturePath = $this->storage->asset($user, 'profilePictureFile');
+            $picturePath = $this->uploaderHelper->asset($user, 'profilePictureFile');
             if ($picturePath) {
-                $user->profilePictureUrl = $this->cache->getBrowserPath($picturePath, 'user_profile_picture');
+                $user->profilePictureUrl = $this->imageCache->getBrowserPath($picturePath, 'user_profile_picture');
             }
         }
     }
@@ -86,23 +86,5 @@ class ResolveUserProfilePictureFieldSubscriber implements EventSubscriberInterfa
         return [
             KernelEvents::VIEW => ['onPreSerialize', EventPriorities::PRE_SERIALIZE],
         ];
-    }
-
-    #[Required]
-    public function setStorage(UploaderHelper $storage): void
-    {
-        $this->storage = $storage;
-    }
-
-    #[Required]
-    public function setCache(CacheManager $cache): void
-    {
-        $this->cache = $cache;
-    }
-
-    #[Required]
-    public function setStage(SerializeStageInterface $stage): void
-    {
-        $this->stage = $stage;
     }
 }

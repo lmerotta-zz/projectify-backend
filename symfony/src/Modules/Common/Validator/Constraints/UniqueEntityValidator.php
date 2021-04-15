@@ -2,21 +2,14 @@
 
 namespace App\Modules\Common\Validator\Constraints;
 
-use Doctrine\ORM\EntityManagerInterface;
+use App\Modules\Common\Traits\EntityManager;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class UniqueEntityValidator extends ConstraintValidator
 {
-    private EntityManagerInterface $em;
-
-    #[Required]
-    public function setEntityManager(EntityManagerInterface $em): void
-    {
-        $this->em = $em;
-    }
+    use EntityManager;
 
     public function validate($value, Constraint $constraint): void
     {
