@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Modules\Common\Traits;
 
 use Symfony\Contracts\Service\Attribute\Required;

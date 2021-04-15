@@ -20,7 +20,6 @@ class CreateOAuthUserHandler
     use UserRepository;
     use Logger;
 
-
     public function __invoke(CreateOAuthUser $command): User
     {
         $propertyAccess = PropertyAccess::createPropertyAccessor();

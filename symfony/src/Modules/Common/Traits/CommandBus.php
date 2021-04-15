@@ -2,7 +2,7 @@
 
 namespace App\Modules\Common\Traits;
 
-use \App\Modules\Common\Bus\CommandBus as Bus;
+use App\Modules\Common\Bus\CommandBus as Bus;
 use Symfony\Contracts\Service\Attribute\Required;
 
 trait CommandBus

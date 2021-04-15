@@ -93,6 +93,7 @@ return [
         \SlevomatCodingStandard\Sniffs\TypeHints\NullableTypeForNullDefaultValueSniff::class,
         \SlevomatCodingStandard\Sniffs\Namespaces\UnusedUsesSniff::class,
         \SlevomatCodingStandard\Sniffs\PHP\UselessSemicolonSniff::class,
+        \NunoMaduro\PhpInsights\Domain\Insights\ForbiddenTraits::class,
     ],
 
     'config' => [

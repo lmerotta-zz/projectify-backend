@@ -11,10 +11,10 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class AddDefaultRoleWhenUserSignedUpHandler
 {
-    private const DEFAULT_ROLE = 'ROLE_USER';
     use Logger;
     use UserRepository;
     use EntityManager;
+    private const DEFAULT_ROLE = 'ROLE_USER';
 
     private RoleRepository $roleRepository;
 
