@@ -3,11 +3,11 @@
 namespace App\Entity\ProjectManagement;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Modules\ProjectManagement\Messenger\Commands\CreateProject;
-use Gedmo\Mapping\Annotation as Gedmo;
 use App\Entity\Security\User;
+use App\Modules\ProjectManagement\Messenger\Commands\CreateProject;
 use App\Repository\ProjectManagement\ProjectRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\UuidInterface;
 
 /**
@@ -18,11 +18,11 @@ use Ramsey\Uuid\UuidInterface;
     graphql: [
         'create' => [
             'input' => CreateProject::class,
-            'messenger' => 'input'
+            'messenger' => 'input',
         ],
     ],
     itemOperations: [
-        'get'
+        'get',
     ]
 )]
 class Project
@@ -45,7 +45,9 @@ class Project
      */
     private $creator;
 
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     public static function create(UuidInterface $uuid, string $name): self
     {

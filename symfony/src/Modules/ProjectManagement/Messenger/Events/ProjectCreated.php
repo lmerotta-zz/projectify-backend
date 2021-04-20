@@ -6,7 +6,9 @@ use Ramsey\Uuid\UuidInterface;
 
 class ProjectCreated
 {
-    public function __construct(private UuidInterface $id) {}
+    public function __construct(private UuidInterface $id)
+    {
+    }
 
     /**
      * @codeCoverageIgnore
