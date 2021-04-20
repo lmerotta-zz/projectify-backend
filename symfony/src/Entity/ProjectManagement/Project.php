@@ -2,14 +2,29 @@
 
 namespace App\Entity\ProjectManagement;
 
+use ApiPlatform\Core\Annotation\ApiResource;
+use App\Modules\ProjectManagement\Messenger\Commands\CreateProject;
 use Gedmo\Mapping\Annotation as Gedmo;
 use App\Entity\Security\User;
 use App\Repository\ProjectManagement\ProjectRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass=ProjectRepository::class)
  */
+#[ApiResource(
+    collectionOperations: [],
+    graphql: [
+        'create' => [
+            'input' => CreateProject::class,
+            'messenger' => 'input'
+        ],
+    ],
+    itemOperations: [
+        'get'
+    ]
+)]
 class Project
 {
     /**
@@ -30,7 +45,18 @@ class Project
      */
     private $creator;
 
-    public function getId(): ?int
+    private function __construct() {}
+
+    public static function create(UuidInterface $uuid, string $name): self
+    {
+        $self = new static();
+        $self->id = $uuid;
+        $self->setName($name);
+
+        return $self;
+    }
+
+    public function getId(): ?UuidInterface
     {
         return $this->id;
     }
