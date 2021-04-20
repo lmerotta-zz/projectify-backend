@@ -65,6 +65,10 @@ services:
         tags:
             - { name: kernel.event_listener, event: 'trikoder.oauth2.authorization_request_resolve', method: onAuthorizationRequestResolve }
 
+    App\Modules\Security\Authorization\PermissionVoter:
+        tags:
+            - { name: security.voter, priority: 255 }
+
     ## USER MANAGEMENT ##
     App\Modules\UserManagement\ApiPlatform\ResolveUserProfilePictureFieldSubscriber:
         decorates: api_platform.graphql.resolver.stage.serialize
