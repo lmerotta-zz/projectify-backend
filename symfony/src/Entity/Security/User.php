@@ -61,7 +61,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
     ],
     itemOperations: [
         'get' => [
-            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_VIEW_SELF"))',
+            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_VIEW_SELF"), object)',
             'normalization_context' => [
                 'groups' => [
                     'user:self',

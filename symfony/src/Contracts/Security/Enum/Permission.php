@@ -11,4 +11,5 @@ class Permission extends FlaggedEnum
 
     public const USER_VIEW_SELF = 1;
     public const USER_EDIT_SELF = 2;
+    public const PROJECT_VIEW_OWN = 4;
 }
