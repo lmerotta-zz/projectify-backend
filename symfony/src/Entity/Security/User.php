@@ -29,7 +29,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
             'input' => SignUserUp::class,
             'messenger' => 'input',
         ],
-        'collection_query',
         'current' => [
             'item_query' => GetCurrentUserResolver::class,
             'args' => [],
