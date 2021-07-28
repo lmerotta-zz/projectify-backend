@@ -9,8 +9,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[UniqueEntity(
     className: User::class,
     fields: ['email' => 'email'],
-    propertyPath: 'email')
-]
+    propertyPath: 'email'
+)]
 class SignUserUp
 {
     #[Assert\NotBlank]

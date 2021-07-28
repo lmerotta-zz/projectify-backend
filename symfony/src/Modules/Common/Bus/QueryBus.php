@@ -15,10 +15,7 @@ class QueryBus
     {
     }
 
-    /**
-     * @return mixed
-     */
-    public function query($query, array $stamps = [])
+    public function query($query, array $stamps = []): mixed
     {
         try {
             return $this->queryBus->dispatch($query, $stamps)->last(HandledStamp::class)->getResult();

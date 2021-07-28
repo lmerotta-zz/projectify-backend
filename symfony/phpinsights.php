@@ -94,6 +94,10 @@ return [
         \SlevomatCodingStandard\Sniffs\Namespaces\UnusedUsesSniff::class,
         \SlevomatCodingStandard\Sniffs\PHP\UselessSemicolonSniff::class,
         \NunoMaduro\PhpInsights\Domain\Insights\ForbiddenTraits::class,
+        \SlevomatCodingStandard\Sniffs\Classes\ForbiddenPublicPropertySniff::class,
+        \SlevomatCodingStandard\Sniffs\Functions\FunctionLengthSniff::class,
+        
+
     ],
 
     'config' => [
