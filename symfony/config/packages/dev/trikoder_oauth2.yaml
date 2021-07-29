@@ -1,0 +1,4 @@
+trikoder_oauth2:
+
+    authorization_server:
+        access_token_ttl: P1D
