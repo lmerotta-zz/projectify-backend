@@ -3,11 +3,11 @@
 namespace App\Modules\Security\Authorization;
 
 use App\Entity\Security\User;
-use Doctrine\Persistence\ObjectManager;
-use Doctrine\Persistence\ObjectRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use App\Modules\Common\Traits\CommandBus;
 use App\Modules\UserManagement\Messenger\Commands\CreateOAuthUser;
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectRepository;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 
@@ -25,11 +25,16 @@ class OAuthUserProvider implements OAuthAwareUserProviderInterface
         'identifier' => 'id',
     ];
 
-    public function __construct(ManagerRegistry $registry, string $class, array $properties, ?string $managerName = null) 
-    {
+    public function __construct(
+        ManagerRegistry $registry,
+        string $class,
+        array $properties,
+        ?string $managerName = null
+    ) {
         $this->em = $registry->getManager($managerName);
         $this->class = $class;
         $this->properties = array_merge($this->properties, $properties);
+        $this->repository = $this->em->getRepository($this->class);
     }
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response): User
@@ -69,12 +74,8 @@ class OAuthUserProvider implements OAuthAwareUserProviderInterface
     /**
      * @return UserInterface
      */
-    protected function findUser(array $criteria)
+    protected function findUser(array $criteria): ?User
     {
-        if (null === $this->repository) {
-            $this->repository = $this->em->getRepository($this->class);
-        }
-
         return $this->repository->findOneBy($criteria);
     }
 }
