@@ -26,10 +26,10 @@
         "version": "v1.5.0"
     },
     "composer/ca-bundle": {
-        "version": "1.2.8"
+        "version": "1.2.10"
     },
     "composer/composer": {
-        "version": "1.10.19"
+        "version": "2.1.5"
     },
     "composer/metadata-minifier": {
         "version": "1.0.0"
@@ -38,13 +38,13 @@
         "version": "1.11.99"
     },
     "composer/semver": {
-        "version": "1.7.2"
+        "version": "3.2.5"
     },
     "composer/spdx-licenses": {
         "version": "1.5.5"
     },
     "composer/xdebug-handler": {
-        "version": "1.4.5"
+        "version": "2.0.1"
     },
     "dama/doctrine-test-bundle": {
         "version": "4.0",
@@ -177,15 +177,15 @@
         "version": "1.1.1"
     },
     "friendsofphp/php-cs-fixer": {
-        "version": "2.2",
+        "version": "3.0",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "master",
-            "version": "2.2",
-            "ref": "cc05ab6abf6894bddb9bbd6a252459010ebe040b"
+            "version": "3.0",
+            "ref": "be2103eb4a20942e28a6dd87736669b757132435"
         },
         "files": [
-            ".php_cs.dist"
+            ".php-cs-fixer.dist.php"
         ]
     },
     "friendsofphp/proxy-manager-lts": {
@@ -231,7 +231,7 @@
         ]
     },
     "justinrainbow/json-schema": {
-        "version": "5.2.10"
+        "version": "5.2.11"
     },
     "laminas/laminas-code": {
         "version": "3.4.1"
@@ -249,7 +249,7 @@
         "version": "4.0.0"
     },
     "league/container": {
-        "version": "3.3.3"
+        "version": "3.4.1"
     },
     "league/event": {
         "version": "2.2.0"
@@ -308,7 +308,7 @@
         "version": "v4.10.2"
     },
     "nunomaduro/phpinsights": {
-        "version": "v1.14.0"
+        "version": "v2.0.1"
     },
     "nyholm/psr7": {
         "version": "1.0",
@@ -332,7 +332,7 @@
         "version": "3.1.0"
     },
     "php-cs-fixer/diff": {
-        "version": "v1.3.1"
+        "version": "v2.0.2"
     },
     "php-http/client-common": {
         "version": "2.3.0"
@@ -371,7 +371,7 @@
         "version": "1.4.0"
     },
     "php-parallel-lint/php-parallel-lint": {
-        "version": "v1.2.0"
+        "version": "v1.3.0"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
@@ -538,15 +538,15 @@
         ]
     },
     "slevomat/coding-standard": {
-        "version": "6.4.1"
+        "version": "7.0.12"
     },
     "squizlabs/php_codesniffer": {
-        "version": "3.0",
+        "version": "3.6",
         "recipe": {
             "repo": "github.com/symfony/recipes-contrib",
             "branch": "master",
-            "version": "3.0",
-            "ref": "0dc9cceda799fd3a08b96987e176a261028a3709"
+            "version": "3.6",
+            "ref": "1019e5c08d4821cb9b77f4891f8e9c31ff20ac6f"
         },
         "files": [
             "phpcs.xml.dist"
