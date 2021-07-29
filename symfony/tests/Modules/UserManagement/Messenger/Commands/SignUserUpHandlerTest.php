@@ -12,8 +12,8 @@ use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
-use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
+use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 use Prophecy\PhpUnit\ProphecyTrait;
 
 class SignUserUpHandlerTest extends TestCase
@@ -26,11 +26,11 @@ class SignUserUpHandlerTest extends TestCase
         $em = $this->prophesize(EntityManagerInterface::class);
         $eventBus = $this->prophesize(EventBus::class);
         $logger = $this->prophesize(LoggerInterface::class);
-        $encoderFactory = $this->prophesize(EncoderFactoryInterface::class);
-        $encoder = $this->prophesize(PasswordEncoderInterface::class);
+        $encoderFactory = $this->prophesize(PasswordHasherFactoryInterface::class);
+        $encoder = $this->prophesize(PasswordHasherInterface::class);
 
-        $encoderFactory->getEncoder(User::class)->shouldBeCalled()->willReturn($encoder->reveal());
-        $encoder->encodePassword('password', null)->shouldBeCalled()->willReturn('123abc');
+        $encoderFactory->getPasswordHasher(User::class)->shouldBeCalled()->willReturn($encoder->reveal());
+        $encoder->hash('password')->shouldBeCalled()->willReturn('123abc');
         $em->persist(Argument::type(User::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
         $eventBus->dispatch(Argument::type(UserSignedUp::class), [new DispatchAfterCurrentBusStamp()])->shouldBeCalled();

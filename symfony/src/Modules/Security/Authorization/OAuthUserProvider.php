@@ -3,17 +3,34 @@
 namespace App\Modules\Security\Authorization;
 
 use App\Entity\Security\User;
+use Doctrine\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use App\Modules\Common\Traits\CommandBus;
 use App\Modules\UserManagement\Messenger\Commands\CreateOAuthUser;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
-use HWI\Bundle\OAuthBundle\Security\Core\User\EntityUserProvider;
+use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 
 /**
  * @codeCoverageIgnore
  */
-class OAuthUserProvider extends EntityUserProvider
+class OAuthUserProvider implements OAuthAwareUserProviderInterface
 {
     use CommandBus;
+
+    protected ObjectManager $em;
+    protected ObjectRepository $repository;
+    protected string $class;
+    protected array $properties = [
+        'identifier' => 'id',
+    ];
+
+    public function __construct(ManagerRegistry $registry, string $class, array $properties, ?string $managerName = null) 
+    {
+        $this->em = $registry->getManager($managerName);
+        $this->class = $class;
+        $this->properties = array_merge($this->properties, $properties);
+    }
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response): User
     {
@@ -26,7 +43,7 @@ class OAuthUserProvider extends EntityUserProvider
 
         $property = $this->properties[$resourceOwnerName];
 
-        $username = $response->getUsername();
+        $username = $response->getUserIdentifier();
         $user = $this->findUser([$property => $username]);
         if (!$user) {
             $firstname = $response->getFirstName();
@@ -47,5 +64,17 @@ class OAuthUserProvider extends EntityUserProvider
         }
 
         return $user;
+    }
+
+    /**
+     * @return UserInterface
+     */
+    protected function findUser(array $criteria)
+    {
+        if (null === $this->repository) {
+            $this->repository = $this->em->getRepository($this->class);
+        }
+
+        return $this->repository->findOneBy($criteria);
     }
 }
