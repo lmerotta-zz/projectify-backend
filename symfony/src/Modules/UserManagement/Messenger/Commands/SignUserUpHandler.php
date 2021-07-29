@@ -10,7 +10,7 @@ use App\Modules\UserManagement\Messenger\Events\UserSignedUp;
 use Psr\Log\LogLevel;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class SignUserUpHandler
@@ -19,7 +19,7 @@ class SignUserUpHandler
     use EventBus;
     use Logger;
 
-    private EncoderFactoryInterface $passwordEncoder;
+    private PasswordHasherFactoryInterface $passwordEncoder;
 
     public function __invoke(SignUserUp $command): User
     {
@@ -27,7 +27,7 @@ class SignUserUpHandler
             Uuid::uuid4(),
             $command->firstName,
             $command->lastName,
-            $this->passwordEncoder->getEncoder(User::class)->encodePassword($command->password, null),
+            $this->passwordEncoder->getPasswordHasher(User::class)->hash($command->password),
             $command->email
         );
 
@@ -42,7 +42,7 @@ class SignUserUpHandler
     }
 
     #[Required]
-    public function setPasswordEncoder(EncoderFactoryInterface $encoder): void
+    public function setPasswordEncoder(PasswordHasherFactoryInterface $encoder): void
     {
         $this->passwordEncoder = $encoder;
     }

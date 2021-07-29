@@ -7,7 +7,7 @@ use App\Entity\Security\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Ramsey\Uuid\Uuid;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Trikoder\Bundle\OAuth2Bundle\Model\Client;
 use Trikoder\Bundle\OAuth2Bundle\Model\Grant;
 use Trikoder\Bundle\OAuth2Bundle\Model\RedirectUri;
@@ -15,9 +15,9 @@ use Trikoder\Bundle\OAuth2Bundle\Model\Scope;
 
 class AppFixtures extends Fixture
 {
-    protected EncoderFactoryInterface $encoderFactory;
+    protected PasswordHasherFactoryInterface $encoderFactory;
 
-    public function __construct(EncoderFactoryInterface $encoderFactory)
+    public function __construct(PasswordHasherFactoryInterface $encoderFactory)
     {
         $this->encoderFactory = $encoderFactory;
     }
@@ -31,7 +31,7 @@ class AppFixtures extends Fixture
             Uuid::uuid4(),
             'default',
             'default',
-            $this->encoderFactory->getEncoder(User::class)->encodePassword('default@default.com', null),
+            $this->encoderFactory->getPasswordHasher(User::class)->hash('default@default.com'),
             'default@default.com'
         );
 

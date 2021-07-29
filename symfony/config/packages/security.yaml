@@ -1,59 +1,70 @@
 security:
-    access_decision_manager:
-        strategy: unanimous
-        allow_if_all_abstain: false
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
-    encoders:
-        App\Entity\Security\User:
-            algorithm: auto
-            cost: 12
-    providers:
-        local_users:
-            entity:
-                class: App\Entity\Security\User
-                property: email
-    firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
+  access_decision_manager:
+    strategy: unanimous
+    allow_if_all_abstain: false
+  # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+  password_hashers:
+    App\Entity\Security\User:
+      algorithm: auto
+      cost: 12
+  providers:
+    local_users:
+      entity:
+        class: App\Entity\Security\User
+        property: email
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
 
+    api_token:
+      pattern: ^/actions/security/authentication/token
+      security: false
 
-        api_token:
-            pattern: ^/actions/security/authentication/token
-            security: false
+    auth:
+      pattern: ^/actions/security/authentication
+      anonymous: true
+      lazy: true
+      json_login:
+        check_path: app.security.action.login
+      oauth:
+        resource_owners:
+          github: "/actions/security/authentication/oauth/connect/check-github"
+        login_path: /actions/security/authentication/oauth/not-connected
+        check_path: /actions/security/authentication/oauth/login_check
+        use_forward: false
+        failure_path: /actions/security/authentication/oauth/not-connected
+        oauth_user_provider:
+          service: app.security.provider.oauth
+        default_target_path: /actions/security/authentication/oauth/connected
 
-        auth:
-            pattern: ^/actions/security/authentication
-            anonymous: true
-            lazy: true
-            json_login:
-                check_path: app.security.action.login
-            oauth:
-                resource_owners:
-                    github: "/actions/security/authentication/oauth/connect/check-github"
-                login_path: /actions/security/authentication/oauth/not-connected
-                check_path: /actions/security/authentication/oauth/login_check
-                use_forward: false
-                failure_path: /actions/security/authentication/oauth/not-connected
-                oauth_user_provider:
-                    service: app.security.provider.oauth
-                default_target_path: /actions/security/authentication/oauth/connected
+    api_docs:
+      pattern: ^/api/doc
+      security: false
 
-        api_docs:
-            pattern: ^/api/doc
-            security: false
+    api:
+      pattern: ^/(api|actions)
+      anonymous: true
+      security: true
+      stateless: true
+      oauth2: true
 
-        api:
-            pattern: ^/(api|actions)
-            anonymous: true
-            security: true
-            stateless: true
-            oauth2: true
-
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
-    access_control:
-        - { path: ^/actions/security/authentication/authorize, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/actionssecurity/authentication/.well-known/openid-configuration, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/actions/security/authentication/oauth/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/actions/security/authentication/oauth/not-connected, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+  # Easy way to control access for large sections of your site
+  # Note: Only the *first* access control that matches will be used
+  access_control:
+    - {
+        path: ^/actions/security/authentication/authorize,
+        roles: IS_AUTHENTICATED_ANONYMOUSLY,
+      }
+    - {
+        path: ^/actionssecurity/authentication/.well-known/openid-configuration,
+        roles: IS_AUTHENTICATED_ANONYMOUSLY,
+      }
+    - {
+        path: ^/actions/security/authentication/oauth/login,
+        roles: IS_AUTHENTICATED_ANONYMOUSLY,
+      }
+    - {
+        path: ^/actions/security/authentication/oauth/not-connected,
+        roles: IS_AUTHENTICATED_ANONYMOUSLY,
+      }
