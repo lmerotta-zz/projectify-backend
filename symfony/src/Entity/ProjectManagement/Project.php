@@ -19,7 +19,7 @@ use Ramsey\Uuid\UuidInterface;
         'create' => [
             'input' => CreateProject::class,
             'messenger' => 'input',
-            'security_post_denormalize' => 'is_granted("IS_AUTHENTICATED_REMEMBERED")',
+            'security_post_denormalize' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::PROJECT_CREATE"), object)',
         ],
         'item_query' => [
             'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::PROJECT_VIEW_OWN"), object)',

@@ -34,7 +34,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
         'current' => [
             'item_query' => GetCurrentUserResolver::class,
             'args' => [],
-            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_VIEW_SELF"), object)'
+            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_VIEW_SELF"), object)',
         ],
         'onboard' => [
             'security_post_denormalize' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_EDIT_SELF"), object)',
@@ -120,7 +120,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @var File|null
-     * Used by vich uploadable to upload files
+     *                Used by vich uploadable to upload files
      *
      * @Vich\UploadableField(mapping="user_profile_picture", fileNameProperty="profilePicture")
      */
