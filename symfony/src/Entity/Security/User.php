@@ -8,15 +8,16 @@ use App\Contracts\UserManagement\Enum\UserStatus;
 use App\Modules\UserManagement\GraphQL\Resolver\GetCurrentUserResolver;
 use App\Modules\UserManagement\GraphQL\Resolver\OnboardUserResolver;
 use App\Modules\UserManagement\Messenger\Commands\SignUserUp;
+use App\Modules\UserManagement\Model\UserDTO;
 use App\Repository\Security\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -33,13 +34,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
         'current' => [
             'item_query' => GetCurrentUserResolver::class,
             'args' => [],
-            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_VIEW_SELF"), object)',
-            'normalization_context' => [
-                'groups' => [
-                    'user:self',
-                ],
-            ],
+            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_VIEW_SELF"), object)'
         ],
+        'collection_query',
         'onboard' => [
             'security_post_denormalize' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_EDIT_SELF"), object)',
             'mutation' => OnboardUserResolver::class,
@@ -63,38 +60,30 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
     itemOperations: [
         'get' => [
             'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_VIEW_SELF"), object)',
-            'normalization_context' => [
-                'groups' => [
-                    'user:self',
-                ],
-            ],
         ],
     ],
+    output: UserDTO::class,
 )]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
-     * @Groups("user:self")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("user:self")
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("user:self")
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
-     * @Groups("user:self")
      */
     private $email;
 
@@ -127,18 +116,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="user_status")
      *
      * @var UserStatus
-     * @Groups("user:self")
      */
     private $status;
 
     /**
-     * @Groups("user:self")
-     */
-    public ?string $profilePictureUrl = null;
-
-    /**
      * @var File|null
-     *                Used by vich uploadable to upload files
+     * Used by vich uploadable to upload files
      *
      * @Vich\UploadableField(mapping="user_profile_picture", fileNameProperty="profilePicture")
      */
@@ -186,12 +169,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $self;
     }
 
-    public function getId(): ?UuidInterface
+    public function getId(): UuidInterface
     {
         return $this->id;
     }
 
-    public function getFirstName(): ?string
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
@@ -203,7 +186,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getLastName(): ?string
+    public function getLastName(): string
     {
         return $this->lastName;
     }
@@ -255,7 +238,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -324,11 +307,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    #[Pure]
     public function getUsername(): string
     {
         return $this->getEmail();
     }
 
+    #[Pure]
     public function getUserIdentifier(): string
     {
         return $this->getEmail();
