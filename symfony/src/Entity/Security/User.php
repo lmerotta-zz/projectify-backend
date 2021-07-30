@@ -36,7 +36,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
             'args' => [],
             'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_VIEW_SELF"), object)'
         ],
-        'collection_query',
         'onboard' => [
             'security_post_denormalize' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_EDIT_SELF"), object)',
             'mutation' => OnboardUserResolver::class,
