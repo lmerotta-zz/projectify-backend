@@ -14,6 +14,7 @@ class ProjectVoter extends Voter
     {
         return match (intval($attribute)) {
             Permission::PROJECT_VIEW_OWN => !$subject || $subject instanceof Project,
+            Permission::PROJECT_CREATE => true,
             default => false,
         };
     }
@@ -22,6 +23,7 @@ class ProjectVoter extends Voter
     {
         return match (intval($attribute)) {
             Permission::PROJECT_VIEW_OWN => !$subject || $this->isOwnedBy($token->getUser(), $subject),
+            Permission::PROJECT_CREATE => true,
             default => false,
         };
     }

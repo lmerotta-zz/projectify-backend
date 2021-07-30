@@ -7,7 +7,6 @@ use App\Entity\ProjectManagement\Project;
 use App\Entity\Security\User;
 use App\Modules\ProjectManagement\Security\Authorization\ProjectVoter;
 use App\Modules\Security\Authorization\PermissionVoter;
-use App\Modules\UserManagement\Security\Authorization\UserVoter;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Ramsey\Uuid\Uuid;
@@ -16,6 +15,15 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 class ProjectVoterTest extends TestCase
 {
     use ProphecyTrait;
+
+    public function testItGrantsAccessIfProjectCreateIsGranted()
+    {
+        $subject = $this->prophesize(Project::class);
+        $token = $this->prophesize(TokenInterface::class);
+
+        $voter = new ProjectVoter();
+        $this->assertEquals(PermissionVoter::ACCESS_GRANTED, $voter->vote($token->reveal(), $subject->reveal(), [Permission::PROJECT_CREATE]));
+    }
 
     public function testItGrantsAccessIfProjectOwnAndSubject()
     {

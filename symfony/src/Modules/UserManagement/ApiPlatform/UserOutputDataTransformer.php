@@ -30,6 +30,9 @@ class UserOutputDataTransformer implements DataTransformerInterface
         return $output;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function supportsTransformation($data, string $to, array $context = []): bool
     {
         return UserDTO::class === $to && $data instanceof User;
