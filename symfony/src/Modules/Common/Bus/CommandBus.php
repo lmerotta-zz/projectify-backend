@@ -2,6 +2,7 @@
 
 namespace App\Modules\Common\Bus;
 
+use Symfony\Component\Messenger\Exception\DelayedMessageHandlingException;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
@@ -19,8 +20,8 @@ class CommandBus
     {
         try {
             return $this->bus->dispatch($command, $stamps)->last(HandledStamp::class)->getResult();
-        } catch (HandlerFailedException $e) {
-            while ($e instanceof HandlerFailedException) {
+        } catch (HandlerFailedException|DelayedMessageHandlingException $e) {
+            while ($e instanceof HandlerFailedException || $e instanceof DelayedMessageHandlingException) {
                 $e = $e->getPrevious();
             }
 

@@ -14,6 +14,8 @@ class SendInBlueMailer
     /**
      * @param array<string,string> $mergeTags
      * @param array<string,string> $recipients
+     *
+     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
      */
     public function send(int $templateId, array $mergeTags, array $recipients): void
     {

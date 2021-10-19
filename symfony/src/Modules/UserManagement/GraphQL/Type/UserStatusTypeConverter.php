@@ -24,7 +24,7 @@ class UserStatusTypeConverter implements TypeConverterInterface
         string $rootResource,
         ?string $property,
         int $depth
-    ): GraphQLType | null | string {
+    ): GraphQLType|null|string {
         if (
             Type::BUILTIN_TYPE_OBJECT === $type->getBuiltinType() &&
             is_a($type->getClassName(), UserStatus::class, true)

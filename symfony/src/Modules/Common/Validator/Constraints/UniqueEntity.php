@@ -37,7 +37,7 @@ class UniqueEntity extends Constraint
         $this->propertyPath = $propertyPath ?? $this->propertyPath;
     }
 
-    public function getTargets(): string | array
+    public function getTargets(): string|array
     {
         return self::CLASS_CONSTRAINT;
     }

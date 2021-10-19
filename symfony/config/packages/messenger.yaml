@@ -4,11 +4,15 @@ framework:
       buses:
         command.bus:
           middleware:
+            - dispatch_after_current_bus
             - doctrine_transaction
             - validation
         query.bus:
           middleware:
+            - dispatch_after_current_bus
             - doctrine_transaction
             - validation
         event.bus:
           default_middleware: allow_no_handlers
+          middleware:
+            - dispatch_after_current_bus

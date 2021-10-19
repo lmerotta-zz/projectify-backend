@@ -7,6 +7,8 @@ Generate RSA private and public keys
 openssl genrsa -out var/oauth/private.key 2048
 openssl rsa -in var/oauth/private.key -pubout -out var/oauth/public.key
 
+Assign read permissions to var/oauth
+
 Login workflow (local)
 
 1. login

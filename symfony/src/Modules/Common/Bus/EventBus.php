@@ -2,6 +2,7 @@
 
 namespace App\Modules\Common\Bus;
 
+use Symfony\Component\Messenger\Exception\DelayedMessageHandlingException;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -18,8 +19,8 @@ class EventBus
     {
         try {
             $this->eventBus->dispatch($event, $stamps);
-        } catch (HandlerFailedException $e) {
-            while ($e instanceof HandlerFailedException) {
+        } catch (HandlerFailedException|DelayedMessageHandlingException $e) {
+            while ($e instanceof HandlerFailedException || $e instanceof DelayedMessageHandlingException) {
                 $e = $e->getPrevious();
             }
 

@@ -48,7 +48,7 @@ class OAuthUserProvider implements OAuthAwareUserProviderInterface
 
         $property = $this->properties[$resourceOwnerName];
 
-        $username = $response->getUserIdentifier();
+        $username = $response->getUsername();
         $user = $this->findUser([$property => $username]);
         if (!$user) {
             $firstname = $response->getFirstName();
