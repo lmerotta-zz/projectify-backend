@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 use App\Entity\Security\User;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Ramsey\Uuid\Uuid;
+use Symfony\Component\Security\Core\Security;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 class UserOutputDataTransformerTest extends TestCase
@@ -20,6 +21,7 @@ class UserOutputDataTransformerTest extends TestCase
     {
         $storage = $this->prophesize(UploaderHelper::class);
         $cache = $this->prophesize(CacheManager::class);
+        $security = $this->prophesize(Security::class);
 
         $user = User::create(
             Uuid::uuid4(),
@@ -28,6 +30,8 @@ class UserOutputDataTransformerTest extends TestCase
             '1234',
             'test@test.com'
         );
+
+        $security->getUser()->shouldBeCalled()->willReturn($user);
 
         $storage->asset($user, 'profilePictureFile')
             ->shouldBeCalled()
@@ -40,6 +44,7 @@ class UserOutputDataTransformerTest extends TestCase
         $transformer = new UserOutputDataTransformer();
         $transformer->setImageCache($cache->reveal());
         $transformer->setUploaderHelper($storage->reveal());
+        $transformer->setSecurity($security->reveal());
 
         $expected = new UserDTO();
         $expected->firstName = 'test';
@@ -48,6 +53,7 @@ class UserOutputDataTransformerTest extends TestCase
         $expected->status = UserStatus::get(UserStatus::SIGNED_UP);
         $expected->id = $user->getId();
         $expected->profilePictureUrl = 'cached.png';
+        $expected->permissions = $user->getPermissions();
 
         $this->assertEquals($expected, $transformer->transform($user, UserDTO::class, []));
     }

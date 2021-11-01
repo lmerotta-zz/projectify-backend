@@ -60,6 +60,9 @@ services:
     App\Modules\UserManagement\GraphQL\Type\UserStatusTypeConverter:
         decorates: api_platform.graphql.type_converter
 
+    App\Modules\UserManagement\GraphQL\Type\UserPermissionsTypeConverter:
+        decorates: api_platform.graphql.type_converter
+
     ## SECURITY ##
     App\Modules\Security\EventListener\AuthorizationCodeListener:
         tags:
