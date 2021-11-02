@@ -8,6 +8,7 @@ use App\Modules\UserManagement\GraphQL\Type\Definition\UserPermissionsType;
 use GraphQL\Type\Definition\Type as GraphQLType;
 use Symfony\Component\PropertyInfo\Type;
 
+// @codeCoverageIgnoreStart
 class UserPermissionsTypeConverter implements TypeConverterInterface
 {
     public function __construct(private TypeConverterInterface $defaultTypeConverter)
@@ -53,3 +54,4 @@ class UserPermissionsTypeConverter implements TypeConverterInterface
         return $this->defaultTypeConverter->resolveType($type);
     }
 }
+// @codeCoverageIgnoreEnd

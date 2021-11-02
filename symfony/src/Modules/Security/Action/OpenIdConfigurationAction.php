@@ -30,7 +30,10 @@ class OpenIdConfigurationAction
                 referenceType: UrlGeneratorInterface::ABSOLUTE_URL
             ),
             'userinfo_endpoint' => '',
-            'end_session_endpoint' => '',
+            'end_session_endpoint' => $generator->generate(
+                name: 'app.security.action.logout',
+                referenceType: UrlGeneratorInterface::ABSOLUTE_URL
+            ),
             'jwks_uri' => '',
         ]);
     }
