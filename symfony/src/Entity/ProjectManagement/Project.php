@@ -5,6 +5,7 @@ namespace App\Entity\ProjectManagement;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Entity\Security\User;
 use App\Modules\ProjectManagement\Messenger\Commands\CreateProject;
+use App\Modules\ProjectManagement\Model\ProjectDTO;
 use App\Repository\ProjectManagement\ProjectRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -32,7 +33,8 @@ use Ramsey\Uuid\UuidInterface;
         'get' => [
             'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::PROJECT_VIEW_OWN"), object)',
         ],
-    ]
+    ],
+    output: ProjectDTO::class,
 )]
 class Project
 {
@@ -54,15 +56,21 @@ class Project
      */
     private $creator;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
     private function __construct()
     {
     }
 
-    public static function create(UuidInterface $uuid, string $name): self
+    public static function create(UuidInterface $uuid, string $name, ?string $description): self
     {
         $self = new static();
         $self->id = $uuid;
         $self->setName($name);
+        $self->setDescription($description);
 
         return $self;
     }
@@ -92,6 +100,18 @@ class Project
     public function setCreator(?User $creator): self
     {
         $this->creator = $creator;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

@@ -27,7 +27,7 @@ class CreateProjectHandlerTest extends TestCase
 
         $eventBus->dispatch(Argument::type(ProjectCreated::class), [new DispatchAfterCurrentBusStamp()])->shouldBeCalled();
 
-        $command = new CreateProject('Test project');
+        $command = new CreateProject('Test project', null);
         $handler = new CreateProjectHandler();
         $handler->setEntityManager($em->reveal());
         $handler->setEventBus($eventBus->reveal());

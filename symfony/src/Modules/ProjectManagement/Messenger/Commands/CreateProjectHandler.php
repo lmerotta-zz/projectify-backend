@@ -16,7 +16,7 @@ class CreateProjectHandler
 
     public function __invoke(CreateProject $command): Project
     {
-        $project = Project::create(Uuid::uuid4(), $command->name);
+        $project = Project::create(Uuid::uuid4(), $command->name, $command->description);
 
         $this->em->persist($project);
         $this->em->flush();
