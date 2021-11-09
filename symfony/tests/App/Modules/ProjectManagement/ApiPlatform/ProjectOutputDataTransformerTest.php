@@ -15,10 +15,11 @@ class ProjectOutputDataTransformerTest extends TestCase
 
     public function testItTransformsTheProjectSuccess()
     {
+        $createdAt = new \DateTime();
         $user = $this->prophesize(User::class);
         $id = Uuid::uuid4();
         $project = Project::create($id, 'test name', 'description');
-        $project->setCreator($user->reveal());
+        $project->setCreator($user->reveal())->setCreatedAt($createdAt)->setUpdatedAt($createdAt);
 
         $transformer = new ProjectOutputDataTransformer();
 
@@ -29,6 +30,8 @@ class ProjectOutputDataTransformerTest extends TestCase
         $expected->creator = $user->reveal();
         $expected->name = "test name";
         $expected->description = "description";
+        $expected->createdAt = $createdAt;
+        $expected->updatedAt = $createdAt;
 
         $output = $transformer->transform($project, ProjectDTO::class);
         $this->assertEquals($expected, $output);

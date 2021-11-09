@@ -61,6 +61,23 @@ class Project
      */
     private $description;
 
+    /**
+     * @var \DateTime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
+
+
     private function __construct()
     {
     }
@@ -115,4 +132,41 @@ class Project
 
         return $this;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt(): \DateTime
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTime $createdAt
+     * @return Project
+     */
+    public function setCreatedAt(\DateTime $createdAt): Project
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt(): \DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     * @return Project
+     */
+    public function setUpdatedAt(\DateTime $updatedAt): Project
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
 }

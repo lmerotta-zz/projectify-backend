@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\ProjectManagement\Model;
 
 use App\Entity\Security\User;
@@ -10,4 +11,6 @@ class ProjectDTO
     public string $name;
     public ?string $description = null;
     public User $creator;
+    public \DateTime $createdAt;
+    public \DateTime $updatedAt;
 }
