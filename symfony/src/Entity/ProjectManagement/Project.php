@@ -34,6 +34,7 @@ use Ramsey\Uuid\UuidInterface;
             'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::PROJECT_VIEW_OWN"), object)',
         ],
     ],
+    order: ["createdAt" => "DESC"],
     output: ProjectDTO::class,
 )]
 class Project
