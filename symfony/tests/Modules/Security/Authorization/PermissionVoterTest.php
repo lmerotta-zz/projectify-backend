@@ -41,7 +41,7 @@ class PermissionVoterTest extends TestCase
 
         $user->getPermissions()->shouldBeCalled()->willReturn(Permission::get(Permission::NONE));
         $token->getUser()->shouldBeCalled()->willReturn($user->reveal());
-        $attribute = Permission::USER_VIEW_SELF;
+        $attribute = Permission::USER_VIEW;
 
         $voter = new PermissionVoter();
         $this->assertEquals(PermissionVoter::ACCESS_DENIED, $voter->vote($token->reveal(), null, [$attribute]));
@@ -52,7 +52,7 @@ class PermissionVoterTest extends TestCase
         $token = $this->prophesize(TokenInterface::class);
 
         $token->getUser()->shouldBeCalled()->willReturn('anon.');
-        $attribute = Permission::USER_VIEW_SELF;
+        $attribute = Permission::USER_VIEW;
 
         $voter = new PermissionVoter();
         $this->assertEquals(PermissionVoter::ACCESS_DENIED, $voter->vote($token->reveal(), null, [$attribute]));

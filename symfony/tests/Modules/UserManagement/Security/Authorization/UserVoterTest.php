@@ -28,7 +28,7 @@ class UserVoterTest extends TestCase
         $token->getUser()->shouldBeCalled()->willReturn($user->reveal());
 
         $voter = new UserVoter();
-        $this->assertEquals(PermissionVoter::ACCESS_GRANTED, $voter->vote($token->reveal(), $subject->reveal(), [Permission::USER_VIEW_SELF]));
+        $this->assertEquals(PermissionVoter::ACCESS_GRANTED, $voter->vote($token->reveal(), $subject->reveal(), [Permission::USER_VIEW]));
     }
 
     public function testItGrantsAccessIfUserIsSelfOnEDIT_SELF()
@@ -43,6 +43,6 @@ class UserVoterTest extends TestCase
         $token->getUser()->shouldBeCalled()->willReturn($user->reveal());
 
         $voter = new UserVoter();
-        $this->assertEquals(PermissionVoter::ACCESS_GRANTED, $voter->vote($token->reveal(), $subject->reveal(), [Permission::USER_EDIT_SELF]));
+        $this->assertEquals(PermissionVoter::ACCESS_GRANTED, $voter->vote($token->reveal(), $subject->reveal(), [Permission::USER_EDIT]));
     }
 }

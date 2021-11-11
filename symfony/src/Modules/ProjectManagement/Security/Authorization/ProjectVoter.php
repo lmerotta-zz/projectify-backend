@@ -13,7 +13,7 @@ class ProjectVoter extends Voter
     protected function supports(string $attribute, $subject): bool
     {
         return match (intval($attribute)) {
-            Permission::PROJECT_VIEW_OWN => !$subject || $subject instanceof Project,
+            Permission::PROJECT_VIEW => !$subject || $subject instanceof Project,
             Permission::PROJECT_CREATE => true,
             default => false,
         };
@@ -22,7 +22,7 @@ class ProjectVoter extends Voter
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
         return match (intval($attribute)) {
-            Permission::PROJECT_VIEW_OWN => !$subject || $this->isOwnedBy($token->getUser(), $subject),
+            Permission::PROJECT_VIEW => !$subject || $this->isOwnedBy($token->getUser(), $subject),
             Permission::PROJECT_CREATE => true,
             default => false,
         };

@@ -22,7 +22,7 @@ class ProjectExtensionTest extends TestCase
         $security = $this->prophesize(Security::class);
         $user = $this->prophesize(User::class);
 
-        $security->isGranted(Permission::PROJECT_VIEW_OWN)->shouldBeCalledTimes(2)->willReturn(true);
+        $security->isGranted(Permission::PROJECT_VIEW)->shouldBeCalledTimes(2)->willReturn(true);
         $security->getUser()->shouldBeCalledTimes(2)->willReturn($user->reveal());
 
         $queryBuilder->getRootAliases()->shouldBeCalledTimes(2)->willReturn(['o']);

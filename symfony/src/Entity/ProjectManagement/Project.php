@@ -23,15 +23,15 @@ use Ramsey\Uuid\UuidInterface;
             'security_post_denormalize' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::PROJECT_CREATE"), object)',
         ],
         'item_query' => [
-            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::PROJECT_VIEW_OWN"), object)',
+            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::PROJECT_VIEW"), object)',
         ],
         'collection_query' => [
-            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::PROJECT_VIEW_OWN"))',
+            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::PROJECT_VIEW"))',
         ],
     ],
     itemOperations: [
         'get' => [
-            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::PROJECT_VIEW_OWN"), object)',
+            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::PROJECT_VIEW"), object)',
         ],
     ],
     order: ["createdAt" => "DESC"],

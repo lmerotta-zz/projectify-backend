@@ -12,7 +12,7 @@ class UserVoter extends Voter
     protected function supports(string $attribute, $subject): bool
     {
         return match (intval($attribute)) {
-            Permission::USER_VIEW_SELF, Permission::USER_EDIT_SELF => $subject instanceof User,
+            Permission::USER_VIEW, Permission::USER_EDIT => $subject instanceof User,
             default => false,
         };
     }
@@ -20,7 +20,7 @@ class UserVoter extends Voter
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
         return match (intval($attribute)) {
-            Permission::USER_VIEW_SELF, Permission::USER_EDIT_SELF => $this->isSelf($token->getUser(), $subject),
+            Permission::USER_VIEW, Permission::USER_EDIT => $this->isSelf($token->getUser(), $subject),
             default => false,
         };
     }

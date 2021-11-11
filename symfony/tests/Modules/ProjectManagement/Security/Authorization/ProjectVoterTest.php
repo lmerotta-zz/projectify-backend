@@ -37,7 +37,7 @@ class ProjectVoterTest extends TestCase
         $token->getUser()->shouldBeCalled()->willReturn($user->reveal());
 
         $voter = new ProjectVoter();
-        $this->assertEquals(PermissionVoter::ACCESS_GRANTED, $voter->vote($token->reveal(), $subject->reveal(), [Permission::PROJECT_VIEW_OWN]));
+        $this->assertEquals(PermissionVoter::ACCESS_GRANTED, $voter->vote($token->reveal(), $subject->reveal(), [Permission::PROJECT_VIEW]));
     }
 
 
@@ -55,7 +55,7 @@ class ProjectVoterTest extends TestCase
         $token->getUser()->shouldBeCalled()->willReturn($user->reveal());
 
         $voter = new ProjectVoter();
-        $this->assertEquals(PermissionVoter::ACCESS_DENIED, $voter->vote($token->reveal(), $subject->reveal(), [Permission::PROJECT_VIEW_OWN]));
+        $this->assertEquals(PermissionVoter::ACCESS_DENIED, $voter->vote($token->reveal(), $subject->reveal(), [Permission::PROJECT_VIEW]));
     }
 
     public function testItGrantsAccessIfProjectOwnAndNoSubject()
@@ -63,6 +63,6 @@ class ProjectVoterTest extends TestCase
         $token = $this->prophesize(TokenInterface::class);
 
         $voter = new ProjectVoter();
-        $this->assertEquals(PermissionVoter::ACCESS_GRANTED, $voter->vote($token->reveal(), null, [Permission::PROJECT_VIEW_OWN]));
+        $this->assertEquals(PermissionVoter::ACCESS_GRANTED, $voter->vote($token->reveal(), null, [Permission::PROJECT_VIEW]));
     }
 }

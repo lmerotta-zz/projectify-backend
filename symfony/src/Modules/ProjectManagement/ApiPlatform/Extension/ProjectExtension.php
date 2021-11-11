@@ -39,7 +39,7 @@ class ProjectExtension implements QueryItemExtensionInterface, QueryCollectionEx
         $rootAlias = $queryBuilder->getRootAliases()[0];
 
         if (Project::class === $resourceClass) {
-            if ($this->security->isGranted(Permission::PROJECT_VIEW_OWN)) {
+            if ($this->security->isGranted(Permission::PROJECT_VIEW)) {
                 $queryBuilder->andWhere(sprintf('%s.creator = :current_user', $rootAlias));
                 $queryBuilder->setParameter('current_user', $this->security->getUser());
             }
