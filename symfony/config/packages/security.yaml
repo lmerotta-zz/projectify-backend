@@ -27,6 +27,9 @@ security:
       lazy: true
       json_login:
         check_path: app.security.action.login
+      logout:
+        path: app.security.action.logout
+        target: app.security.action.oauth.connected
       oauth:
         resource_owners:
           github: "/actions/security/authentication/oauth/connect/check-github"
