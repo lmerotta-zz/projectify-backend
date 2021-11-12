@@ -63,18 +63,18 @@ class Project
     private $description;
 
     /**
-     * @var \DateTime $created
+     * @var \DateTimeImmutable $createdAt
      *
      * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime_immutable")
      */
     private $createdAt;
 
     /**
-     * @var \DateTime $updated
+     * @var \DateTimeImmutable|null $updatedAt
      *
      * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date_immutable", nullable=true)
      */
     private $updatedAt;
 
@@ -110,12 +110,12 @@ class Project
         return $this;
     }
 
-    public function getCreator(): ?User
+    public function getCreator(): User
     {
         return $this->creator;
     }
 
-    public function setCreator(?User $creator): self
+    public function setCreator(User $creator): self
     {
         $this->creator = $creator;
 
@@ -135,36 +135,36 @@ class Project
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeImmutable
      */
-    public function getCreatedAt(): \DateTime
+    public function getCreatedAt(): \DateTimeImmutable
     {
         return $this->createdAt;
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param \DateTimeImmutable $createdAt
      * @return Project
      */
-    public function setCreatedAt(\DateTime $createdAt): Project
+    public function setCreatedAt(\DateTimeImmutable $createdAt): Project
     {
         $this->createdAt = $createdAt;
         return $this;
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeImmutable|null
      */
-    public function getUpdatedAt(): \DateTime
+    public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
     /**
-     * @param \DateTime $updatedAt
+     * @param \DateTimeImmutable $updatedAt|null
      * @return Project
      */
-    public function setUpdatedAt(\DateTime $updatedAt): Project
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): Project
     {
         $this->updatedAt = $updatedAt;
         return $this;

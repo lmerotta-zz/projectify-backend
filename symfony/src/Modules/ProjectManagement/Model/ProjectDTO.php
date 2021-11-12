@@ -12,5 +12,5 @@ class ProjectDTO
     public ?string $description = null;
     public User $creator;
     public \DateTime $createdAt;
-    public \DateTime $updatedAt;
+    public ?\DateTime $updatedAt = null;
 }

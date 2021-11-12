@@ -5,6 +5,7 @@ namespace App\Entity\Security;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Contracts\Security\Enum\Permission;
 use App\Contracts\UserManagement\Enum\UserStatus;
+use App\Entity\UserManagement\Team;
 use App\Modules\UserManagement\GraphQL\Resolver\GetCurrentUserResolver;
 use App\Modules\UserManagement\GraphQL\Resolver\OnboardUserResolver;
 use App\Modules\UserManagement\Messenger\Commands\SignUserUp;
@@ -126,10 +127,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public $profilePictureFile;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Team::class, mappedBy="members")
+     */
+    private $teams;
+
     private function __construct()
     {
         $this->status = UserStatus::get(UserStatus::SIGNED_UP);
         $this->roles = new ArrayCollection();
+        $this->teams = new ArrayCollection();
     }
 
     public static function create(
@@ -333,6 +340,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setStringStatus(string $stringStatus): User
     {
         $this->status = UserStatus::get($stringStatus);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Team[]
+     */
+    public function getTeams(): Collection
+    {
+        return $this->teams;
+    }
+
+    public function addTeam(Team $team): self
+    {
+        if (!$this->teams->contains($team)) {
+            $this->teams[] = $team;
+            $team->addMember($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTeam(Team $team): self
+    {
+        if ($this->teams->removeElement($team)) {
+            $team->removeMember($this);
+        }
 
         return $this;
     }
