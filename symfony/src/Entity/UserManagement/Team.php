@@ -4,6 +4,7 @@ namespace App\Entity\UserManagement;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Entity\Security\User;
+use App\Modules\UserManagement\Messenger\Commands\CreateTeam;
 use App\Repository\UserManagement\TeamRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,7 +15,15 @@ use Ramsey\Uuid\UuidInterface;
 /**
  * @ORM\Entity(repositoryClass=TeamRepository::class)
  */
-#[ApiResource]
+#[ApiResource(
+    collectionOperations: [],
+    graphql: [
+        'create' => [
+            'input' => CreateTeam::class,
+            'messenger' => 'input'
+        ]
+    ]
+)]
 class Team
 {
     /**

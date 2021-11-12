@@ -11,6 +11,6 @@ class ProjectDTO
     public string $name;
     public ?string $description = null;
     public User $creator;
-    public \DateTime $createdAt;
-    public ?\DateTime $updatedAt = null;
+    public \DateTimeImmutable $createdAt;
+    public ?\DateTimeImmutable $updatedAt = null;
 }

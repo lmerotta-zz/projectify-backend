@@ -15,7 +15,7 @@ class ProjectOutputDataTransformerTest extends TestCase
 
     public function testItTransformsTheProjectSuccess()
     {
-        $createdAt = new \DateTime();
+        $createdAt = new \DateTimeImmutable();
         $user = $this->prophesize(User::class);
         $id = Uuid::uuid4();
         $project = Project::create($id, 'test name', 'description');
