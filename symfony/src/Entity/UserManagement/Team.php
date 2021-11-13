@@ -20,7 +20,8 @@ use Ramsey\Uuid\UuidInterface;
     graphql: [
         'create' => [
             'input' => CreateTeam::class,
-            'messenger' => 'input'
+            'messenger' => 'input',
+            'security_post_denormalize' => 'is_granted(permission("TEAM_CREATE"), object)',
         ]
     ]
 )]

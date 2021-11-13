@@ -35,10 +35,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
         'current' => [
             'item_query' => GetCurrentUserResolver::class,
             'args' => [],
-            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_VIEW"), object)',
+            'security' => 'is_granted(permission("USER_VIEW"), object)',
         ],
         'onboard' => [
-            'security_post_denormalize' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_EDIT"), object)',
+            'security_post_denormalize' => 'is_granted(permission("USER_EDIT"), object)',
             'mutation' => OnboardUserResolver::class,
             'deserialize' => false,
             'args' => [
@@ -59,7 +59,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
     ],
     itemOperations: [
         'get' => [
-            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::USER_VIEW"), object)',
+            'security' => 'is_granted(permission("USER_VIEW"), object)',
         ],
     ],
     output: UserDTO::class,

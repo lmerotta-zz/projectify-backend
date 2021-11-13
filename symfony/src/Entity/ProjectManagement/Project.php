@@ -9,6 +9,7 @@ use App\Modules\ProjectManagement\Model\ProjectDTO;
 use App\Repository\ProjectManagement\ProjectRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use App\Contracts\Security\Enum\Permission;
 use Ramsey\Uuid\UuidInterface;
 
 /**
@@ -20,18 +21,18 @@ use Ramsey\Uuid\UuidInterface;
         'create' => [
             'input' => CreateProject::class,
             'messenger' => 'input',
-            'security_post_denormalize' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::PROJECT_CREATE"), object)',
+            'security_post_denormalize' => 'is_granted(permission("PROJECT_CREATE"), object)',
         ],
         'item_query' => [
-            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::PROJECT_VIEW"), object)',
+            'security' => 'is_granted(permission("PROJECT_VIEW"), object)',
         ],
         'collection_query' => [
-            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::PROJECT_VIEW"))',
+            'security' => 'is_granted(permission("PROJECT_VIEW"))',
         ],
     ],
     itemOperations: [
         'get' => [
-            'security' => 'is_granted(constant("\\\App\\\Contracts\\\Security\\\Enum\\\Permission::PROJECT_VIEW"), object)',
+            'security' => 'is_granted(permission("PROJECT_VIEW"), object)',
         ],
     ],
     order: ["createdAt" => "DESC"],

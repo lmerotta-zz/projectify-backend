@@ -9,7 +9,8 @@ class CreateTeam
     #[Assert\NotBlank]
     public string $name;
 
-    public function __construct(string $name) {
+    public function __construct(string $name)
+    {
         $this->name = $name;
     }
 }
