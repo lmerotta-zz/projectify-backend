@@ -43,8 +43,8 @@ class TeamExtension implements QueryItemExtensionInterface, QueryCollectionExten
                 $user = $this->security->getUser();
                 $queryBuilder->andWhere(
                     $queryBuilder->expr()->orX(
-                        $queryBuilder->expr()->eq(sprintf("%s.owner", $rootAlias), ':current_user'),
-                        $queryBuilder->expr()->isMemberOf(':current_user', sprintf("%s.members", $rootAlias))
+                        $queryBuilder->expr()->eq(sprintf('%s.owner', $rootAlias), ':current_user'),
+                        $queryBuilder->expr()->isMemberOf(':current_user', sprintf('%s.members', $rootAlias))
                     )
                 );
                 $queryBuilder->setParameter('current_user', $user);

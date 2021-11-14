@@ -27,6 +27,9 @@ use Ramsey\Uuid\UuidInterface;
         'collection_query' => [
             'security' => 'is_granted(permission("TEAM_VIEW"))',
         ],
+        'item_query' => [
+            'security' => 'is_granted(permission("TEAM_VIEW"), object)',
+        ],
     ],
     order: ["createdAt" => "DESC"],
     output: TeamDTO::class

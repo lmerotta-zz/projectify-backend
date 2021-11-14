@@ -25,7 +25,7 @@ class TeamVoter extends Voter
         $user = $token->getUser();
         return match (intval($attribute)) {
             Permission::TEAM_CREATE => true,
-            Permission::TEAM_VIEW =>  $subject === null || ($this->isCreatorOf($subject, $user) || $this->isMemberOf($subject, $user)),
+            Permission::TEAM_VIEW => $subject === null || $this->isCreatorOf($subject, $user), // TODO: is member of
             default => false,
         };
     }
@@ -33,12 +33,5 @@ class TeamVoter extends Voter
     private function isCreatorOf(Team $team, User $user): bool
     {
         return $team->getOwner()->getId()->equals($user->getId());
-    }
-
-    private function isMemberOf(Team $team, User $user): bool
-    {
-        $criteria = Criteria::create();
-        $criteria->where(Criteria::expr()->contains('id', $user->getId()));
-        return $team->getMembers()->matching($criteria);
     }
 }

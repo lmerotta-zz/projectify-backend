@@ -32,4 +32,3 @@ final class RegisterPermissionExpressionFunctionPass implements CompilerPassInte
     }
 }
 // @codeCoverageIgnoreEnd
-
