@@ -5,6 +5,7 @@ namespace App\Entity\UserManagement;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Entity\Security\User;
 use App\Modules\UserManagement\Messenger\Commands\CreateTeam;
+use App\Modules\UserManagement\Model\TeamDTO;
 use App\Repository\UserManagement\TeamRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -22,8 +23,13 @@ use Ramsey\Uuid\UuidInterface;
             'input' => CreateTeam::class,
             'messenger' => 'input',
             'security_post_denormalize' => 'is_granted(permission("TEAM_CREATE"), object)',
-        ]
-    ]
+        ],
+        'collection_query' => [
+            'security' => 'is_granted(permission("TEAM_VIEW"))',
+        ],
+    ],
+    order: ["createdAt" => "DESC"],
+    output: TeamDTO::class
 )]
 class Team
 {

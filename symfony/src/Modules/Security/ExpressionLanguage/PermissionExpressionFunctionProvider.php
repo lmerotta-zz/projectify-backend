@@ -10,12 +10,6 @@ use Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
 final class PermissionExpressionFunctionProvider implements ExpressionFunctionProviderInterface
 {
     use Logger;
-
-    /**
-     * @var array
-     */
-    private $cached = [];
-
     /**
      * @return ExpressionFunction[]
      */
@@ -27,18 +21,16 @@ final class PermissionExpressionFunctionProvider implements ExpressionFunctionPr
                 static function (): void {
                 },
                 function ($params, string $permission): string {
-                    if (isset($this->cached[$permission])) {
-                        return $this->cached[$permission];
-                    }
-
                     $constant = \sprintf('%s::%s', Permission::class, $permission);
 
                     try {
                         return \constant($constant);
+                        // @codeCoverageIgnoreStart
                     } catch (\Throwable $throwable) {
                         $this->logger->error(\sprintf('Constant "%s" not found', $constant));
                         throw $throwable;
                     }
+                    // @codeCoverageIgnoreEnd
                 }
             ),
         ];

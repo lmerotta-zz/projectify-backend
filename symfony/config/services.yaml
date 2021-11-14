@@ -73,8 +73,6 @@ services:
             - { name: security.voter, priority: 255 }
 
     ## USER MANAGEMENT ##
-    App\Modules\UserManagement\ApiPlatform\UserOutputDataTransformer: ~
-
     app.security.provider.oauth:
         class: App\Modules\Security\Authorization\OAuthUserProvider
         autoconfigure: false

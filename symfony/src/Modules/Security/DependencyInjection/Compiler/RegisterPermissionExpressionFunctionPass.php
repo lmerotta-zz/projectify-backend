@@ -8,6 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
+// @codeCoverageIgnoreStart
 final class RegisterPermissionExpressionFunctionPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
@@ -30,3 +31,5 @@ final class RegisterPermissionExpressionFunctionPass implements CompilerPassInte
         }
     }
 }
+// @codeCoverageIgnoreEnd
+
