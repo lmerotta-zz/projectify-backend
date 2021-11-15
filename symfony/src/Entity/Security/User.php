@@ -28,6 +28,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[ApiResource(
     collectionOperations: [],
     graphql: [
+        'collection_query' => [
+            'security' => 'is_granted(permission("USER_VIEW"))',
+        ],
         'create' => [
             'input' => SignUserUp::class,
             'messenger' => 'input',

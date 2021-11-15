@@ -3,7 +3,6 @@
 namespace App\Tests;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\Client;
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase as APIPlatformTestCase;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
@@ -42,7 +41,7 @@ abstract class APITestCase extends APIPlatformTestCase
 
     protected function login(string $username = 'default@default.com', ?string $password = null)
     {
-        $r = $this->client->request('POST',
+        $this->client->request('POST',
             '/actions/security/authentication/login',
             ['json' => ['username' => $username, 'password' => $password ?? $username]]);
 
