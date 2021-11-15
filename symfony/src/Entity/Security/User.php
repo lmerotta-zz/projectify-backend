@@ -4,10 +4,10 @@ namespace App\Entity\Security;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Contracts\Security\Enum\Permission;
 use App\Contracts\UserManagement\Enum\UserStatus;
 use App\Entity\UserManagement\Team;
+use App\Modules\UserManagement\ApiPlatform\Filter\UserEmailFilter;
 use App\Modules\UserManagement\GraphQL\Resolver\GetCurrentUserResolver;
 use App\Modules\UserManagement\GraphQL\Resolver\OnboardUserResolver;
 use App\Modules\UserManagement\Messenger\Commands\SignUserUp;
@@ -69,7 +69,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
     ],
     output: UserDTO::class,
 )]
-#[ApiFilter(SearchFilter::class, properties: ['email' => 'exact'])]
+#[ApiFilter(UserEmailFilter::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**

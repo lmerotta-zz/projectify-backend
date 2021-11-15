@@ -111,7 +111,8 @@ return [
         \NunoMaduro\PhpInsights\Domain\Insights\CyclomaticComplexityIsHigh::class => [
             'exclude' => [
                 'src/Modules/UserManagement/Security/Authorization/UserVoter.php',
-                'src/Modules/UserManagement/ApiPlatform/ResolveUserProfilePictureFieldSubscriber.php'
+                'src/Modules/UserManagement/ApiPlatform/ResolveUserProfilePictureFieldSubscriber.php',
+                'src/Modules/UserManagement/ApiPlatform/Filter/UserEmailFilter.php'
             ]
         ],
         \PhpCsFixer\Fixer\ClassNotation\OrderedClassElementsFixer::class => [

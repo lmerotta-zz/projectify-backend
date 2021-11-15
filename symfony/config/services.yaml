@@ -53,6 +53,7 @@ services:
     # please note that last definitions always *replace* previous ones
 
     ## COMMON ##
+
     App\Modules\Common\EventSubscriber\LocaleSubscriber:
         arguments: ['%kernel.default_locale%']
         tags: [kernel.event_subscriber]
