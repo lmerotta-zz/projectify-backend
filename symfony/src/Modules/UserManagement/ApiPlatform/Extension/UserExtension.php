@@ -3,7 +3,6 @@
 namespace App\Modules\UserManagement\ApiPlatform\Extension;
 
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionExtensionInterface;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use App\Contracts\Security\Enum\Permission;
 use App\Entity\Security\User;
@@ -21,17 +20,20 @@ class UserExtension implements ContextAwareQueryCollectionExtensionInterface
         string $operationName = null,
         array $context = []
     ): void {
-        $this->addKnownUsersDependency($queryBuilder, $resourceClass);
+        $this->addKnownUsersDependency($queryBuilder, $resourceClass, $context['filters']);
     }
 
-    private function addKnownUsersDependency(QueryBuilder $queryBuilder, string $resourceClass): void
-    {
+    private function addKnownUsersDependency(
+        QueryBuilder $queryBuilder,
+        string $resourceClass,
+        array $filters = []
+    ): void {
         $rootAlias = $queryBuilder->getRootAliases()[0];
 
         if (User::class === $resourceClass) {
-            if ($this->security->isGranted(Permission::USER_VIEW)) {
+            if (empty($filters['email']) && $this->security->isGranted(Permission::USER_VIEW)) {
                 $user = $this->security->getUser();
-                $queryBuilder->leftJoin(sprintf('%s.teams', $rootAlias), 'user_teams');
+                $queryBuilder->innerJoin(sprintf('%s.teams', $rootAlias), 'user_teams');
                 $queryBuilder->andWhere(
                     $queryBuilder->expr()->orX(
                         $queryBuilder->expr()->eq('user_teams.owner', ':current_user'),

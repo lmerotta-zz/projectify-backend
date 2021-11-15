@@ -16,8 +16,10 @@ class PermissionVoter implements VoterInterface
 
         $user = $token->getUser();
 
-        foreach ($attributes as $attribute) {
-            if (!Permission::accepts($attribute)) {
+        foreach (array_filter($attributes, static fn ($item) => intval($item) !== 0) as $attribute) {
+            $converted = intval($attribute);
+
+            if (!Permission::accepts($converted)) {
                 continue;
             }
 
@@ -26,7 +28,7 @@ class PermissionVoter implements VoterInterface
                 return self::ACCESS_DENIED;
             }
 
-            if (!$user->getPermissions()->hasFlag($attribute)) {
+            if (!$user->getPermissions()->hasFlag($converted)) {
                 $vote = self::ACCESS_DENIED;
             }
         }

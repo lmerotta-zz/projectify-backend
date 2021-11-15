@@ -2,7 +2,9 @@
 
 namespace App\Entity\Security;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Contracts\Security\Enum\Permission;
 use App\Contracts\UserManagement\Enum\UserStatus;
 use App\Entity\UserManagement\Team;
@@ -67,6 +69,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
     ],
     output: UserDTO::class,
 )]
+#[ApiFilter(SearchFilter::class, properties: ['email' => 'exact'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**

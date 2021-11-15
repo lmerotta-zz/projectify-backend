@@ -8,6 +8,45 @@ use App\Tests\APITestCase;
 
 class UserExtensionTest extends APITestCase
 {
+
+    public function testItAllowsToSearchUsersViaExactEmail(): void
+    {
+        $this->createUser('first@test.com', 'first', 'user');
+        $this->createUser('second@test.com', 'second', 'user');
+        $this->createUser('third@test.com', 'third', 'user');
+
+        $expected = [
+            ["node" => [
+                "email" => "first@test.com"
+            ]]
+        ];
+
+        $listUsersQuery = <<<'GQL'
+            query listUsers($email: String!) {
+                users(email: $email) {
+                    edges {
+                        node {
+                            email
+                        }
+                    }
+                }
+            }
+        GQL;
+
+        $this->login('third@test.com');
+        $response = $this->graphql($listUsersQuery, ['email' => 'first']);
+
+        $data = json_decode($response->getContent(), true)["data"]["users"]["edges"];
+
+        $this->assertEmpty($data);
+
+        $response = $this->graphql($listUsersQuery, ['email' => 'first@test.com']);
+
+        $data = json_decode($response->getContent(), true)["data"]["users"]["edges"];
+
+        $this->assertArraySubset($expected, $data);
+    }
+
     public function testItAllowsToSeeUsersOfSameTeams(): void
     {
         $this->createUser('first@test.com', 'first', 'user');
@@ -86,7 +125,6 @@ class UserExtensionTest extends APITestCase
 
         $this->assertArraySubset($expected, $data);
     }
-
 
     public function testItAllowsToSeeUsersOfOwnedTeams(): void
     {
