@@ -36,12 +36,6 @@ final class UserEmailFilter extends AbstractFilter implements ContextAwareFilter
         string $operationName = null,
         array $context = []
     ): void {
-        if (!isset($context['filters']) || !\is_array($context['filters'])) {
-            parent::apply($queryBuilder, $queryNameGenerator, $resourceClass, $operationName, $context);
-
-            return;
-        }
-
         if (empty($context['filters'])) {
             $this->filterProperty(
                 '',
@@ -75,6 +69,8 @@ final class UserEmailFilter extends AbstractFilter implements ContextAwareFilter
         string $resourceClass,
         string $operationName = null
     ): void {
+
+        // @codeCoverageIgnoreStart
         if (
             $property &&
             (!$this->isPropertyEnabled($property, $resourceClass) ||
@@ -82,6 +78,7 @@ final class UserEmailFilter extends AbstractFilter implements ContextAwareFilter
         ) {
             return;
         }
+        // @codeCoverageIgnoreEnd
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
 
@@ -153,9 +150,11 @@ final class UserEmailFilter extends AbstractFilter implements ContextAwareFilter
             ];
         }
 
+        // @codeCoverageIgnoreStart
         if ($resourceClass !== User::class) {
             throw new \Exception('This filter can only be used on the User class');
         }
+        // @codeCoverageIgnoreEnd
 
         return $description;
     }

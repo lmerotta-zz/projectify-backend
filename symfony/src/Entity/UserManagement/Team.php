@@ -4,6 +4,7 @@ namespace App\Entity\UserManagement;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Entity\Security\User;
+use App\Modules\UserManagement\Messenger\Commands\AddMemberToTeam;
 use App\Modules\UserManagement\Messenger\Commands\CreateTeam;
 use App\Modules\UserManagement\Model\TeamDTO;
 use App\Repository\UserManagement\TeamRepository;
@@ -22,7 +23,16 @@ use Ramsey\Uuid\UuidInterface;
         'create' => [
             'input' => CreateTeam::class,
             'messenger' => 'input',
-            'security_post_denormalize' => 'is_granted(permission("TEAM_CREATE"), object)',
+            'security_post_denormalize' => 'is_granted(permission("TEAM_CREATE"))',
+        ],
+        'addMemberTo' => [
+            'input' => AddMemberToTeam::class,
+            'messenger' => 'input',
+            'args' => [
+                'team' => ['type' => 'ID!'],
+                'user' => ['type' => 'ID!'],
+            ],
+            'security_post_denormalize' => 'is_granted(permission("TEAM_EDIT"), object.team)',
         ],
         'collection_query' => [
             'security' => 'is_granted(permission("TEAM_VIEW"))',

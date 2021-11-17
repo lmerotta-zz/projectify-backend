@@ -16,6 +16,7 @@ class TeamVoter extends Voter
         return match (intval($attribute)) {
             Permission::TEAM_CREATE => true,
             Permission::TEAM_VIEW => $subject instanceof Team || $subject === null,
+            Permission::TEAM_EDIT => $subject instanceof Team,
             default => false,
         };
     }
@@ -25,13 +26,21 @@ class TeamVoter extends Voter
         $user = $token->getUser();
         return match (intval($attribute)) {
             Permission::TEAM_CREATE => true,
-            Permission::TEAM_VIEW => $subject === null || $this->isCreatorOf($subject, $user), // TODO: is member of
+            Permission::TEAM_VIEW => ($subject === null ||
+                ($this->isOwnerOf($subject, $user) ||
+                    $this->isMemberOf($subject, $user))),
+            Permission::TEAM_EDIT => $this->isOwnerOf($subject, $user),
             default => false,
         };
     }
 
-    private function isCreatorOf(Team $team, User $user): bool
+    private function isOwnerOf(Team $team, User $user): bool
     {
         return $team->getOwner()->getId()->equals($user->getId());
+    }
+
+    private function isMemberOf(Team $team, User $user): bool
+    {
+        return $team->getMembers()->contains($user);
     }
 }

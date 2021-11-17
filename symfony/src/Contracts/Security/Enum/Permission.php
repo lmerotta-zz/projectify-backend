@@ -15,6 +15,7 @@ class Permission extends FlaggedEnum
     public const PROJECT_CREATE = 8;
     public const TEAM_CREATE = 16;
     public const TEAM_VIEW = 32;
+    public const TEAM_EDIT = 64;
 
     /**
      * @return string[]
@@ -28,6 +29,7 @@ class Permission extends FlaggedEnum
             self::PROJECT_VIEW => 'PROJECT_VIEW',
             self::TEAM_CREATE => 'TEAM_CREATE',
             self::TEAM_VIEW => 'TEAM_VIEW',
+            self::TEAM_EDIT => 'TEAM_EDIT',
         ];
     }
 }

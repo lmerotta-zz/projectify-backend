@@ -21,7 +21,7 @@ use Ramsey\Uuid\UuidInterface;
         'create' => [
             'input' => CreateProject::class,
             'messenger' => 'input',
-            'security_post_denormalize' => 'is_granted(permission("PROJECT_CREATE"), object)',
+            'security_post_denormalize' => 'is_granted(permission("PROJECT_CREATE"))',
         ],
         'item_query' => [
             'security' => 'is_granted(permission("PROJECT_VIEW"), object)',

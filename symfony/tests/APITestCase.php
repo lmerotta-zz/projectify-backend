@@ -16,7 +16,7 @@ abstract class APITestCase extends APIPlatformTestCase
         $this->client = static::createClient();
     }
 
-    protected function createUser(string $email, string $firstName, string $lastName, ?string $password = null): void
+    protected function createUser(string $email, string $firstName, string $lastName, ?string $password = null): ResponseInterface
     {
         $realPassword = $password ?? $email;
         $mutation = <<<GQL
@@ -30,7 +30,7 @@ abstract class APITestCase extends APIPlatformTestCase
         GQL;
 
         $body = ['query' => $mutation, 'variables' => null];
-        $this->client->request('POST', '/api/graphql', ['json' => $body]);
+        return $this->client->request('POST', '/api/graphql', ['json' => $body]);
     }
 
     protected function graphql(string $query, ?array $variables = null): ResponseInterface

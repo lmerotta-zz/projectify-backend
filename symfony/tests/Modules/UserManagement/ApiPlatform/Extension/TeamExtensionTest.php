@@ -140,4 +140,66 @@ class TeamExtensionTest extends APITestCase
             ]
         ]);
     }
+
+    public function testItReturnsTeamsTheUserIsMemberOf(): void
+    {
+        $this->createUser('first@test.com', 'first', 'user');
+        $secondUser = $this->createUser('second@test.com', 'second', 'user');
+
+        $secondUserId = json_decode($secondUser->getContent(), true)['data']['createUser']['user']['id'];
+
+        //first user creates a team and adds a user
+        $createTeamMutation = <<<'GQL'
+            mutation create($name: String!) {
+                createTeam(input: { name: $name }) {
+                    team {
+                      id
+                    }
+                }
+            }
+        GQL;
+
+        //first user creates a team
+        $addUserMutation = <<<'GQL'
+            mutation add($team: ID!, $user: ID!) {
+                addMemberToTeam(input: { team: $team, user: $user }) {
+                    clientMutationId
+                }
+            }
+        GQL;
+
+        $this->login('first@test.com');
+        $firstTeam = $this->graphql($createTeamMutation, ['name' => 'First team1']);
+        $secondTeam = $this->graphql($createTeamMutation, ['name' => 'First team2']);
+        $firstTeamId = json_decode($firstTeam->getContent(), true)['data']['createTeam']['team']['id'];
+        $secondTeamId = json_decode($secondTeam->getContent(), true)['data']['createTeam']['team']['id'];
+        $this->graphql($addUserMutation, ['team' => $firstTeamId, 'user' => $secondUserId]);
+
+        $this->logout();
+
+        //get team with second user
+        $listTeamsQuery = <<<'GQL'
+            query getTeam($id: ID!) {
+                team(id: $id) {
+                   id, 
+                   name
+                }
+            }
+        GQL;
+
+        $this->login('second@test.com');
+        $this->graphql($listTeamsQuery, ['id' => $firstTeamId]);
+
+        $this->assertJsonContains([
+            'data' => [
+                'team' => [
+                    'id' => $firstTeamId,
+                    'name' => 'First team1',
+                ]
+            ]
+        ]);
+
+        $this->graphql($listTeamsQuery, ['id' => $secondTeamId]);
+        $this->assertJsonContains(['data' => ['team' => null]]);
+    }
 }
