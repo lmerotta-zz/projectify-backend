@@ -7,6 +7,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Contracts\Security\Enum\Permission;
 use App\Contracts\UserManagement\Enum\UserStatus;
 use App\Entity\UserManagement\Team;
+use App\Modules\Common\ApiPlatform\Filter\ExcludeFilter;
 use App\Modules\UserManagement\ApiPlatform\Filter\UserEmailFilter;
 use App\Modules\UserManagement\GraphQL\Resolver\GetCurrentUserResolver;
 use App\Modules\UserManagement\GraphQL\Resolver\OnboardUserResolver;
@@ -70,6 +71,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
     output: UserDTO::class,
 )]
 #[ApiFilter(UserEmailFilter::class)]
+#[ApiFilter(ExcludeFilter::class, properties: ["teams"])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**

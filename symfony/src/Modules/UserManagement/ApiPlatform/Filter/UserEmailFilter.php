@@ -36,7 +36,7 @@ final class UserEmailFilter extends AbstractFilter implements ContextAwareFilter
         string $operationName = null,
         array $context = []
     ): void {
-        if (empty($context['filters'])) {
+        if (empty($context['filters']) || empty($context['filters']['email'])) {
             $this->filterProperty(
                 '',
                 null,
@@ -103,7 +103,11 @@ final class UserEmailFilter extends AbstractFilter implements ContextAwareFilter
             foreach ($emails as $index => $email) {
                 $emailParameterName = ':'.$nameGenerator->generateParameterName("email_${index}");
                 if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $fullEmailOrXConditions[] = $queryBuilder->expr()->like(
+                    $fullEmailOrXConditions[] = $queryBuilder->expr()->eq(
+                        sprintf('%s.email', $rootAlias),
+                        $emailParameterName
+                    );
+                    $defaultAndXConditions[] = $queryBuilder->expr()->eq(
                         sprintf('%s.email', $rootAlias),
                         $emailParameterName
                     );
@@ -134,27 +138,26 @@ final class UserEmailFilter extends AbstractFilter implements ContextAwareFilter
      */
     public function getDescription(string $resourceClass): array
     {
-        $description = [];
-        if (!$this->properties) {
-            $description['email'] = [
-                'property' => 'email',
-                'type' => Type::BUILTIN_TYPE_STRING,
-                'required' => false,
-                'is_collection' => false,
-            ];
-            $description['email[]'] = [
-                'property' => 'email',
-                'type' => Type::BUILTIN_TYPE_STRING,
-                'required' => false,
-                'is_collection' => true,
-            ];
-        }
 
         // @codeCoverageIgnoreStart
         if ($resourceClass !== User::class) {
             throw new \Exception('This filter can only be used on the User class');
         }
         // @codeCoverageIgnoreEnd
+
+        $description = [];
+        $description['email'] = [
+            'property' => 'email',
+            'type' => Type::BUILTIN_TYPE_STRING,
+            'required' => false,
+            'is_collection' => false,
+        ];
+        $description['email[]'] = [
+            'property' => 'email',
+            'type' => Type::BUILTIN_TYPE_STRING,
+            'required' => false,
+            'is_collection' => true,
+        ];
 
         return $description;
     }

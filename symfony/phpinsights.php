@@ -112,7 +112,8 @@ return [
             'exclude' => [
                 'src/Modules/UserManagement/Security/Authorization/UserVoter.php',
                 'src/Modules/UserManagement/ApiPlatform/ResolveUserProfilePictureFieldSubscriber.php',
-                'src/Modules/UserManagement/ApiPlatform/Filter/UserEmailFilter.php'
+                'src/Modules/UserManagement/ApiPlatform/Filter/UserEmailFilter.php',
+                'src/Modules/Common/ApiPlatform/Filter/ExcludeFilter.php'
             ]
         ],
         \PhpCsFixer\Fixer\ClassNotation\OrderedClassElementsFixer::class => [
