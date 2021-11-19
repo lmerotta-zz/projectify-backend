@@ -2,7 +2,7 @@
 
 namespace App\Tests\Modules\UserManagement\ApiPlatform\Extension;
 
-use App\Tests\APITestCase;
+use App\Tests\Helpers\APITestCase;
 
 class TeamExtensionTest extends APITestCase
 {

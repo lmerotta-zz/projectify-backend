@@ -4,7 +4,7 @@ namespace App\Tests\Modules\UserManagement\ApiPlatform\Filter;
 
 use App\Entity\Security\User;
 use App\Entity\UserManagement\Team;
-use App\Tests\APITestCase;
+use App\Tests\Helpers\APITestCase;
 
 class UserEmailFilterTest extends APITestCase
 {

@@ -22,8 +22,6 @@ class CreateOAuthUserHandler
 
     public function __invoke(CreateOAuthUser $command): User
     {
-        $propertyAccess = PropertyAccess::createPropertyAccessor();
-
         // first find a user with the same email
         $user = $this->userRepository->findOneBy(['email' => $command->email]);
 
@@ -34,14 +32,21 @@ class CreateOAuthUserHandler
             $this->eventBus->dispatch(new UserSignedUp($user->getId()), [new DispatchAfterCurrentBusStamp()]);
         }
 
-        $propertyAccess->setValue($user, $command->identifierField, $command->identifierValue);
+        $this->em
+            ->getClassMetadata(User::class)
+            ->setFieldValue($user, $command->identifierField, $command->identifierValue);
 
         $this->em->flush();
 
         $this->logger->log(
             LogLevel::INFO,
             'User signed up using oauth',
-            ['id' => $user->getId(), 'email' => $user->getEmail(), 'identifierValue' => $command->identifierValue]
+            [
+                'id' => $user->getId(),
+                'field' => $command->identifierField,
+                'email' => $user->getEmail(),
+                'value' => $command->identifierValue,
+            ]
         );
 
         return $user;

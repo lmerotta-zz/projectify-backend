@@ -7,6 +7,7 @@ use App\Entity\Security\User;
 use App\Entity\UserManagement\Team;
 use App\Modules\Security\Authorization\PermissionVoter;
 use App\Modules\UserManagement\Security\Authorization\UserVoter;
+use App\Tests\Helpers\ReflectionTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
@@ -17,6 +18,7 @@ class UserVoterTest extends TestCase
 {
 
     use ProphecyTrait;
+    use ReflectionTrait;
 
     public function testItGrantsAccessIfUserIsSelfVIEW()
     {
@@ -43,12 +45,12 @@ class UserVoterTest extends TestCase
         $token = $this->prophesize(TokenInterface::class);
         $commonTeamId = Uuid::uuid4();
         $commonTeam = Team::create($commonTeamId, 'common');
-        $commonTeam->setOwner($teamsOwner);
+        $this->setFieldValue($commonTeam, 'owner', $teamsOwner);
 
         for ($i = 0; $i < 10; $i++) {
             $teamUser = Team::create(Uuid::uuid4(), 'team user '.$i);
             $teamSubject = Team::create(Uuid::uuid4(), 'team subject '.$i);
-            $teamSubject->setOwner($teamsOwner);
+            $this->setFieldValue($teamSubject, 'owner', $teamsOwner);
 
             $user->addTeam($teamUser);
             $subject->addTeam($teamSubject);
@@ -74,13 +76,13 @@ class UserVoterTest extends TestCase
 
         for ($i = 0; $i < 10; $i++) {
             $teamSubject = Team::create(Uuid::uuid4(), 'team subject '.$i);
-            $teamSubject->setOwner($teamsOwner);
+            $this->setFieldValue($teamSubject, 'owner', $teamsOwner);
 
             $subject->addTeam($teamSubject);
         }
 
         $ownedBySelf = Team::create(Uuid::uuid4(), 'owned by self');
-        $ownedBySelf->setOwner($user);
+        $this->setFieldValue($ownedBySelf, 'owner', $user);
         $subject->addTeam($ownedBySelf);
 
         $token->getUser()->shouldBeCalled()->willReturn($user);

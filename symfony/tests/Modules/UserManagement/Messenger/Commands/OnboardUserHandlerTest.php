@@ -64,16 +64,13 @@ class OnboardUserHandlerTest extends TestCase
     public function testItWorksIfAllConditionsAreMet()
     {
 
-        $user = $this->prophesize(User::class);
+        $user = User::create(Uuid::uuid4(), 'first', 'last', 'tet', 'email@test.com');
         $repo = $this->prophesize(UserRepository::class);
         $workflow = $this->prophesize(WorkflowInterface::class);
 
-        $repo->find(Argument::type(UuidInterface::class))->shouldBeCalled()->willReturn($user->reveal());
-        $workflow->can($user->reveal(), 'onboard')->shouldBeCalled()->willReturn(true);
-        $workflow->apply($user->reveal(), 'onboard')->shouldBeCalled();
-
-        $user->setFirstName('test')->shouldBeCalled()->willReturn($user->reveal());
-        $user->setLastName('test')->shouldBeCalled()->willReturn($user->reveal());
+        $repo->find(Argument::type(UuidInterface::class))->shouldBeCalled()->willReturn($user);
+        $workflow->can($user, 'onboard')->shouldBeCalled()->willReturn(true);
+        $workflow->apply($user, 'onboard')->shouldBeCalled();
 
         $handler = new OnboardUserHandler();
         $handler->setUserRepository($repo->reveal());
@@ -83,9 +80,10 @@ class OnboardUserHandlerTest extends TestCase
             Uuid::uuid4(),
             $this->getMockBuilder(File::class)->disableOriginalConstructor()->getMock(),
             'test',
-            'test'
+            'testing'
         ));
 
-        $this->assertInstanceOf(User::class, $result);
+        $this->assertEquals($result->getFirstName(), 'test');
+        $this->assertEquals($result->getLastName(), 'testing');
     }
 }

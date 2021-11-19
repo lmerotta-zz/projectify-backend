@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a794b239acb1d591ef6ab7d9740f751",
+    "content-hash": "f13c224a6611f2eef5ed021d982f081e",
     "packages": [
         {
             "name": "api-platform/core",
@@ -2243,6 +2243,60 @@
                 "wiki": "https://github.com/Atlantic18/DoctrineExtensions/tree/main/doc"
             },
             "time": "2021-06-22T11:23:22+00:00"
+        },
+        {
+            "name": "happyr/message-serializer",
+            "version": "0.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Happyr/message-serializer.git",
+                "reference": "82aa20f82903b7459e0dc43ab65832c1aab0a2ce"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Happyr/message-serializer/zipball/82aa20f82903b7459e0dc43ab65832c1aab0a2ce",
+                "reference": "82aa20f82903b7459e0dc43ab65832c1aab0a2ce",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^7.3 || ^8.0"
+            },
+            "require-dev": {
+                "symfony/messenger": "^4.4 || ^5.0",
+                "symfony/phpunit-bridge": "^4.4 || ^5.0"
+            },
+            "suggest": {
+                "symfony/messenger": "4.4 if you want to use a Symfony messenger integration"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Happyr\\MessageSerializer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nyholm",
+                    "email": "tobias.nyholm@gmail.com"
+                }
+            ],
+            "description": "Serialize classes the good way. ",
+            "support": {
+                "issues": "https://github.com/Happyr/message-serializer/issues",
+                "source": "https://github.com/Happyr/message-serializer/tree/0.5.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/Nyholm",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-12-02T14:47:44+00:00"
         },
         {
             "name": "hwi/oauth-bundle",

@@ -4,7 +4,7 @@ namespace App\Tests\Modules\Common\ApiPlatform\Filter;
 
 use App\Entity\Security\User;
 use App\Entity\UserManagement\Team;
-use App\Tests\APITestCase;
+use App\Tests\Helpers\APITestCase;
 
 class ExcludeFilterTest extends APITestCase
 {

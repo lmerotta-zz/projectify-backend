@@ -156,12 +156,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     ): self {
         $self = new static();
         $self->id = $id;
-
-        $self
-            ->setFirstName($firstName)
-            ->setLastName($lastName)
-            ->setPassword($password)
-            ->setEmail($email);
+        $self->firstName = $firstName;
+        $self->lastName = $lastName;
+        $self->email = $email;
+        $self->password = $password;
 
         return $self;
     }
@@ -174,13 +172,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     ): self {
         $self = new static();
         $self->id = $id;
-
-        $self->setEmail($email)
-            ->setFirstName($firstName)
-            ->setLastName($lastName)
-            ->setStatus(UserStatus::get(UserStatus::SIGNED_UP_OAUTH));
+        $self->email = $email;
+        $self->firstName = $firstName;
+        $self->lastName = $lastName;
+        $self->status = UserStatus::get(UserStatus::SIGNED_UP_OAUTH);
 
         return $self;
+    }
+
+    public function onboard(string $confirmedFirstName, string $confirmedLastName, ?File $profilePicture = null): void
+    {
+        $this->profilePictureFile = $profilePicture;
+        $this->firstName = $confirmedFirstName;
+        $this->lastName = $confirmedLastName;
     }
 
     public function getId(): UuidInterface
@@ -193,23 +197,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->firstName;
     }
 
-    public function setFirstName(string $firstName): self
-    {
-        $this->firstName = $firstName;
-
-        return $this;
-    }
-
     public function getLastName(): string
     {
         return $this->lastName;
-    }
-
-    public function setLastName(string $lastName): self
-    {
-        $this->lastName = $lastName;
-
-        return $this;
     }
 
     public function getPassword(): ?string
@@ -217,23 +207,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
     public function getProfilePicture(): ?string
     {
         return $this->profilePicture;
-    }
-
-    public function setProfilePicture(?string $profilePicture): self
-    {
-        $this->profilePicture = $profilePicture;
-
-        return $this;
     }
 
     public function addRole(Role $role): self
@@ -268,13 +244,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     // ------ UserInterface methods ----- //
 
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
     public function eraseCredentials(): void
     {
     }
@@ -302,23 +271,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->githubId;
     }
 
-    public function setGithubId(?string $githubId): self
-    {
-        $this->githubId = $githubId;
-
-        return $this;
-    }
-
     public function getStatus(): UserStatus
     {
         return $this->status;
-    }
-
-    public function setStatus(UserStatus $status): self
-    {
-        $this->status = $status;
-
-        return $this;
     }
 
     #[Pure]

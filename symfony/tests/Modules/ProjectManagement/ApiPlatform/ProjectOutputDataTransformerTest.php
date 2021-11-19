@@ -5,6 +5,7 @@ namespace App\Modules\ProjectManagement\ApiPlatform;
 use App\Entity\ProjectManagement\Project;
 use App\Entity\Security\User;
 use App\Modules\ProjectManagement\Model\ProjectDTO;
+use App\Tests\Helpers\ReflectionTrait;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Ramsey\Uuid\Uuid;
@@ -12,6 +13,7 @@ use Ramsey\Uuid\Uuid;
 class ProjectOutputDataTransformerTest extends TestCase
 {
     use ProphecyTrait;
+    use ReflectionTrait;
 
     public function testItTransformsTheProjectSuccess()
     {
@@ -19,8 +21,8 @@ class ProjectOutputDataTransformerTest extends TestCase
         $user = $this->prophesize(User::class);
         $id = Uuid::uuid4();
         $project = Project::create($id, 'test name', 'description');
-        $project->setCreator($user->reveal())->setCreatedAt($createdAt);
-
+        $this->setFieldValue($project, 'creator', $user->reveal());
+        $this->setFieldValue($project, 'createdAt', $createdAt);
         $transformer = new ProjectOutputDataTransformer();
 
         $this->assertTrue($transformer->supportsTransformation($project, ProjectDTO::class));

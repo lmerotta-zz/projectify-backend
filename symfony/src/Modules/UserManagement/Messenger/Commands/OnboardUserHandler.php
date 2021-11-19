@@ -27,9 +27,7 @@ class OnboardUserHandler
             throw new UserAlreadyOnboardedException($command->id);
         }
 
-        $user->profilePictureFile = $command->profilePicture;
-        $user->setFirstName($command->firstName)
-            ->setLastName($command->lastName);
+        $user->onboard($command->firstName, $command->lastName, $command->profilePicture);
 
         $this->stateMachine->apply($user, 'onboard');
 

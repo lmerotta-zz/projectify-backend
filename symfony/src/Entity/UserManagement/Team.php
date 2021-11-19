@@ -95,7 +95,7 @@ class Team
     {
         $self = new static();
         $self->id = $uuid;
-        $self->setName($name);
+        $self->name = $name;
 
         return $self;
     }
@@ -108,13 +108,6 @@ class Team
     public function getName(): ?string
     {
         return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -146,23 +139,9 @@ class Team
         return $this->owner;
     }
 
-    public function setOwner(?User $owner): self
-    {
-        $this->owner = $owner;
-
-        return $this;
-    }
-
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeImmutable
@@ -170,22 +149,8 @@ class Team
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
     public function getArchivedAt(): ?\DateTimeImmutable
     {
         return $this->archivedAt;
-    }
-
-    public function setArchivedAt(?\DateTimeImmutable $archivedAt): self
-    {
-        $this->archivedAt = $archivedAt;
-
-        return $this;
     }
 }

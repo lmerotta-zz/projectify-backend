@@ -194,6 +194,9 @@
     "gedmo/doctrine-extensions": {
         "version": "v3.0.4"
     },
+    "happyr/message-serializer": {
+        "version": "0.5.1"
+    },
     "hwi/oauth-bundle": {
         "version": "0.6",
         "recipe": {

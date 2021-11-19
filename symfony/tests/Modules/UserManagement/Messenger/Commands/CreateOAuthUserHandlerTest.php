@@ -9,6 +9,7 @@ use App\Modules\UserManagement\Messenger\Commands\CreateOAuthUserHandler;
 use App\Modules\UserManagement\Messenger\Events\UserSignedUp;
 use App\Repository\Security\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -22,19 +23,20 @@ class CreateOAuthUserHandlerTest extends TestCase
 
     public function testItSetsTheOauthIdOnAFoundUser()
     {
-        $user = $this->prophesize(User::class);
+        $email = 'test@test.com';
+        $user = User::create(Uuid::uuid4(), 'firstName', 'lastName', 'test', $email);
         $em = $this->prophesize(EntityManagerInterface::class);
         $logger = $this->prophesize(LoggerInterface::class);
         $repo = $this->prophesize(UserRepository::class);
+        $metadata = $this->prophesize(ClassMetadata::class);
 
-        $email = 'test@test.com';
         $githubId = '12345';
 
-        $user->getId()->shouldBeCalled()->willReturn(Uuid::uuid4());
-        $user->getEmail()->shouldBeCalled()->willReturn($email);
-        $user->setGithubId($githubId)->shouldBeCalled()->willReturn($user->reveal());
-        $repo->findOneBy(['email' => $email])->shouldBeCalled()->willReturn($user->reveal());
+        $repo->findOneBy(['email' => $email])->shouldBeCalled()->willReturn($user);
         $em->flush()->shouldBeCalled();
+        $em->getClassMetadata(User::class)->shouldBeCalled()->willReturn($metadata->reveal());
+        $metadata->setFieldValue($user, 'githubId', $githubId)->shouldBeCalled();
+
 
         $handler = new CreateOAuthUserHandler();
         $handler->setLogger($logger->reveal());
@@ -52,6 +54,7 @@ class CreateOAuthUserHandlerTest extends TestCase
         $em = $this->prophesize(EntityManagerInterface::class);
         $logger = $this->prophesize(LoggerInterface::class);
         $repo = $this->prophesize(UserRepository::class);
+        $metadata = $this->prophesize(ClassMetadata::class);
 
         $email = 'test@test.com';
         $githubId = '12345';
@@ -59,6 +62,8 @@ class CreateOAuthUserHandlerTest extends TestCase
         $repo->findOneBy(['email' => $email])->shouldBeCalled()->willReturn(null);
         $em->persist(Argument::type(User::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
+        $em->getClassMetadata(User::class)->shouldBeCalled()->willReturn($metadata->reveal());
+        $metadata->setFieldValue(Argument::type(User::class), 'githubId', $githubId)->shouldBeCalled();
         $eventBus->dispatch(Argument::type(UserSignedUp::class), [new DispatchAfterCurrentBusStamp()])->shouldBeCalled();
 
 
@@ -71,6 +76,5 @@ class CreateOAuthUserHandlerTest extends TestCase
         $command = new CreateOAuthUser($email,  'test', 'test', 'githubId', $githubId);
 
         $user = $handler($command);
-        $this->assertEquals($githubId, $user->getGithubId());
     }
 }

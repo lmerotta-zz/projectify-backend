@@ -34,10 +34,11 @@ class Role
     {
     }
 
-    public static function create(string $name): self
+    public static function create(string $name, Permission $permissions): self
     {
         $self = new static();
-        $self->setName($name);
+        $self->name = $name;
+        $self->permissions = $permissions;
 
         return $self;
     }
@@ -47,22 +48,8 @@ class Role
         return $this->name;
     }
 
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function getPermissions(): Permission
     {
         return $this->permissions;
-    }
-
-    public function setPermissions(Permission $permissions): self
-    {
-        $this->permissions = $permissions;
-
-        return $this;
     }
 }

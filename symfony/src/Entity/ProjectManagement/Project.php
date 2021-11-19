@@ -9,7 +9,6 @@ use App\Modules\ProjectManagement\Model\ProjectDTO;
 use App\Repository\ProjectManagement\ProjectRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use App\Contracts\Security\Enum\Permission;
 use Ramsey\Uuid\UuidInterface;
 
 /**
@@ -84,12 +83,12 @@ class Project
     {
     }
 
-    public static function create(UuidInterface $uuid, string $name, ?string $description): self
+    public static function create(UuidInterface $uuid, string $name, ?string $description = null): self
     {
         $self = new static();
         $self->id = $uuid;
-        $self->setName($name);
-        $self->setDescription($description);
+        $self->name = $name;
+        $self->description = $description;
 
         return $self;
     }
@@ -104,35 +103,14 @@ class Project
         return $this->name;
     }
 
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function getCreator(): User
     {
         return $this->creator;
     }
 
-    public function setCreator(User $creator): self
-    {
-        $this->creator = $creator;
-
-        return $this;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;
-    }
-
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
     }
 
     /**
@@ -144,31 +122,11 @@ class Project
     }
 
     /**
-     * @param \DateTimeImmutable $createdAt
-     * @return Project
-     */
-    public function setCreatedAt(\DateTimeImmutable $createdAt): Project
-    {
-        $this->createdAt = $createdAt;
-        return $this;
-    }
-
-    /**
      * @return \DateTimeImmutable|null
      */
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * @param \DateTimeImmutable $updatedAt|null
-     * @return Project
-     */
-    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): Project
-    {
-        $this->updatedAt = $updatedAt;
-        return $this;
     }
 
 }
