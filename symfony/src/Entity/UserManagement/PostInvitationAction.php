@@ -2,6 +2,7 @@
 
 namespace App\Entity\UserManagement;
 
+use App\Contracts\UserManagement\Enum\PostInvitationActionType;
 use App\Repository\UserManagement\PostInvitationActionRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
@@ -18,9 +19,14 @@ class PostInvitationAction
     private $id;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="post_invitation_action")
      */
-    private $action = [];
+    private $type;
+
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $payload = [];
 
     /**
      * @ORM\ManyToOne(targetEntity=Invitation::class, inversedBy="actions")
@@ -28,11 +34,12 @@ class PostInvitationAction
      */
     private $invitation;
 
-    public static function create(UuidInterface $id, array $action): self
+    public static function create(UuidInterface $id, PostInvitationActionType $type, array $payload = []): self
     {
         $self = new static();
         $self->id = $id;
-        $self->action = $action;
+        $self->type = $type;
+        $self->payload = $payload;
 
         return $self;
     }
@@ -42,9 +49,14 @@ class PostInvitationAction
         return $this->id;
     }
 
-    public function getAction(): array
+    public function getType()
     {
-        return $this->action;
+        return $this->type;
+    }
+
+    public function getPayload(): array
+    {
+        return $this->payload;
     }
 
     public function getInvitation(): ?Invitation

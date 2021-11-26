@@ -44,7 +44,7 @@ class Invitation
     private $expirationDate;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class)
      */
     private $acceptedBy;
 

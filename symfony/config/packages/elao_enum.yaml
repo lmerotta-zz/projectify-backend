@@ -5,4 +5,5 @@ elao_enum:
         types:
             permission: App\Contracts\Security\Enum\Permission
             user_status: App\Contracts\UserManagement\Enum\UserStatus
+            post_invitation_action: App\Contracts\UserManagement\Enum\PostInvitationActionType
 

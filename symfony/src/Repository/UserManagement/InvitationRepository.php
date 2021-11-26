@@ -19,32 +19,12 @@ class InvitationRepository extends ServiceEntityRepository
         parent::__construct($registry, Invitation::class);
     }
 
-    // /**
-    //  * @return Invitation[] Returns an array of Invitation objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getNonExpiredInvitationFor(string $email): ?Invitation
     {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('i.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->createQueryBuilder('invitation')
+            ->andWhere('invitation.email LIKE :email')
+            ->andWhere('invitation.expirationDate < :now')
+            ->setParameters(['email' => $email, 'now' => new \DateTimeImmutable()])
+            ->getQuery()->getOneOrNullResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Invitation
-    {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

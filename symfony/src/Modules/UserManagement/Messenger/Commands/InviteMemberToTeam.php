@@ -2,21 +2,21 @@
 
 namespace App\Modules\UserManagement\Messenger\Commands;
 
-use App\Entity\Security\User;
 use App\Entity\UserManagement\Team;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class AddMemberToTeam
+class InviteMemberToTeam
 {
+    #[Assert\Email]
+    #[Assert\NotBlank]
+    public string $email;
+
     #[Assert\NotBlank]
     public Team $team;
 
-    #[Assert\NotBlank]
-    public User $user;
-
-    public function __construct(Team $team, User $user)
+    public function __construct(string $email, Team $team)
     {
+        $this->email = $email;
         $this->team = $team;
-        $this->user = $user;
     }
 }
